@@ -11,7 +11,9 @@ const Header = styled.h1`
 export function Component1() {
   return (
     <Container className="m-20">
-        <Header>Component 1</Header>
+      <Header>
+        Component 1
+      </Header>
     </Container>
   );
 }
