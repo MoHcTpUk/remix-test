@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '~/root';
 import { Box } from '../common/Box';
 import { Footer } from '../lib/Footer';
 import { Navbar } from '../lib/Navbar';
@@ -8,24 +10,21 @@ type Props = {
 };
 
 const Container = styled(Box)`
-  background-color: ${(props) => props.theme.pageBackground};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const CommonLayout = ({ children }: Props): JSX.Element => {
-  const navbarItems = [
-    { id: 0, title: 'Home', href: '/' },
-    { id: 1, title: 'Todo', href: '/' },
-  ];
+  const userContext = useContext(UserContext);
 
   return (
     <Container flexDirection='column' minHeight='100vh'>
-      <Navbar items={navbarItems} />
+      <Navbar theme={userContext!.theme} />
 
-      <Box width='100%' padding='24px' flexDirection='column' flexGrow='1'>
+      <Box width='100%' flexDirection='column' flexGrow='1'>
         {children}
       </Box>
 
-      <Footer />
+      <Footer theme={userContext!.theme} />
     </Container>
   );
 };

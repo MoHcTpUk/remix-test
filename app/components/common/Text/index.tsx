@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import type { DefaultTheme } from 'styled-components';
 import styled from 'styled-components';
 import { TextVariantEnum } from './enums';
 
@@ -6,6 +7,7 @@ type Props = {
   variant?: TextVariantEnum;
   color?: CSSProperties['color'];
   fontStyle?: CSSProperties['fontStyle'];
+  theme?: DefaultTheme;
 };
 
 export const FONT_SIZES_MOB: Record<TextVariantEnum, string> = {

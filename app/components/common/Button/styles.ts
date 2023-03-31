@@ -1,15 +1,6 @@
-import { ButtonSizeEnum, ButtonColorEnum, ButtonPriorityEnum } from './enums';
+import { ButtonSizeEnum, ButtonPriorityEnum } from './enums';
 import styled, { css } from 'styled-components';
 import type { ButtonProps } from './index';
-import {
-  color_dark_blue_16,
-  color_erl_gray,
-  color_light_gray,
-  color_vasil,
-  color_vasil_80,
-  color_vasil_dark,
-  color_white,
-} from 'public/styles/variables';
 
 export const Button = styled.button<ButtonProps>`
   cursor: pointer;
@@ -20,10 +11,7 @@ export const Button = styled.button<ButtonProps>`
   width: fit-content;
   transition: all 0.1s ease-in;
   padding: ${({ size }) => (size === ButtonSizeEnum.M ? '12px 28px' : '8px 20px')};
-  &:hover {
-    transform: scale(0.95);
-  }
-
+  &:hover,
   &:focus {
     transform: scale(0.95);
   }
@@ -49,62 +37,68 @@ export const Button = styled.button<ButtonProps>`
     switch (priority) {
       case ButtonPriorityEnum.primary:
         return css`
-          background-color: ${color_vasil};
+          background-color: ${({ theme }) => theme.buttons.primary.backgroundColor};
           span {
-            color: ${color_white};
+            color: ${({ theme }) => theme.buttons.primary.spanColor};
           }
           &:hover,
           &:focus {
-            background-color: ${color_vasil_dark};
+            background-color: ${({ theme }) => theme.buttons.primary.focusBackgroundColor};
           }
         `;
       case ButtonPriorityEnum.small:
         return css`
-          background-color: ${color_white};
-          border: 1px solid ${color_vasil};
+          background-color: ${({ theme }) => theme.buttons.small.backgroundColor};
+          border: 1px solid ${({ theme }) => theme.buttons.small.borderColor};
           span {
-            color: ${color_vasil};
+            color: ${({ theme }) => theme.buttons.small.borderColor};
           }
-          &:hover,
-          &:focus {
-            background-color: ${color_vasil_80};
-            border: 1px solid ${color_vasil_80};
+          &:hover {
+            background-color: ${({ theme }) => theme.buttons.small.hoverBackgroundColor};
+            border: 1px solid ${({ theme }) => theme.buttons.small.hoverBorderColor};
             span {
-              color: ${color_white};
+              color: ${({ theme }) => theme.buttons.small.hoverBorderSpanColor};
             }
+          }
+          &:focus {
+            border: 1px solid ${({ theme }) => theme.buttons.small.focusBorderColor};
           }
         `;
       case ButtonPriorityEnum.secondary:
         return css`
-          background-color: ${color_white};
+          background-color: ${({ theme }) => theme.buttons.secondary.backgroundColor};
           span {
-            color: ${color_erl_gray};
+            color: ${({ theme }) => theme.buttons.secondary.spanColor};
           }
           &:hover,
           &:focus {
-            background-color: ${color_light_gray};
+            background-color: ${({ theme }) => theme.buttons.secondary.focusBackgroundColor};
             span {
-              color: ${color_vasil};
+              color: ${({ theme }) => theme.buttons.secondary.focusSpanColor};
             }
           }
         `;
       case ButtonPriorityEnum.chips:
         return css`
-          background-color: ${color_light_gray};
+          background-color: ${({ theme }) => theme.buttons.chips.backgroundColor};
           padding: 8px 14px;
+
           span {
-            color: ${color_erl_gray};
+            color: ${({ theme }) => theme.buttons.chips.spanColor};
           }
           &:hover,
           &:focus {
-            background-color: ${color_dark_blue_16};
+            background-color: ${({ theme }) => theme.buttons.chips.focusBackgroundColor};
             span {
-              color: ${color_vasil};
+              color: ${({ theme }) => theme.buttons.chips.focusSpanColor};
               font-weight: 600;
             }
           }
           &:active {
-            border: 1px solid ${color_vasil};
+            border: 1px solid ${({ theme }) => theme.buttons.chips.focusSpanColor};
+            span {
+              color: ${({ theme }) => theme.buttons.chips.focusSpanColor};
+            }
           }
           @media (min-width: 768px) {
             padding: 12px 24px;

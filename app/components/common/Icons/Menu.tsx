@@ -10,9 +10,9 @@ const SvgMenu = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      d='M7 16h16M1 8h22'
+      d='M7 12h16M1 4h22M1 20h22'
       stroke='CurrentColor'
-      strokeWidth={1.5}
+      strokeWidth={2}
       strokeLinecap='round'
       strokeLinejoin='round'
     />

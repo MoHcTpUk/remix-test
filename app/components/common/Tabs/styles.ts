@@ -1,17 +1,10 @@
 import styled from 'styled-components';
-import {
-  color_erl_gray,
-  color_lavender,
-  color_light_gray,
-  color_vasil,
-  color_white,
-} from 'public/styles/variables';
-import { TabProps } from '.';
+import type { TabProps } from '.';
 
 export const TabContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${color_lavender};
+  background-color: ${({ theme }) => theme.tabs.tabContainer.backgroundColor};
   border-radius: 16px 16px 0 0;
 `;
 
@@ -19,15 +12,27 @@ export const TabButton = styled.button<{ isActive: boolean }>`
   cursor: pointer;
   width: 100%;
   min-width: fit-content;
-  background-color: ${({ isActive }) => (isActive ? color_white : color_lavender)};
+  background-color: ${({ isActive, theme }) =>
+    isActive ? theme.tabs.tabButton.activeBackgroundColor : theme.tabs.tabButton.backgroundColor};
   padding: 12px 18px;
   border-radius: 16px 16px 0 0;
   transition: all 0.15s ease-in;
   &:hover,
   &:focus {
-    background-color: ${({ isActive }) => (isActive ? color_white : color_light_gray)};
+    background-color: ${({ isActive, theme }) =>
+      isActive
+        ? theme.tabs.tabButton.focusBackgroundColor
+        : theme.tabs.tabButton.focusActiveBackgroundColor};
     span {
-      color: ${({ isActive }) => (isActive ? color_erl_gray : color_vasil)};
+      color: ${({ isActive, theme }) =>
+        isActive
+          ? theme.tabs.tabButton.focusSpanActiveBackgroundColor
+          : theme.tabs.tabButton.focusSpanBackgroundColor};
+      font-weight: 400;
+    }
+  }
+  &:active {
+    span {
       font-weight: ${({ isActive }) => (isActive ? 400 : 500)};
     }
   }
@@ -35,16 +40,28 @@ export const TabButton = styled.button<{ isActive: boolean }>`
   @media (min-width: 768px) {
     &:hover,
     &:focus {
-      background-color: ${({ isActive }) => (isActive ? color_white : color_light_gray)};
+      background-color: ${({ isActive, theme }) =>
+        isActive
+          ? theme.tabs.tabButton.focusBackgroundColor
+          : theme.tabs.tabButton.focusActiveBackgroundColor};
       span {
-        color: ${({ isActive }) => (isActive ? color_erl_gray : color_vasil)};
+        color: ${({ isActive, theme }) =>
+          isActive
+            ? theme.tabs.tabButton.focusSpanActiveBackgroundColor
+            : theme.tabs.tabButton.focusSpanBackgroundColor};
         font-weight: 400;
       }
     }
     &:active {
-      background-color: ${({ isActive }) => (isActive ? color_white : color_light_gray)};
+      background-color: ${({ isActive, theme }) =>
+        isActive
+          ? theme.tabs.tabButton.focusActiveBackgroundColor
+          : theme.tabs.tabButton.focusBackgroundColor};
       span {
-        color: ${({ isActive }) => (isActive ? color_erl_gray : color_vasil)};
+        color: ${({ isActive, theme }) =>
+          isActive
+            ? theme.tabs.tabButton.focusSpanActiveBackgroundColor
+            : theme.tabs.tabButton.focusSpanBackgroundColor};
         font-weight: ${({ isActive }) => (isActive ? 400 : 600)};
       }
     }
@@ -67,7 +84,7 @@ export const MiddleBorder = styled.div<{ index: number; activeTab: TabProps; tab
   min-width: 1px;
   height: 26px;
   transition: all 0.15s ease-in;
-  background-color: ${color_vasil};
+  background-color: ${({ theme }) => theme.tabs.middleBorder.backgroundColor};
   visibility: ${({ index, activeTab, tabs }) =>
     index !== tabs.length - 1 &&
     activeTab.id !== tabs[index]?.id &&

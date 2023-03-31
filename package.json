@@ -42,7 +42,7 @@
     "@svgr/plugin-prettier": "^6.5.1",
     "@svgr/plugin-svgo": "^6.5.1",
     "@types/i18next-fs-backend": "1.1.2",
-    "@types/react": "^18.0.29",
+    "@types/react": "^18.0.30",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
     "babel-eslint": "^10.1.0",

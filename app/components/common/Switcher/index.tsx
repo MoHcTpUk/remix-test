@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 export type SwitcherProps = {
@@ -37,7 +37,7 @@ export const Switch = styled.label<SwitcherProps>`
     transition: left 0.15s ease-in;
     left: ${({ checked }) => checked && '28px'};
     background: ${({ checked }) =>
-      checked ? "url('images/flags/English.png')" : "url('images/flags/Thailand.png')"};
+    checked ? "url('images/flags/English.png')" : "url('images/flags/Thailand.png')"};
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

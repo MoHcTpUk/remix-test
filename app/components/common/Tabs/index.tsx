@@ -1,7 +1,9 @@
-import { color_erl_gray, color_erl_gray_70 } from 'public/styles/variables';
 import React, { useState } from 'react';
 import { Text } from '../Text';
-import { MiddleBorder, TabButton, TabContainer, TabContent } from './styles';
+import { MiddleBorder, TabButton, TabContainer } from './styles';
+import type { DefaultTheme } from 'styled-components';
+import { Search } from '~/components/lib/Search';
+import { useTranslation } from 'react-i18next';
 
 export interface TabProps {
   id: string;
@@ -10,10 +12,30 @@ export interface TabProps {
 }
 
 export interface TabSwitcherProps {
-  tabs: TabProps[];
+  theme: DefaultTheme;
 }
 
-const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
+const TabSwitcher: React.FC<TabSwitcherProps> = ({ theme }) => {
+  let { t } = useTranslation();
+
+  const tabs: TabProps[] = [
+    {
+      id: '1',
+      label: `${t('home:find_job')}`,
+      content: `${t('home:find_job')}`,
+    },
+    {
+      id: '2',
+      label: `${t('home:find_employer')}`,
+      content: `${t('home:find_employer')}`,
+    },
+    {
+      id: '3',
+      label: `${t('home:companies')}`,
+      content: `${t('home:companies')}`,
+    },
+  ];
+
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const handleTabClick = (tab: TabProps) => {
@@ -28,7 +50,9 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
             <TabButton isActive={activeTab.id === tab.id} onClick={() => handleTabClick(tab)}>
               <Text
                 variant='textBody1'
-                color={activeTab.id === tab.id ? color_erl_gray : color_erl_gray_70}
+                color={
+                  activeTab.id === tab.id ? theme.tabs.activeTabColor : theme.tabs.disabledTabColor
+                }
               >
                 {tab.label}
                 {activeTab.id === tab.id}
@@ -38,7 +62,7 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
           </React.Fragment>
         ))}
       </TabContainer>
-      <TabContent>{activeTab.content} content goes here</TabContent>
+      <Search theme={theme} />
     </div>
   );
 };

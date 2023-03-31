@@ -10,18 +10,20 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next';
 
-import i18nextServer from '~/i18next.server';
-// import stylesTailwind from 'public/styles/tailwind.css';
+import i18nextServer from '~/i18n/i18next.server';
+import stylesTailwind from 'public/styles/tailwind.css';
 import stylesGlobal from 'public/styles/globals.css';
 import stylesConstants from 'public/styles/constants.css';
 import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
+import { lightTheme } from './themes/lightTheme';
+import React, { useState } from 'react';
+import type IUserContext from 'public/interfaces/iUserContext';
+import { doraTheme } from './themes/doraTheme';
+
 
 type LoaderData = { locale: string };
-
-export const handle = {
-  i18n: 'common',
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
   let locale = await i18nextServer.getLocale(request);
@@ -29,7 +31,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const links: LinksFunction = () => [
-  // { rel: 'stylesheet', href: stylesTailwind },
+  { rel: 'stylesheet', href: stylesTailwind },
   { rel: 'stylesheet', href: stylesGlobal },
   { rel: 'stylesheet', href: stylesConstants },
 ];
@@ -40,8 +42,26 @@ export const meta: MetaFunction = () => ({
   viewport: 'width=device-width,initial-scale=1',
 });
 
+export const UserContext = React.createContext<IUserContext | null>({} as IUserContext);
+
 export default function Root() {
-  let { locale } = useLoaderData<LoaderData>();
+  const [theme, setTheme] = useState(lightTheme)
+  const [language, setLanguage] = useState("en")
+
+  function setUserTheme(theme: DefaultTheme) {
+    setTheme(theme)
+  }
+
+  function defaultUserContext(): IUserContext {
+    return {
+      theme: theme,
+      setTheme: setUserTheme,
+      language: language,
+      setLanguage: setLanguage
+    }
+  }
+
+  let { locale } = useLoaderData<typeof loader>();
   let { i18n } = useTranslation();
 
   useChangeLanguage(locale);
@@ -54,7 +74,11 @@ export default function Root() {
         {typeof document === 'undefined' ? '__STYLES__' : null}
       </head>
       <body>
-        <Outlet />
+        <UserContext.Provider value={defaultUserContext()}>
+          <ThemeProvider theme={theme}>
+            <Outlet />
+          </ThemeProvider>
+        </UserContext.Provider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

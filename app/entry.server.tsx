@@ -3,15 +3,12 @@ import Backend from 'i18next-fs-backend';
 import { resolve } from 'path';
 import { renderToString } from 'react-dom/server';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-
-import i18n from './i18n';
-import i18next from './i18next.server';
+import i18n from './i18n/i18n';
+import i18next from './i18n/i18next.server'
 import { ServerStyleSheet } from 'styled-components';
 import type { EntryContext } from '@remix-run/cloudflare';
 import { createInstance } from 'i18next';
-
-import translationEN from 'public/locales/en/common.json';
-import translationTH from 'public/locales/th/common.json';
+import resources from './i18n/i18next.resources'
 
 export default async function handleRequest(
   request: Request,
@@ -23,15 +20,6 @@ export default async function handleRequest(
 
   let lng = await i18next.getLocale(request);
   let ns = i18next.getRouteNamespaces(context);
-
-  const resources = {
-    en: {
-      translation: translationEN,
-    },
-    th: {
-      translation: translationTH,
-    },
-  };
 
   await instance
     .use(initReactI18next)
