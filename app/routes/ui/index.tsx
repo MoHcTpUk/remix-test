@@ -190,7 +190,7 @@ export default function Index() {
 
   return (
     <CommonLayout>
-      <Box flexDirection='column' padding='80px' gap='20px'>
+      <Box flexDirection='column' padding='16px' gap='20px'>
         <Box>
           <TranslateBox>
             <Box
