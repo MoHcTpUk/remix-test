@@ -1,6 +1,7 @@
+import { Link, Outlet } from '@remix-run/react';
+import { LanguageEnum } from 'public/enums/languageEnum';
 import { memo, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import styled, { DefaultTheme } from 'styled-components';
+
 import { Button } from '~/components/common/Button/styles';
 import SvgBell from '~/components/common/Icons/Bell';
 import SvgEmail from '~/components/common/Icons/Email';
@@ -8,122 +9,62 @@ import SvgLogo from '~/components/common/Icons/Logo';
 import SvgMenu from '~/components/common/Icons/Menu';
 import { Switcher } from '~/components/common/Switcher';
 import { Text } from '~/components/common/Text';
+import ForgotPasswordPage from '~/components/pages/Auth/ForgotPassword';
+import Login from '~/components/pages/Auth/Login';
+import { useApp } from '~/hooks';
+
+import {
+  BoxText,
+  ContainerHeader,
+  IconButton,
+  IconButtons,
+  LeftContainer,
+  LogoWrapper,
+  MenuContainer,
+  TranslateBox,
+  WrapperHeader,
+} from './styles';
 
 export * from './NavbarItem';
 export * from './types';
 
-export const WrapperHeader = styled.div`
-  width: 100%;
-  background-color: ${({ theme }) => theme.navbar.wrapperHeaderBackgroundColor};
-  display: flex;
-  justify-content: center;
-`;
+export const Navbar = memo((): JSX.Element => {
+  const [visibilityLogin, setVisibilityLogin] = useState(false);
+  const [visibilityForgotPassword, setVisibilityForgotPassword] = useState(false);
 
-export const ContainerHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 22px 20px;
-  width: 100%;
-  max-width: 1232px;
-`;
-
-const LogoWrapper = styled.a`
-  cursor: pointer;
-  svg {
-    max-width: 99px;
-    height: 40px;
-    transition: all 0.15s ease-in;
+  const { userContext, setUserContext, theme, t, i18n } = useApp();
+  function setLang(language: LanguageEnum) {
+    setUserContext((prevContext) => ({ ...prevContext, language }));
   }
 
-  &:hover {
-    svg {
-      color: ${({ theme }) => theme.navbar.hoverColor};
-    }
-  }
-`;
+  const changeLanguage = () =>
+    userContext?.language === LanguageEnum.TH
+      ? setUserContext((prevContext) => ({ ...prevContext, language: LanguageEnum.EN }))
+      : setUserContext((prevContext) => ({ ...prevContext, language: LanguageEnum.TH }));
 
-export const BoxText = styled.div<{ lang: string; selectedLang: string }>`
-  cursor: pointer;
-  span:hover {
-    color: ${({ lang, selectedLang, theme }) =>
-      lang !== selectedLang ? theme.navbar.hoverColor : theme.navbar.noHoverColor};
-  }
-`;
-
-export const MenuContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-`;
-
-export const LeftContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-`;
-
-export const TranslateBox = styled.div`
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  display: none;
-  @media (min-width: 768px) {
-    display: flex;
-  }
-`;
-
-export const IconButton = styled.button`
-  cursor: pointer;
-  transition: all 0.15s ease-in;
-  &:hover {
-    svg {
-      color: ${({ theme }) => theme.navbar.hoverColor};
-    }
-  }
-`;
-
-export const IconButtons = styled.div`
-  display: none;
-  @media (min-width: 1024px) {
-    display: flex;
-    flex-direction: row;
-    gap: 38px;
-  }
-`;
-
-export const Navbar = memo(function NavbarMemoized({
-  theme,
-}: {
-  theme: DefaultTheme;
-}): JSX.Element {
-  let { i18n, t } = useTranslation();
-
-  const changeLanguage = () => {
-    lang === 'th' ? setLang('en') : setLang('th');
-  };
-  const [lang, setLang] = useState('en');
   useEffect(() => {
-    i18n.changeLanguage(lang);
-  }, [i18n, lang]);
+    i18n.changeLanguage(userContext?.language);
+  }, [i18n, userContext?.language]);
 
   return (
     <WrapperHeader>
       <ContainerHeader>
         <LeftContainer>
-          <LogoWrapper href='#'>
-            <SvgLogo color={theme.navbar.logoColor} />
-          </LogoWrapper>
+          <Link to='/'>
+            <LogoWrapper>
+              <SvgLogo color={theme.navbar.logoColor} />
+            </LogoWrapper>
+          </Link>
           <TranslateBox>
             <BoxText
               style={{ cursor: 'pointer' }}
-              lang={'th'}
-              selectedLang={lang}
-              onClick={() => setLang('th')}
+              lang={LanguageEnum.TH}
+              selectedLang={userContext?.language ?? ''}
+              onClick={() => setLang(LanguageEnum.TH)}
             >
               <Text
                 color={
-                  lang === 'th'
+                  userContext?.language === LanguageEnum.TH
                     ? theme.navbar.textActiveLangColor
                     : theme.navbar.textNoActiveLangColor
                 }
@@ -131,16 +72,20 @@ export const Navbar = memo(function NavbarMemoized({
                 ภาษาไทย
               </Text>
             </BoxText>
-            <Switcher onChange={changeLanguage} checked={lang === 'en'} htmlLabel='lang' />
+            <Switcher
+              onChange={changeLanguage}
+              checked={userContext?.language === LanguageEnum.EN}
+              htmlLabel='lang'
+            />
             <BoxText
               style={{ cursor: 'pointer' }}
-              lang={'en'}
-              selectedLang={lang}
-              onClick={() => setLang('en')}
+              lang={LanguageEnum.EN}
+              selectedLang={userContext?.language ?? ''}
+              onClick={() => setLang(LanguageEnum.EN)}
             >
               <Text
                 color={
-                  lang === 'en'
+                  userContext?.language === LanguageEnum.EN
                     ? theme.navbar.textActiveLangColor
                     : theme.navbar.textNoActiveLangColor
                 }
@@ -153,15 +98,32 @@ export const Navbar = memo(function NavbarMemoized({
 
         <MenuContainer>
           <IconButtons>
-            <IconButton>{<SvgBell color={theme.navbar.svgColor} />}</IconButton>
-            <IconButton>{<SvgEmail color={theme.navbar.svgColor} />}</IconButton>
+            <IconButton>
+              <SvgBell color={theme.navbar.svgColor} />
+            </IconButton>
+            <IconButton>
+              <SvgEmail color={theme.navbar.svgColor} />
+            </IconButton>
           </IconButtons>
-          <Button priority='small'>
+          <Button onClick={() => setVisibilityLogin(!visibilityLogin)} priority='small'>
             <Text>{t('signIn')}</Text>
           </Button>
-          <IconButton>{<SvgMenu color={theme.navbar.svgColor} />}</IconButton>
+          <Outlet />
+          <IconButton>
+            <SvgMenu color={theme.navbar.svgColor} />
+          </IconButton>
         </MenuContainer>
       </ContainerHeader>
+      <Login
+        visibility={visibilityLogin}
+        setVisibility={setVisibilityLogin}
+        setVisibilityForgotPassword={setVisibilityForgotPassword}
+      />
+      <ForgotPasswordPage
+        visibility={visibilityForgotPassword}
+        setVisibility={setVisibilityForgotPassword}
+        setVisibilityLogin={setVisibilityLogin}
+      />
     </WrapperHeader>
   );
 });

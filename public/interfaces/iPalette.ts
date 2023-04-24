@@ -9,27 +9,31 @@ export interface IPalette {
   darken: {
     darken1: {
       darken1_base: string;
-      darken1_varian1: string;
-      darken1_varian2: string;
+      darken1_variant1: string;
+      darken1_variant2: string;
     };
     darken2: {
       darken2_base: string;
-      darken2_varian1: string;
-      darken2_varian2: string;
+      darken2_variant1: string;
+      darken2_variant2: string;
     };
   };
 
   accent: {
     accent1: {
       accent1_base: string;
-      accent1_varian1: string;
-      accent1_varian2: string;
-      accent1_varian3: string;
-      accent1_varian4: string;
-      accent1_varian5: string;
-      accent1_varian6: string;
+      accent1_variant1: string;
+      accent1_variant2: string;
+      accent1_variant3: string;
+      accent1_variant4: string;
+      accent1_variant5: string;
+      accent1_variant6: string;
     };
     accent2: string;
     accent3: string;
+  };
+
+  error: {
+    error_base: string;
   };
 }

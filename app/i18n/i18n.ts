@@ -1,6 +1,6 @@
 export default {
-  supportedLngs: ["en", "th"],
-  fallbackLng: "en",
-  defaultNS: "common",
+  supportedLngs: ['en', 'th'],
+  fallbackLng: 'th',
+  defaultNS: 'common',
   react: { useSuspense: false },
 };

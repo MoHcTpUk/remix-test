@@ -1,16 +1,24 @@
 export interface ITheme {
   backgroundColor: string;
+  defaultTextColor: string;
+  errorTextColor: string;
   buttons: {
     primary: {
       backgroundColor: string;
       spanColor: string;
       focusBackgroundColor: string;
+      iconColor: string;
+      iconColorHover: string;
+      iconDisable: string;
     };
     secondary: {
       backgroundColor: string;
       spanColor: string;
       focusBackgroundColor: string;
       focusSpanColor: string;
+      iconColor: string;
+      iconColorHover: string;
+      iconDisable: string;
     };
     chips: {
       backgroundColor: string;
@@ -23,10 +31,19 @@ export interface ITheme {
       backgroundColor: string;
       borderColor: string;
       hoverBackgroundColor: string;
+      pressedBacgroundColor: string;
       hoverBorderColor: string;
       hoverBorderSpanColor: string;
       focusBorderColor: string;
+      iconColor: string;
+      iconColorHover: string;
+      iconDisable: string;
     };
+  };
+  inputs: {
+    borderColor: string;
+    borderFocusColor: string;
+    backgroundDefaultColor: string;
   };
   search: {
     backgroundWrapper: string;
@@ -59,9 +76,20 @@ export interface ITheme {
     activeTabColor: string;
     disabledTabColor: string;
   };
+  modal: {
+    backgroundColor: string;
+    svgColor: string;
+  };
   ui: {
     logoLinkColor: string;
     logoLinkHoverColor: string;
+  };
+  slider: {
+    backgroundBulletColor: string;
+    backgroundBulletActiveColor: string;
+    backgroundButtonArrowColor: string;
+    buttonArrowColor: string;
+    hoverButtonArrowColor: string;
   };
   navbar: {
     logoColor: string;
@@ -78,5 +106,35 @@ export interface ITheme {
     linkSpanColorMedia1024: string;
     boxCopirightSpanColorMedia1024: string;
     linkTextColor: string;
+    borderColor: string;
+  };
+  auth: {
+    helpButtonColor: string;
+    helpButtonHoverColor: string;
+    helpButtonActiveColor: string;
+    radioButtonColor: string;
+    backgroundRegisterPage: string;
+    backgroundRegisterContainerColor: string;
+  };
+  mainPage: {
+    headingColor: string;
+    titleColor: string;
+    backgroundSectionTrendingColor: string;
+    backgroundSectionCompaniesColor: string;
+    backgroundSectionArticlesColor: string;
+    backgroundSectionNewsColor: string;
+    benefitHeadingMobileColor: string;
+    benefitHeaderColorSmall: string;
+    benefitHeaderColor: string;
+    benefitBodyColorSmall: string;
+    benefitBodyColor: string;
+  };
+  user: {
+    headinTextColor: string;
+    backgroundPageColor: string;
+    backgroundCardColor: string;
+    borderColor: string;
+    descriptionTextColor: string;
+    iconColor: string;
   };
 }

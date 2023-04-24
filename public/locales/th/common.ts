@@ -11,4 +11,6 @@ export default {
     help: 'ช่วย',
   },
   copyright: 'Copyright © 2023 Upjob. All Rights Reserved.',
+  edit: 'Edit',
+  save: 'Save,',
 };

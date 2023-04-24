@@ -7,6 +7,7 @@ export interface BoxProps {
   flexDirection?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
+  alignSelf?: CSSProperties['alignSelf'];
   flexGrow?: CSSProperties['flexGrow'];
   flexWrap?: CSSProperties['flexWrap'];
 
@@ -32,6 +33,7 @@ export const Box = styled.div<BoxProps>`
   flex-direction: ${({ flexDirection }) => flexDirection};
   justify-content: ${({ justifyContent }) => justifyContent};
   align-items: ${({ alignItems }) => alignItems};
+  align-self: ${({ alignSelf }) => alignSelf};
   flex-grow: ${({ flexGrow }) => flexGrow};
   flex-wrap: ${({ flexWrap }) => flexWrap};
   gap: ${({ gap }) => gap};

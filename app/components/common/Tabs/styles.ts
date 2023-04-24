@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import type { TabProps } from '.';
 
 export const TabContainer = styled.div`
@@ -6,6 +7,7 @@ export const TabContainer = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.tabs.tabContainer.backgroundColor};
   border-radius: 16px 16px 0 0;
+  width: 100%;
 `;
 
 export const TabButton = styled.button<{ isActive: boolean }>`
@@ -14,7 +16,7 @@ export const TabButton = styled.button<{ isActive: boolean }>`
   min-width: fit-content;
   background-color: ${({ isActive, theme }) =>
     isActive ? theme.tabs.tabButton.activeBackgroundColor : theme.tabs.tabButton.backgroundColor};
-  padding: 12px 18px;
+  padding: 12px 17px;
   border-radius: 16px 16px 0 0;
   transition: all 0.15s ease-in;
   &:hover,
@@ -38,6 +40,7 @@ export const TabButton = styled.button<{ isActive: boolean }>`
   }
 
   @media (min-width: 768px) {
+    padding: 18px 40px;
     &:hover,
     &:focus {
       background-color: ${({ isActive, theme }) =>
@@ -55,8 +58,8 @@ export const TabButton = styled.button<{ isActive: boolean }>`
     &:active {
       background-color: ${({ isActive, theme }) =>
         isActive
-          ? theme.tabs.tabButton.focusActiveBackgroundColor
-          : theme.tabs.tabButton.focusBackgroundColor};
+          ? theme.tabs.tabButton.focusBackgroundColor
+          : theme.tabs.tabButton.focusActiveBackgroundColor};
       span {
         color: ${({ isActive, theme }) =>
           isActive
@@ -67,9 +70,14 @@ export const TabButton = styled.button<{ isActive: boolean }>`
     }
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 940px) {
     max-width: fit-content;
-    padding: 24px 40px;
+    padding: 24px 43px 24px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: fit-content;
+    padding: 24px 43px 24px;
   }
 
   @media (max-width: 768px) {
@@ -91,8 +99,8 @@ export const MiddleBorder = styled.div<{ index: number; activeTab: TabProps; tab
     activeTab.id !== tabs[index + 1]?.id
       ? 'visible'
       : 'hidden'};
-  @media (min-width: 1024px) {
-    height: 40px;
+  @media (min-width: 940px) {
+    height: 44px;
   }
 `;
 

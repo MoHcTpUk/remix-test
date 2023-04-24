@@ -1,12 +1,19 @@
-import type { LoaderArgs, MetaFunction } from '@remix-run/cloudflare';
-import { json } from '@remix-run/cloudflare';
-import { Form, useLoaderData, useNavigation } from '@remix-run/react';
+import { Form } from '@remix-run/react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled, { DefaultTheme } from 'styled-components';
-import { Box } from '~/components/common/Box';
+import type { DefaultTheme } from 'styled-components';
+
 import SvgMap from '~/components/common/Icons/Map';
 import SvgSearch from '~/components/common/Icons/Search';
+
+import {
+  MainInputSearch,
+  MiddleBorder,
+  PlaceInputSearch,
+  SearchContainer,
+  SvgWrapper,
+  WrapperInput,
+} from './styles';
 
 // export const meta: MetaFunction = () => {
 //   return {
@@ -69,97 +76,18 @@ import SvgSearch from '~/components/common/Icons/Search';
 //   });
 // };
 
-const SearchContainer = styled.div`
-  width: 100%;
-  background-color: ${({ theme }) => theme.search.backgroundWrapper};
-  display: flex;
-  flex-direction: column;
-  border-radius: 0 0 8px 8px;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    border-radius: 0 0 16px 16px;
-  }
-`;
-
-const MainInputSearch = styled.input`
-  background-color: ${({ theme }) => theme.search.backgroundWrapper};
-  padding: 18px 26px 18px 65px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  &:nth-child(1) {
-    border-bottom: 1px solid ${({ theme }) => theme.search.borderColor};
-  }
-  @media (min-width: 1024px) {
-    border-radius: 0 0 0 16px;
-    padding: 24px 14px 24px 76px;
-    &:nth-child(1) {
-      border-bottom: none;
-    }
-  }
-`;
-
-const PlaceInputSearch = styled.input`
-  background-color: ${({ theme }) => theme.search.backgroundWrapper};
-  padding: 18px 26px 18px 65px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  border-radius: 0px 0px 8px 8px;
-  @media (min-width: 1024px) {
-    padding: 24px 14px 24px 54px;
-    border-radius: 0px 0px 16px 0px;
-  }
-`;
-
-const WrapperInput = styled.div`
-  width: 100%;
-  position: relative;
-  border-radius: 0px 0px 8px 8px;
-`;
-
-const SvgWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  top: 18px;
-  left: 26px;
-  @media (min-width: 1024px) {
-    &:nth-child(1) {
-      top: 24px;
-      left: 40px;
-    }
-    &:nth-child(2) {
-      top: 24px;
-      left: 14px;
-    }
-  }
-`;
-
-export const MiddleBorder = styled.div`
-  display: none;
-  min-width: 1px;
-  height: 40px;
-  background-color: ${({ theme }) => theme.search.middleBorderColor};
-  padding: 16px 0px;
-  margin-top: 16px;
-  @media (min-width: 1024px) {
-    display: flex;
-  }
-`;
-
-export const Search = memo(function NavbarMemoized({ theme }: { theme: DefaultTheme }) {
+export const Search = memo(({ theme }: { theme: DefaultTheme }) => {
   // const data = useLoaderData<typeof loader>();
   // const navagation = useNavigation();
 
-  let { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <Form method='get' className='search-form'>
+    <Form method='GET' style={{ width: '100%' }}>
       <SearchContainer>
         <WrapperInput>
           <MainInputSearch placeholder={t('home:job_title_keywords_or_company')} type='text' />
-          <SvgWrapper>
+          <SvgWrapper search>
             <SvgSearch color={theme.search.svgColor} />
           </SvgWrapper>
         </WrapperInput>

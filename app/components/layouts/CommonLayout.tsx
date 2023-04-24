@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
-import { UserContext } from '~/root';
+
 import { Box } from '../common/Box';
 import { Footer } from '../lib/Footer';
 import { Navbar } from '../lib/Navbar';
@@ -13,18 +12,21 @@ const Container = styled(Box)`
   background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
-export const CommonLayout = ({ children }: Props): JSX.Element => {
-  const userContext = useContext(UserContext);
-
+export function CommonLayout({ children }: Props): JSX.Element {
   return (
     <Container flexDirection='column' minHeight='100vh'>
-      <Navbar theme={userContext!.theme} />
+      <Navbar />
 
-      <Box width='100%' flexDirection='column' flexGrow='1'>
+      <Box
+        width='100%'
+        flexDirection='column'
+        alignItems='center'
+        // flexGrow='1'
+      >
         {children}
       </Box>
 
-      <Footer theme={userContext!.theme} />
+      <Footer />
     </Container>
   );
-};
+}

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Text } from '../Text';
-import { MiddleBorder, TabButton, TabContainer } from './styles';
-import type { DefaultTheme } from 'styled-components';
+
 import { Search } from '~/components/lib/Search';
-import { useTranslation } from 'react-i18next';
+import { useApp } from '~/hooks';
+
+import { Text } from '../Text';
+import { TextVariantEnum } from '../Text/enums';
+import { MiddleBorder, TabButton, TabContainer } from './styles';
 
 export interface TabProps {
   id: string;
@@ -11,12 +13,8 @@ export interface TabProps {
   content: string;
 }
 
-export interface TabSwitcherProps {
-  theme: DefaultTheme;
-}
-
-const TabSwitcher: React.FC<TabSwitcherProps> = ({ theme }) => {
-  let { t } = useTranslation();
+function TabSwitcher() {
+  const { theme, t } = useApp();
 
   const tabs: TabProps[] = [
     {
@@ -43,13 +41,13 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ theme }) => {
   };
 
   return (
-    <div>
+    <>
       <TabContainer>
         {tabs.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <TabButton isActive={activeTab.id === tab.id} onClick={() => handleTabClick(tab)}>
               <Text
-                variant='textBody1'
+                variant={TextVariantEnum.textBody1}
                 color={
                   activeTab.id === tab.id ? theme.tabs.activeTabColor : theme.tabs.disabledTabColor
                 }
@@ -63,8 +61,8 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ theme }) => {
         ))}
       </TabContainer>
       <Search theme={theme} />
-    </div>
+    </>
   );
-};
+}
 
 export default TabSwitcher;

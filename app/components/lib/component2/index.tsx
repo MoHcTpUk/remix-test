@@ -1,4 +1,4 @@
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export function Component2() {
   return (
