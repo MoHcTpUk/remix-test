@@ -5,6 +5,7 @@ import { ButtonWrapper, SliderContainer, TitleContainer, WrapperSection } from '
 import { useApp } from '~/hooks';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 import Button from '~/components/common/Button';
+import styled from 'styled-components';
 
 export const SectionCompanies = memo(function HomePageMemoized(): JSX.Element {
   const { theme, t } = useApp();
