@@ -1,12 +1,11 @@
-import type { LoaderArgs, MetaFunction } from '@remix-run/cloudflare';
-import { json } from '@remix-run/cloudflare';
-import { Form, useLoaderData, useNavigation } from '@remix-run/react';
+import { Form } from '@remix-run/react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled, { DefaultTheme } from 'styled-components';
-import { Box } from '~/components/common/Box';
+import type { DefaultTheme } from 'styled-components';
+
 import SvgMap from '~/components/common/Icons/Map';
 import SvgSearch from '~/components/common/Icons/Search';
+
 import {
   MainInputSearch,
   MiddleBorder,
@@ -77,14 +76,14 @@ import {
 //   });
 // };
 
-export const Search = memo(function NavbarMemoized({ theme }: { theme: DefaultTheme }) {
+export const Search = memo(({ theme }: { theme: DefaultTheme }) => {
   // const data = useLoaderData<typeof loader>();
   // const navagation = useNavigation();
 
-  let { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <Form method='GET' className='search-form' style={{ width: '100%' }}>
+    <Form method='GET' style={{ width: '100%' }}>
       <SearchContainer>
         <WrapperInput>
           <MainInputSearch placeholder={t('home:job_title_keywords_or_company')} type='text' />

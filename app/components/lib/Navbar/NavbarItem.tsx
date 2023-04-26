@@ -7,6 +7,6 @@ type NavbarItemProps = {
   item: NavbarLink;
 };
 
-export const NavbarItem = memo(function NavbarItemMemoized({ item }: NavbarItemProps): JSX.Element {
-  return <Link to={item.href}>{item.title}</Link>;
-});
+export const NavbarItem = memo(
+  ({ item }: NavbarItemProps): JSX.Element => <Link to={item.href}>{item.title}</Link>,
+);

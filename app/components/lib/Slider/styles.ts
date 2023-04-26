@@ -1,5 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components';
-import { ISliderProps } from '.';
+import styled from 'styled-components';
 
 export const SwiperContainer = styled.div<{ variant?: 'chips' | 'companies' | 'articles' }>`
   width: 100%;
@@ -48,7 +47,7 @@ export const SwiperControl = styled.div<{ variant?: string }>`
   justify-content: center;
   flex-direction: row;
   gap: 32px;
-  width: 100%;
+  width: 99%;
 
   & button {
     display: ${({ variant }) => (variant === 'chips' ? 'flex' : 'none')};

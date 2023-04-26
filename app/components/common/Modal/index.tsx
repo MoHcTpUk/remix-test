@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
-import SvgClose from '../Icons/Close';
+
 import { useApp } from '~/hooks';
+
+import SvgClose from '../Icons/Close';
 
 const Background = styled.div``;
 
@@ -36,7 +38,7 @@ const ModalInner = styled(motion.div)`
   }
 `;
 
-export const Modal = ({
+export function Modal({
   visibility,
   setVisibility,
   children,
@@ -44,7 +46,7 @@ export const Modal = ({
   visibility: boolean;
   setVisibility: (visibility: boolean) => void;
   children: ReactNode;
-}) => {
+}) {
   const { theme } = useApp();
 
   return (
@@ -96,4 +98,4 @@ export const Modal = ({
       )}
     </AnimatePresence>
   );
-};
+}

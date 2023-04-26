@@ -1,6 +1,15 @@
+import type { LanguageEnum } from 'public/enums/languageEnum';
+import { memo } from 'react';
+import type { EntityMaterial } from 'shared/client/data-contracts';
+import { lng } from 'shared/utils';
+
+import Button from '~/components/common/Button';
 import { Text } from '~/components/common/Text';
+import { TextVariantEnum } from '~/components/common/Text/enums';
 import type { ISlide } from '~/components/lib/Slider';
 import { Slider } from '~/components/lib/Slider';
+import { useApp } from '~/hooks';
+
 import {
   ButtonInner,
   ButtonWrapper,
@@ -8,13 +17,6 @@ import {
   TitleContainer,
   WrapperSection,
 } from './styles';
-import { useApp } from '~/hooks';
-import { TextVariantEnum } from '~/components/common/Text/enums';
-import Button from '~/components/common/Button';
-import { memo } from 'react';
-import type { EntityMaterial } from 'shared/client';
-import { lng } from 'shared/utils';
-import type { LanguageEnum } from 'public/enums/languageEnum';
 
 export interface INewsProps {
   news: EntityMaterial[];
@@ -26,12 +28,12 @@ function mapMaterialsToViewModel(material: EntityMaterial, language: LanguageEnu
     date: material.created_at,
     vacancies: undefined,
     image: material.image,
-  } as ISlide
+  } as ISlide;
 }
 
-export const SectionNews = memo(function HomePageMemoized({ news }: INewsProps): JSX.Element {
+export const SectionNews = memo(({ news }: INewsProps): JSX.Element => {
   const { theme, t, userContext } = useApp();
-  const slides = news.map(item => mapMaterialsToViewModel(item, userContext!.language))
+  const slides = news.map((item) => mapMaterialsToViewModel(item, userContext.language));
 
   return (
     <WrapperSection>

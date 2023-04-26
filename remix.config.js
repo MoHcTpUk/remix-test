@@ -1,5 +1,6 @@
 const { withEsbuildOverride } = require('remix-esbuild-override');
 const styledComponentsPlugin = require('./styled-components-esbuild-plugin');
+const { createRoutesFromFolders } = require('@remix-run/v1-route-convention');
 
 withEsbuildOverride((option) => {
   option.plugins.unshift(styledComponentsPlugin());
@@ -21,6 +22,14 @@ module.exports = {
   serverPlatform: 'neutral',
   future: {
     unstable_tailwind: true,
+    v2_errorBoundary: true,
+    v2_normalizeFormMethod: true,
+    v2_meta: true,
+    v2_routeConvention: true,
+  },
+  routes(defineRoutes) {
+    // uses the v1 convention, works in v1.15+ and v2
+    return createRoutesFromFolders(defineRoutes);
   },
   appDirectory: 'app',
   assetsBuildDirectory: 'public/build',

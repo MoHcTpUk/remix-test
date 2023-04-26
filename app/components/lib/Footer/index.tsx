@@ -1,11 +1,14 @@
+import { Link } from '@remix-run/react';
 import { memo } from 'react';
+
 import { Text } from '~/components/common/Text';
 import { useApp } from '~/hooks';
+
 import {
   BoxCopiright,
   ContainerFooter,
   IconsWrapper,
-  Link,
+  LinkItem,
   LinksWrapper,
   SosialImg,
   WrapperFooter,
@@ -21,7 +24,7 @@ export interface FooterProps {
   links: ILink[];
 }
 
-export const Footer = memo(function FooterMemoized(): JSX.Element {
+export const Footer = memo((): JSX.Element => {
   const { theme, t } = useApp();
 
   const navlinks: ILink[] = [
@@ -62,21 +65,31 @@ export const Footer = memo(function FooterMemoized(): JSX.Element {
       <ContainerFooter>
         <LinksWrapper>
           {navlinks.map(({ href, id, title }) => (
-            <Link key={id} href={href}>
-              <Text color={theme.footer.linkTextColor}>{title}</Text>
+            <Link key={id} to={href}>
+              <LinkItem>
+                <Text color={theme.footer.linkTextColor}>{title}</Text>
+              </LinkItem>
             </Link>
           ))}
         </LinksWrapper>
         <IconsWrapper>
-          <SosialImg href='#'>
-            <img src='images/social/ln.jpg' alt='line' />
-          </SosialImg>
-          <SosialImg href='#'>
-            <img src='images/social/fb.jpg' alt='facebook' />
-          </SosialImg>
-          <SosialImg href='#'>
-            <img src='images/social/in.jpg' alt='instagram' />
-          </SosialImg>
+          <Link to='#'>
+            <SosialImg>
+              <img src='/images/social/ln.jpg' alt='line' />
+            </SosialImg>
+          </Link>
+
+          <Link to='#'>
+            <SosialImg>
+              <img src='/images/social/fb.jpg' alt='facebook' />
+            </SosialImg>
+          </Link>
+
+          <Link to='#'>
+            <SosialImg>
+              <img src='/images/social/in.jpg' alt='instagram' />
+            </SosialImg>
+          </Link>
         </IconsWrapper>
         <BoxCopiright>
           <Text color={theme.footer.linkTextColor}>{t('copyright')}</Text>

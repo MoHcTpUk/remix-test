@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { DefaultTheme } from 'styled-components';
 import styled from 'styled-components';
+
 import { TextVariantEnum } from './enums';
 
 type Props = {

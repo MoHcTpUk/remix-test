@@ -1,55 +1,67 @@
 import { useFetcher } from '@remix-run/react';
 import type { IUserContext } from 'public/interfaces/iUserContext';
 import { isUserContext } from 'public/interfaces/iUserContext';
-import { createContext, useEffect, useRef, useState } from 'react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { isServer } from 'shared/utils';
+
 import { defaultUserContext } from '../../public/defaultUserContext';
 
-type UserContextType = [IUserContext | null, Dispatch<SetStateAction<IUserContext | null>>];
+type UserContextType = [IUserContext, Dispatch<SetStateAction<IUserContext>>];
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-function UserContextProvider({ children, specifiedUserContext }: { children: ReactNode; specifiedUserContext: IUserContext | null }) {
-	const [userContext, setUserContext] = useState<IUserContext | null>(() => {
-		if (specifiedUserContext) {
-			if (isUserContext(specifiedUserContext)) {
-				return specifiedUserContext
-			}
-			else {
-				return null
-			}
-		}
+function UserContextProvider({
+  children,
+  specifiedUserContext,
+}: {
+  children: ReactNode;
+  specifiedUserContext: IUserContext | null;
+}) {
+  const [userContext, setUserContext] = useState<IUserContext>(() => {
+    if (specifiedUserContext) {
+      if (isUserContext(specifiedUserContext)) {
+        return specifiedUserContext;
+      }
 
-		if (isServer()) {
-			return null
-		}
+      return defaultUserContext();
+    }
 
-		return defaultUserContext()
-	});
+    if (isServer()) {
+      return defaultUserContext();
+    }
 
-	const persistUserContext = useFetcher();
-	const persistUserContextRef = useRef(persistUserContext);
+    return defaultUserContext();
+  });
 
-	useEffect(() => {
-		persistUserContextRef.current = persistUserContext;
-	}, [persistUserContext]);
+  const persistUserContext = useFetcher();
+  const persistUserContextRef = useRef(persistUserContext);
 
-	const mountRun = useRef(false);
+  useEffect(() => {
+    persistUserContextRef.current = persistUserContext;
+  }, [persistUserContext]);
 
-	useEffect(() => {
-		if (!mountRun.current) {
-			mountRun.current = true;
-			return;
-		}
-		if (!userContext) {
-			return;
-		}
+  const mountRun = useRef(false);
 
-		persistUserContextRef.current.submit({ context: JSON.stringify(userContext) }, { action: 'actions/set-user-context', method: 'POST' });
-	}, [userContext]);
+  useEffect(() => {
+    if (!mountRun.current) {
+      mountRun.current = true;
+      return;
+    }
+    if (!userContext) {
+      return;
+    }
 
-	return <UserContext.Provider value={[userContext, setUserContext]}>{children}</UserContext.Provider>;
+    persistUserContextRef.current.submit(
+      { context: JSON.stringify(userContext) },
+      { action: 'actions/set-user-context', method: 'POST' },
+    );
+  }, [userContext]);
+
+  return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <UserContext.Provider value={[userContext, setUserContext]}>{children}</UserContext.Provider>
+  );
 }
 
-export { UserContextProvider, UserContext };
+export { UserContext, UserContextProvider };

@@ -1,29 +1,31 @@
 import { memo } from 'react';
+import type { EntityMaterial } from 'shared/client/data-contracts';
+
 import { CommonLayout } from '~/components/layouts/CommonLayout';
-import { SectionTop } from './SectionTop';
-import { SectionTrending } from './SectionTrending';
+
+import { SectionArticles } from './SectionArticles';
 import { SectionBenefits } from './SectionBenefits';
 import { SectionCompanies } from './SectionCompanies';
-import { SectionArticles } from './SectionArticles';
 import { SectionNews } from './SectionNews';
-import { SectionInnerContaier } from './styles';
-import type { EntityMaterial } from 'shared/client';
+import { SectionTop } from './SectionTop';
+import { SectionTrending } from './SectionTrending';
+import { SectionInnerContainer } from './styles';
 
 export interface IHomePageProps {
   news: EntityMaterial[];
 }
 
-export const HomePage = memo(function HomePageMemoized({ news }: IHomePageProps): JSX.Element {
-  return (
+export const HomePage = memo(
+  ({ news }: IHomePageProps): JSX.Element => (
     <CommonLayout>
       <SectionTop />
       <SectionTrending />
-      <SectionInnerContaier>
+      <SectionInnerContainer>
         <SectionCompanies />
         <SectionBenefits />
-      </SectionInnerContaier>
+      </SectionInnerContainer>
       <SectionNews news={news} />
       <SectionArticles />
     </CommonLayout>
-  );
-});
+  ),
+);

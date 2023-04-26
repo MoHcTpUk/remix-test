@@ -1,26 +1,23 @@
-import type { LoaderArgs} from '@remix-run/cloudflare';
+import type { LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { Api } from 'shared/client';
+import { Materials } from 'shared/client/Materials';
+
 import { HomePage } from '~/components/pages/HomePage';
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const client = new Api();
-  const response = await client.materials.newsList();
-
-  // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  // return json(await res.text());
+  const client = new Materials();
+  const response = await client.newsList();
 
   if (response.data.data) {
-    return json(response.data.data)
+    return json(response.data.data);
   }
 
   return json([]);
 };
 
-
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  console.warn(data)
-  return <HomePage news={[]} />;
+
+  return <HomePage news={data} />;
 }

@@ -1,141 +1,135 @@
-import { Form, Link } from '@remix-run/react';
-import { memo } from 'react';
-import { Input } from '~/components/common/Input';
+import { Link, useFetcher } from '@remix-run/react';
+import { memo, useEffect, useRef } from 'react';
+
 import Button from '~/components/common/Button';
-
-import { CommonLayout } from '~/components/layouts/CommonLayout';
-import styled from 'styled-components';
-import { TextVariantEnum } from '~/components/common/Text/enums';
-import { useApp } from '~/hooks';
+import { CheckBox } from '~/components/common/Checkbox';
+import { Input } from '~/components/common/Input';
 import { Text } from '~/components/common/Text';
+import { TextVariantEnum } from '~/components/common/Text/enums';
+import { CommonLayout } from '~/components/layouts/CommonLayout';
+import { useApp } from '~/hooks';
+import type { ISignUpResponse } from '~/routes/auth.register';
+
 import { PoliciesText } from '../Login/styles';
+import { BoxCheckbox, BoxForm, Wrapper } from './styles';
 
-export const Wrapper = styled.div`
-  padding: 16px;
-  background-color: ${({ theme }) => theme.auth.backgroundRegisterPage};
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 768px) {
-    gap: 24px;
-  }
-`;
+export const RegisterPage = memo(
+  ({ actionData }: { actionData: ISignUpResponse | null }): JSX.Element => {
+    const { t } = useApp();
+    const register = useFetcher<ISignUpResponse>();
 
-export const BoxForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: ${({ theme }) => theme.auth.backgroundRegisterContainerColor};
-  border-radius: 8px;
-  align-items: center;
-  gap: 24px;
-  padding: 16px;
-  @media (min-width: 768px) {
-    gap: 32px;
-    max-width: 476px;
-    padding: 40px;
-  }
-  @media (min-width: 1280px) {
-    padding: 48px 102px;
-    max-width: 792px;
-  }
-`;
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    // const first_name = useRef<HTMLInputElement>(null);
+    // const last_name = useRef<HTMLInputElement>(null);
 
-export const BoxRadios = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  @media (min-width: 1280px) {
-    flex-direction: row;
-    justify-content: center;
-  }
-`;
+    useEffect(() => {
+      if (actionData?.fieldErrors.email) {
+        emailRef.current?.focus();
+      } else if (actionData?.fieldErrors.password) {
+        passwordRef.current?.focus();
+      }
+    }, [actionData]);
 
-export const RadioBtnWrapper = styled.label`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const RadioBtn = styled.input`
-  accent-color: ${({ theme }) => theme.auth.radioButtonColor};
-  width: 20px;
-  height: 20px;
-`;
-
-export const RegisterPage = memo(function HomePageMemoized(): JSX.Element {
-  const { t } = useApp();
-
-  return (
-    <CommonLayout>
-      <Wrapper>
-        <Form
-          method='post'
-          action='/'
-          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-        >
-          <BoxForm>
-            <Text variant={TextVariantEnum.textHeading3} style={{ textAlign: 'center' }}>
-              {t('auth:sign_up')}
-            </Text>
-            <Input
-              placeholder={t('auth:enter_first_name')}
-              id='i_enter_first_name'
-              name={'enter_first_name'}
-            />
-            <Input placeholder={t('auth:enter_last_name')} id='i_last_name' name={'last_name'} />
-            <Input placeholder={t('auth:enter_email')} id='i_email' name={'email'} />
-            <Input placeholder={t('auth:enter_password')} id='i_password' name={'password'} />
-            <Input
-              placeholder={t('auth:password_confirmation')}
-              id='i_password_confirmation'
-              name={'password_confirmation'}
-            />
-            <BoxRadios>
-              <RadioBtnWrapper>
-                <RadioBtn type='radio' id='i_newsletter' name={'newsletter'} />
-                <Text variant={TextVariantEnum.textBody1medium}>
-                  {t('auth:subscribe_to_newsletter')}
-                </Text>
-              </RadioBtnWrapper>
-              <RadioBtnWrapper>
-                <RadioBtn type='radio' id='i_policy' name={'policy'} />
-                <Text variant={TextVariantEnum.textBody1medium}>
-                  {t('auth:i_accept_terms_of_use')}
-                </Text>
-              </RadioBtnWrapper>
-            </BoxRadios>
-            <Button priority='primary' fullwidth>
-              <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_up')}</Text>
-            </Button>
-            <PoliciesText>
-              <Text variant={TextVariantEnum.textBody2}>
-                {`${t('auth:by_continuing_i_agree_to_the')} `}
+    return (
+      <CommonLayout>
+        <Wrapper>
+          <register.Form
+            method='POST'
+            action='/auth/register'
+            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
+            <BoxForm>
+              <Text variant={TextVariantEnum.textHeading3} style={{ textAlign: 'center' }}>
+                {t('auth:sign_up')}
               </Text>
-              <Link to='/'>
-                <Text
-                  variant={TextVariantEnum.textBody2}
-                  style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                >
-                  {t('auth:terms_of_use')}
+              <Input
+                placeholder={t('auth:enter_first_name')}
+                id='i_enter_first_name'
+                name='first_name'
+              />
+              <Input placeholder={t('auth:enter_last_name')} id='i_last_name' name='last_name' />
+              <Input
+                htmlType='email'
+                placeholder={t('auth:enter_email')}
+                id='i_email'
+                name='email'
+                aria-invalid={register.data?.fieldErrors.email ? true : undefined}
+                errorText={
+                  register.data?.fieldErrors?.email ? register.data?.fieldErrors.email : undefined
+                }
+              />
+              <Input
+                htmlType='password'
+                placeholder={t('auth:enter_password')}
+                id='i_password'
+                name='password'
+                aria-invalid={register?.data?.fieldErrors.password ? true : undefined}
+                errorText={
+                  register.data?.fieldErrors.password
+                    ? register.data?.fieldErrors.password
+                    : undefined
+                }
+              />
+              <Input
+                htmlType='password'
+                placeholder={t('auth:password_confirmation')}
+                id='i_password_confirmation'
+                name='password_confirmation'
+                aria-invalid={register?.data?.fieldErrors.passwordConfirm ? true : undefined}
+                errorText={
+                  register.data?.fieldErrors.passwordConfirm
+                    ? register.data?.fieldErrors.passwordConfirm
+                    : undefined
+                }
+              />
+              <BoxCheckbox>
+                <CheckBox
+                  id='i_newsletter'
+                  name='newsletter'
+                  label={t('auth:subscribe_to_newsletter')}
+                />
+                <CheckBox
+                  id='i_policy'
+                  name='policy'
+                  label={t('auth:i_accept_terms_of_use')}
+                  aria-invalid={register.data?.fieldErrors.policy ? true : undefined}
+                  errorText={
+                    register.data?.fieldErrors.policy
+                      ? register.data?.fieldErrors.policy
+                      : undefined
+                  }
+                />
+              </BoxCheckbox>
+              <Button priority='primary' fullwidth>
+                <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_up')}</Text>
+              </Button>
+              <PoliciesText>
+                <Text variant={TextVariantEnum.textBody2}>
+                  {`${t('auth:by_continuing_i_agree_to_the')} `}
                 </Text>
-              </Link>
-              <Text variant={TextVariantEnum.textBody2}>{` ${t('auth:and')} `}</Text>
-              <Link to='/'>
-                <Text
-                  variant={TextVariantEnum.textBody2}
-                  style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                >
-                  {t('auth:privacy_policy')}.
-                </Text>
-              </Link>
-            </PoliciesText>
-          </BoxForm>
-        </Form>
-      </Wrapper>
-    </CommonLayout>
-  );
-});
+                <Link to='/'>
+                  <Text
+                    variant={TextVariantEnum.textBody2}
+                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                  >
+                    {t('auth:terms_of_use')}
+                  </Text>
+                </Link>
+                <Text variant={TextVariantEnum.textBody2}>{` ${t('auth:and')} `}</Text>
+                <Link to='/'>
+                  <Text
+                    variant={TextVariantEnum.textBody2}
+                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                  >
+                    {t('auth:privacy_policy')}.
+                  </Text>
+                </Link>
+              </PoliciesText>
+            </BoxForm>
+          </register.Form>
+        </Wrapper>
+      </CommonLayout>
+    );
+  },
+);

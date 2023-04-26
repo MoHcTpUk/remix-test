@@ -11,6 +11,8 @@ export interface IPalette {
       darken1_base: string;
       darken1_variant1: string;
       darken1_variant2: string;
+      darken1_variant3: string;
+      darken1_variant4: string;
     };
     darken2: {
       darken2_base: string;
@@ -31,5 +33,9 @@ export interface IPalette {
     };
     accent2: string;
     accent3: string;
+  };
+
+  error: {
+    error_base: string;
   };
 }

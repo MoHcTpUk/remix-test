@@ -1,13 +1,15 @@
 import { memo } from 'react';
-import Button from '~/components/common/Button';
+
 import { Box } from '~/components/common/Box';
+import Button from '~/components/common/Button';
 import TabSwitcher from '~/components/common/Tabs';
 import { Text } from '~/components/common/Text';
-import { ButtonContainer, WrapperSection } from './styles';
-import { useApp } from '~/hooks';
 import { TextVariantEnum } from '~/components/common/Text/enums';
+import { useApp } from '~/hooks';
 
-export const SectionTop = memo(function HomePageMemoized(): JSX.Element {
+import { ButtonContainer, WrapperSection } from './styles';
+
+export const SectionTop = memo((): JSX.Element => {
   const { theme, t } = useApp();
 
   return (

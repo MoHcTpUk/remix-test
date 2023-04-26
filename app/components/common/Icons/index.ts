@@ -1,6 +1,9 @@
+export { default as ArrowLeft } from './ArrowLeft';
 export { default as Bell } from './Bell';
 export { default as BellPush } from './BellPush';
+export { default as Cart } from './Cart';
 export { default as Close } from './Close';
+export { default as Copy } from './Copy';
 export { default as Down } from './Down';
 export { default as Email } from './Email';
 export { default as EmailPush } from './EmailPush';

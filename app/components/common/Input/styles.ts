@@ -1,15 +1,25 @@
 import styled from 'styled-components';
+
 import { FONT_SIZES_DESC, FONT_SIZES_MOB } from '../Text';
 
-export const WrapperInput = styled.div`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: 'flex-start';
+  width: 100%;
+`;
+
+export const WrapperInner = styled.div`
   width: 100%;
   position: relative;
 `;
 
-export const InputComponent = styled.input<{ backgrond?: string }>`
+export const InputComponent = styled.input<{ backgrond?: string; error?: boolean }>`
   width: 100%;
   height: 100%;
-  border: 1px solid ${({ theme }) => theme.inputs.borderColor};
+  border: ${({ theme, error }) =>
+    error ? `2px solid ${theme.errorTextColor}` : `1px solid ${theme.inputs.borderColor}`};
+
   background-color: transparent;
   border-radius: 80px;
   padding: 11px 16px;
@@ -83,5 +93,21 @@ export const PlaceHolder = styled.label`
     @supports (not (-ms-ime-align: auto)) {
       transform: translate(16px, -36px);
     }
+  }
+`;
+
+export const BoxErrors = styled.div<{ isText?: boolean }>`
+  margin-left: 16px;
+  margin: ${({ isText }) => isText && '4px 0'};
+`;
+
+export const ButtonClear = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  @media (min-width: 1024px) {
+    top: 16px;
+    right: 16px;
   }
 `;

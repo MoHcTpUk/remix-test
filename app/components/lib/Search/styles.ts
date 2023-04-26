@@ -1,4 +1,5 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
+
 import { FONT_SIZES_DESC, FONT_SIZES_MOB } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 
