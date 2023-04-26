@@ -38,18 +38,16 @@ export const Image = styled.div<CardProps>`
   padding: ${({ variant }) => (variant === 'companies' ? '15px 25px' : '0')};
   background: ${({ theme }) => theme.сards.imageBackground};
   min-width: ${({ variant }) => (variant === 'companies' ? '100%' : '138px')};
-  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: ${({ variant }) =>
     variant === 'companies' ? ' 16px 16px 0px 0px' : '8px 8px 0px 0px'};
-  min-height: ${({ variant }) => (variant === 'companies' ? 'auto' : '182px')};
-  height: ${({ variant }) => (variant === 'companies' ? '100%' : '182px')};
-
+  height: 100%;
   flex-grow: 1;
   img {
-    width: 100%;
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
     border-radius: ${({ variant }) => (variant === 'companies' ? '0' : '8px 8px 0px 0px')};
   }
 
@@ -58,11 +56,11 @@ export const Image = styled.div<CardProps>`
     height: ${({ variant }) => (variant === 'companies' ? '118px' : '200px')};
     img {
       min-width: ${({ variant }) => (variant === 'companies' ? '110px' : '256px')};
-      max-height: ${({ variant }) => (variant === 'companies' ? '80px' : '100%')};
+      height: ${({ variant }) => (variant === 'companies' ? '80px' : 'auto')};
     }
   }
   @media (min-width: 1024px) {
-    max-height: ${({ variant }) => (variant === 'companies' ? '130px' : '100%')};
+    height: ${({ variant }) => (variant === 'companies' ? '130px' : 'auto')};
     padding: ${({ variant }) => (variant === 'companies' ? '25px 45px' : '0')};
     width: 100%;
   }

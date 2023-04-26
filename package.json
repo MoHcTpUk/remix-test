@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=production npm run wrangler",
     "typecheck": "tsc",
     "wrangler": "wrangler pages dev ./public",
-    "swagger:generate": "npx swagger-typescript-api -p ./shared/client.json -n ./shared/client.ts",
+    "swagger:generate": "nswag run ./shared/client.nswag",
     "icons:generate": "npx @svgr/cli --out-dir app/components/common/Icons -- public/images/icons",
     "icons:watch": "npm-watch icons",
     "icons:svg": "run-s icons icons:watch",

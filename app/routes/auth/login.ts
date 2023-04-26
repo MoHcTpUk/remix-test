@@ -1,9 +1,5 @@
-import type { ActionArgs } from '@remix-run/cloudflare';
-import { redirect } from '@remix-run/cloudflare';
-import type { EntitySignInRequest } from 'shared/client';
-import { Api } from 'shared/client';
+import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
 import { badRequest } from '~/utils/request.server';
-import { sessionStorage } from '~/storages/session.server'
 
 function validateEmail(email: unknown) {
   if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
@@ -19,9 +15,9 @@ function validatePassword(password: unknown) {
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
-  const email = form.get('email')?.toString();
-  const password = form.get('password')?.toString();
-  const creds: EntitySignInRequest = { email, password };
+  const email = form.get('email');
+  const password = form.get('password');
+  const fields = { email, password };
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
@@ -37,22 +33,24 @@ export const action = async ({ request }: ActionArgs) => {
   };
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, creds, formError: null });
+    return badRequest({ fieldErrors, fields, formError: null });
   }
 
   try {
-    const client = new Api();
-    // dirt hack to bypass issue when swagger generator make only http client but server require https
-    client.baseUrl = 'https://upjob.com/api/v1';
-    const signInResult = await client.userService.loginCreate(creds);
-    const sessionCookie = signInResult.headers.get('Set-Cookie');
+    // добавить в env process.env.BASE_HOST
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    const requestOptions: Request | RequestInit | undefined = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(fields),
+      redirect: 'follow',
+    };
 
-    const session = await sessionStorage.getSession();
-    session.set('session', sessionCookie);
-    const headers: HeadersInit = sessionCookie
-      ? { 'Set-Cookie': await sessionStorage.commitSession(session) }
-      : {};
+    const data = await fetch(`https://upjob.com/api/v1/user-service/login`, requestOptions);
 
+    const sessionCookie = data.headers.get('Set-Cookie');
+    const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
     return redirect('/account', {
       status: 302,
       headers,
@@ -60,7 +58,7 @@ export const action = async ({ request }: ActionArgs) => {
   } catch (error) {
     return badRequest({
       fieldErrors: null,
-      fields: creds,
+      fields,
       formError: `Username/Password combination is incorrect`,
     });
   }

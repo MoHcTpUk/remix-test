@@ -1,12 +1,16 @@
-import { useEffect, useRef } from 'react';
-import { Link, useFetcher } from '@remix-run/react';
+import { useState, useEffect, useRef } from 'react';
+
+import { useNavigate, useActionData, Form, Link, useFetcher } from '@remix-run/react';
 import { Modal } from '~/components/common/Modal';
 import { Input } from '~/components/common/Input';
 import { useApp } from '~/hooks';
 import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
+import { Box } from '~/components/common/Box';
 import Button from '~/components/common/Button';
 import { IconEnum } from 'public/enums/iconEnum';
+import { Icon } from '~/components/common/Icon';
+import styled from 'styled-components';
 import { BoxContainer, BoxForm, BoxHelp, BoxSocial, HelpButton, PoliciesText } from './styles';
 
 export default function Login({
@@ -35,8 +39,8 @@ export default function Login({
         </Text>
         <login.Form method='POST' action='/auth/login' style={{ width: '100%' }}>
           <BoxForm>
-            <Input placeholder={t('auth:enter_email')} id='i_email' name={'email'} value='qwe@qwe.ru' />
-            <Input placeholder={t('auth:enter_password')} id='i_password' name={'password'} value='qwerty123' />
+            <Input placeholder={t('auth:enter_email')} id='i_email' name={'email'} />
+            <Input placeholder={t('auth:enter_password')} id='i_password' name={'password'} />
             <Button priority='primary' fullwidth>
               <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_in_with_email')}</Text>
             </Button>

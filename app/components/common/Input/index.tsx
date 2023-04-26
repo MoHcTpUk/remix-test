@@ -70,7 +70,6 @@ export const Input = ({
         disabled={disabled}
         id={id}
         name={name}
-        value={value}
       ></InputComponent>
       {placeholder && variant !== 'search' && (
         <PlaceHolder htmlFor={id} className='placeholder'>

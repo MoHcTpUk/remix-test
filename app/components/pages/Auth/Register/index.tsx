@@ -74,7 +74,7 @@ export const RegisterPage = memo(function HomePageMemoized(): JSX.Element {
       <Wrapper>
         <Form
           method='post'
-          action='/register'
+          action='/'
           style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
         >
           <BoxForm>

@@ -2,7 +2,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
 import { isUserContext } from "public/interfaces/iUserContext";
-import { getUserContextSession } from "~/storages/userContext.server";
+import { getUserContextSession } from "~/userContext.server";
 
 export const action: ActionFunction = async ({ request }) => {
 	const userContextSession = await getUserContextSession(request);
