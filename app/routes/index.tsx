@@ -1,6 +1,6 @@
 import type { LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react/dist/components';
 import { Api } from 'shared/client';
 import { HomePage } from '~/components/pages/HomePage';
 
