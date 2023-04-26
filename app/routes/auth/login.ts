@@ -1,6 +1,5 @@
 import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
-import { Api, EntitySignInRequest } from 'shared/client';
-import { badRequest, noContent } from '~/utils/request.server';
+import { badRequest } from '~/utils/request.server';
 
 function validateEmail(email: unknown) {
   if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
@@ -16,8 +15,9 @@ function validatePassword(password: unknown) {
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
-  const email = form.get('email')?.toString();
-  const password = form.get('password')?.toString();
+  const email = form.get('email');
+  const password = form.get('password');
+  const fields = { email, password };
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
@@ -27,16 +27,14 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 
-  // const fieldErrors = {
-  //   email: validateEmail(email),
-  //   password: validatePassword(password),
-  // };
+  const fieldErrors = {
+    email: validateEmail(email),
+    password: validatePassword(password),
+  };
 
-  // if (Object.values(fieldErrors).some(Boolean)) {
-  //   return badRequest({ fieldErrors, fields, formError: null });
-  // }
-
-  const creds: EntitySignInRequest = { email, password };
+  if (Object.values(fieldErrors).some(Boolean)) {
+    return badRequest({ fieldErrors, fields, formError: null });
+  }
 
   try {
     // добавить в env process.env.BASE_HOST
@@ -45,7 +43,7 @@ export const action = async ({ request }: ActionArgs) => {
     const requestOptions: Request | RequestInit | undefined = {
       method: 'POST',
       headers: myHeaders,
-      body: JSON.stringify(creds),
+      body: JSON.stringify(fields),
       redirect: 'follow',
     };
 
@@ -53,28 +51,14 @@ export const action = async ({ request }: ActionArgs) => {
 
     const sessionCookie = data.headers.get('Set-Cookie');
     const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
-
     return redirect('/account', {
       status: 302,
       headers,
     });
-
-    // console.warn(creds)
-
-    // const client = new Api()
-    // const signInResult = await client.userService.loginCreate(creds)
-
-    // console.log('>>>>>>>>>', signInResult.ok)
-    // console.log('>>>>>>>>>', signInResult.headers)
-    // const sessionCookie = signInResult.headers.get('Set-Cookie');
-
-    // console.log('>>>>>>>>>', sessionCookie)
-    // return noContent()
-
   } catch (error) {
     return badRequest({
       fieldErrors: null,
-      fields: creds,
+      fields,
       formError: `Username/Password combination is incorrect`,
     });
   }

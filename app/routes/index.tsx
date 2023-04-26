@@ -18,6 +18,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-
+  console.warn(data)
   return <HomePage news={data} />;
 }
