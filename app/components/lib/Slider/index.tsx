@@ -12,7 +12,7 @@ import { ChipsContainer, IconContainerArrow, SwiperContainer, SwiperControl } fr
 import Card from '~/components/common/Card';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 
-export interface ISlide {
+interface ISlide {
   id: string;
   title?: string;
   date?: string;
