@@ -23,25 +23,13 @@ export default function Login({
   const { t, theme } = useApp();
 
   const login = useFetcher();
-  const ref = useRef();
+  const ref = useRef<any>();
 
   useEffect(() => {
     if (login.type === 'done' && login.data.ok) {
       ref.current?.reset();
     }
   }, [login]);
-
-  const handlefetch = async () => {
-    // добавить в env process.env.BASE_HOST
-    const user = await fetch('https://upjob.com/api/v1/user-service/login', {
-      method: 'post',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: 'qwe@qwe.ru', password: 'qwerty123' }),
-    });
-  };
 
   return (
     <Modal visibility={visibility} setVisibility={setVisibility}>
@@ -62,7 +50,7 @@ export default function Login({
           {t('auth:or_register_with_social_accounts')}
         </Text>
         <BoxSocial>
-          <Button onClick={handlefetch} priority='small' fullwidth iconName={IconEnum.google}>
+          <Button priority='small' fullwidth iconName={IconEnum.google}>
             <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_with_google')}</Text>
           </Button>
           <Button priority='small' fullwidth iconName={IconEnum.fb}>
