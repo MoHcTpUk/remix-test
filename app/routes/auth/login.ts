@@ -1,4 +1,4 @@
-import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
+import { ActionArgs, json } from '@remix-run/cloudflare';
 import { badRequest } from '~/utils/request.server';
 
 function validateEmail(email: unknown) {
@@ -38,23 +38,14 @@ export const action = async ({ request }: ActionArgs) => {
 
   try {
     // добавить в env process.env.BASE_HOST
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    const requestOptions: Request | RequestInit | undefined = {
-      method: 'POST',
-      headers: myHeaders,
+    const user = await fetch('https://upjob.com/api/v1/user-service/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(fields),
-      redirect: 'follow',
-    };
-
-    const data = await fetch(`https://upjob.com/api/v1/user-service/login`, requestOptions);
-
-    const sessionCookie = data.headers.get('Set-Cookie');
-    const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
-    return redirect('/account', {
-      status: 302,
-      headers,
     });
+    return json(user);
   } catch (error) {
     return badRequest({
       fieldErrors: null,

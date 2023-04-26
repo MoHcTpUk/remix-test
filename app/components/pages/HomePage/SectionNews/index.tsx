@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import { Text } from '~/components/common/Text';
-import type { ISlide } from '~/components/lib/Slider';
 import { Slider } from '~/components/lib/Slider';
 import {
   ButtonInner,
@@ -11,27 +11,84 @@ import {
 import { useApp } from '~/hooks';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 import Button from '~/components/common/Button';
-import { memo } from 'react';
-import type { EntityMaterial } from 'shared/client';
-import { lng } from 'shared/utils';
-import type { LanguageEnum } from 'public/enums/languageEnum';
 
-export interface INewsProps {
-  news: EntityMaterial[];
-}
-function mapMaterialsToViewModel(material: EntityMaterial, language: LanguageEnum): ISlide {
-  return {
-    id: material.id,
-    title: lng(material.en?.title, material.th?.title, language),
-    date: material.created_at,
-    vacancies: undefined,
-    image: material.image,
-  } as ISlide
-}
+export const SectionNews = memo(function HomePageMemoized(): JSX.Element {
+  const { theme, t } = useApp();
 
-export const SectionNews = memo(function HomePageMemoized({ news }: INewsProps): JSX.Element {
-  const { theme, t, userContext } = useApp();
-  const slides = news.map(item => mapMaterialsToViewModel(item, userContext!.language))
+  const temporaryNews = [
+    {
+      id: '1',
+      title: ' 1 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '2',
+      title: '2 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '3',
+      title: '3 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '4',
+      title: '4 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '5',
+      title: '5 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '6',
+      title: '6 - Apple company-2',
+      vacancies: 0,
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '7',
+      title: ' 1 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '8',
+      title: '2 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '9',
+      title: '3 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '10',
+      title: '4 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '11',
+      title: '5 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
+      date: '17.02.2023',
+      image: 'images/homePage/new.png',
+    },
+    {
+      id: '12',
+      title: '6 - Apple company-2',
+      vacancies: 0,
+      image: 'images/homePage/new.png',
+    },
+  ];
 
   return (
     <WrapperSection>
@@ -41,7 +98,7 @@ export const SectionNews = memo(function HomePageMemoized({ news }: INewsProps):
         </Text>
       </TitleContainer>
       <SliderContainer>
-        <Slider theme={theme} variant='articles' slides={slides} />
+        <Slider theme={theme} variant='articles' slides={temporaryNews} />
       </SliderContainer>
       <ButtonWrapper>
         <ButtonInner>
