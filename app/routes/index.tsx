@@ -5,12 +5,12 @@ import { Api } from 'shared/client';
 import { HomePage } from '~/components/pages/HomePage';
 
 export const loader = async ({ request }: LoaderArgs) => {
-  // const client = new Api();
-  // const response = await client.materials.newsList();
+  const client = new Api();
+  const response = await client.materials.newsList();
 
-  // if (response.data.data) {
-  //   return json(response.data.data)
-  // }
+  if (response.data.data) {
+    return json(response.data.data)
+  }
 
   return json([]);
 };
