@@ -26,4 +26,3 @@ module.exports = {
   assetsBuildDirectory: 'public/build',
   publicPath: '/build/',
 };
-
