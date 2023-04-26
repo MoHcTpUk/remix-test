@@ -3,11 +3,11 @@ import { useLoaderData } from '@remix-run/react';
 import { Text } from '~/components/common/Text';
 import { getUser } from '~/utils/session.server';
 
-export const loader = async ({ request }: LoaderArgs) => {
-  // const session = await requireSession(request);
-  // const user = await getUser(request);
-  // return json({ user });
-};
+// export const loader = async ({ request }: LoaderArgs) => {
+//   const session = await requireSession(request);
+//   const user = await getUser(request);
+//   return json({ user });
+// };
 
 export default function Index() {
   // const data = useLoaderData<typeof loader>();

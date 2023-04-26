@@ -63,7 +63,3 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 };
-
-export const meta = {
-  location: '/account',
-};
