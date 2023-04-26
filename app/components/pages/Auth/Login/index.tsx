@@ -37,11 +37,12 @@ export default function Login({
     <Modal visibility={visibility} setVisibility={setVisibility}>
       <BoxContainer>
         <Text variant={TextVariantEnum.textHeading3} style={{ textAlign: 'center' }}>
-          {t('auth:create_new_user_or_sign_in')}
+          {t('auth:create_new_account_or_sign_in')}
         </Text>
         <login.Form method='POST' action='/auth/login' style={{ width: '100%' }}>
           <BoxForm>
             <Input
+              // ref={ref}
               placeholder={t('auth:enter_email')}
               id='i_email'
               name='email'
@@ -65,7 +66,7 @@ export default function Login({
           </BoxForm>
         </login.Form>
         <Text variant={TextVariantEnum.textBody2medium}>
-          {t('auth:or_register_with_social_users')}
+          {t('auth:or_register_with_social_accounts')}
         </Text>
         <BoxSocial>
           <Form method='POST' action='/auth/login-google'>

@@ -20,8 +20,8 @@ export const RegisterPage = memo(
 
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    // const first_name = useRef<HTMLInputElement>(null);
-    // const last_name = useRef<HTMLInputElement>(null);
+    const first_name = useRef<HTMLInputElement>(null);
+    const last_name = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
       if (actionData?.fieldErrors.email) {

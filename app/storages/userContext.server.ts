@@ -4,12 +4,6 @@ import { isUserContext } from 'public/interfaces/iUserContext';
 
 import { defaultUserContext } from '../../public/defaultUserContext';
 
-interface IUserContextSessions {
-  getUserContext: () => IUserContext;
-  setUserContext: (userContext: IUserContext) => void;
-  commit: () => Promise<string>;
-}
-
 // TODO: Security - add cookie secrets
 
 // const sessionSecret = process.env.SESSION_SECRET;
@@ -30,7 +24,7 @@ const userContextStorage = createCookieSessionStorage({
   },
 });
 
-async function getUserContextStorage(request: Request): Promise<IUserContextSessions> {
+async function getUserContextSession(request: Request) {
   const session = await userContextStorage.getSession(request.headers.get('Cookie'));
   return {
     getUserContext: () => {
@@ -39,7 +33,7 @@ async function getUserContextStorage(request: Request): Promise<IUserContextSess
       if (!rawSession) return defaultUserContext();
 
       const userContext = JSON.parse(rawSession) as string;
-      return isUserContext(userContext) ? (userContext as IUserContext) : defaultUserContext();
+      return isUserContext(userContext) ? userContext : defaultUserContext();
     },
     setUserContext: (userContext: IUserContext) =>
       session.set(SESSION_NAME, JSON.stringify(userContext)),
@@ -47,5 +41,4 @@ async function getUserContextStorage(request: Request): Promise<IUserContextSess
   };
 }
 
-export { getUserContextStorage, SESSION_NAME };
-export type { IUserContextSessions };
+export { getUserContextSession, SESSION_NAME };

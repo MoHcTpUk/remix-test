@@ -1,8 +1,5 @@
 /* eslint-disable */
 /* tslint:disable */
-
-import { ISession} from "~/storages/session.server";
-import { v4 as uuidv4 } from 'uuid';
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -11,6 +8,9 @@ import { v4 as uuidv4 } from 'uuid';
  * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
  * ---------------------------------------------------------------
  */
+
+import { getSession } from '~/storages/session.server';
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, 'body' | 'bodyUsed'>;
 
@@ -76,9 +76,16 @@ export class HttpClient<SecurityDataType = unknown> {
     Object.assign(this, apiConfig);
   }
 
-  public async auth(session: ISession) {
-    if (session.session) {
-      const authToken = session.session.split(';').at(0);
+  public async auth(request: Request) {
+    const sessionStorage = await getSession(request);
+    const session: string = sessionStorage.get('session');
+
+    this.authWithSession(session);
+  }
+
+  public async authWithSession(session: string) {
+    if (session) {
+      const authToken = session.split(';').at(0);
       this.baseApiParams.headers = { Cookie: authToken } as { Cookie: string };
     }
   }
@@ -197,20 +204,6 @@ export class HttpClient<SecurityDataType = unknown> {
     const queryString = query && this.toQueryString(query);
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
-    const requestId = uuidv4()
-    console.log(
-      `${requestId} >>> URL`,
-      `${baseUrl || this.baseUrl || ''}${path}${queryString ? `?${queryString}` : ''}`,
-    );
-    console.log(`${requestId} >>> METHOD`, params.method);
-    console.log(
-      `${requestId} >>> BODY`,
-      typeof body === 'undefined' || body === null ? null : payloadFormatter(body),
-    );
-    console.log(`${requestId} >>> HEADERS`, {
-      ...(requestParams.headers || {}),
-      ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
-    });
 
     return this.customFetch(
       `${baseUrl || this.baseUrl || ''}${path}${queryString ? `?${queryString}` : ''}`,
@@ -224,7 +217,6 @@ export class HttpClient<SecurityDataType = unknown> {
         body: typeof body === 'undefined' || body === null ? null : payloadFormatter(body),
       },
     ).then(async (response) => {
-      console.log(`${requestId} >>> RESPONSE`, response.status);
       const r = response as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;

@@ -11,7 +11,7 @@ import { ServerStyleSheet } from 'styled-components';
 import i18n from './i18n/i18n';
 import resources from './i18n/i18next.resources';
 import i18next from './i18n/i18next.server';
-import { getUserContextStorage } from './storages/userContext.server';
+import { getUserContextSession } from './storages/userContext.server';
 
 export default async function handleRequest(
   request: Request,
@@ -20,7 +20,7 @@ export default async function handleRequest(
   context: EntryContext,
 ) {
   const instance = createInstance();
-  const userContextSession = await getUserContextStorage(request);
+  const userContextSession = await getUserContextSession(request);
 
   const lng = userContextSession.getUserContext()?.language ?? LanguageEnum.EN;
   const ns = i18next.getRouteNamespaces(context);

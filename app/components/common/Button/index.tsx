@@ -16,7 +16,6 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   iconColor?: string;
   iconSize?: number;
   fullwidth?: boolean;
-  onlyIcon?: boolean;
 };
 
 function ButtonComponent({
@@ -30,7 +29,6 @@ function ButtonComponent({
   iconColor,
   iconSize,
   fullwidth,
-  onlyIcon,
   ...other
 }: ButtonProps) {
   return (
@@ -42,7 +40,6 @@ function ButtonComponent({
       disabled={disabled}
       iconName={iconName}
       fullwidth={fullwidth}
-      onlyIcon={onlyIcon}
       {...other}
     >
       {iconName && <Icon name={iconName} color={iconColor} size={iconSize} />}

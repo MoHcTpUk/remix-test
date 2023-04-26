@@ -1,5 +1,6 @@
 import { IconEnum } from 'public/enums/iconEnum';
-import { RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { useRef } from 'react';
 
 import { useApp } from '~/hooks';
 
@@ -30,7 +31,7 @@ export type InputProps = {
 
 export function Input({
   id,
-  value = '',
+  value,
   placeholder,
   errorText,
   disabled,
@@ -55,12 +56,6 @@ export function Input({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = value;
-    }
-  }, [value]);
-
   function clearInput() {
     if (inputRef.current) {
       inputRef.current.value = '';
@@ -78,6 +73,7 @@ export function Input({
           disabled={disabled}
           id={id}
           name={name}
+          value={value}
           error={Boolean(errorText)}
         />
         {placeholder && variant !== 'search' && (

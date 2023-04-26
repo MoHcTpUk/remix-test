@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", ".eslintrc.js", "server.js"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", ".eslintrc.js"],
   "exclude": [".cache", "build", "public"],
   "compilerOptions": {
     "experimentalDecorators": true,

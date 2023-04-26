@@ -14,8 +14,8 @@ export default {
   benefits_of_changing_your_password_regularly: 'Benefits of changing your password regularly',
   create_a_new_password_use_a_minimum_of_characters_including_uppercase_letters_lowercase_letters_and_numbers:
     'Create a new password. Use a minimum of 10 characters, including uppercase letters, lowercase letters, and numbers.',
-  it_limits_breaches_to_multiple_users:
-    'It limits breaches to multiple users, prevents constant access, prevents use of saved passwords, limits access gained by keystroke loggers.',
+  it_limits_breaches_to_multiple_accounts:
+    'It limits breaches to multiple accounts, prevents constant access, prevents use of saved passwords, limits access gained by keystroke loggers.',
   change_password: 'Change password',
   notifications: 'Notifications',
   phone_notifications: 'Phone notifications',

@@ -1,8 +1,6 @@
 export default {
   my_profile: 'My profile',
   personal_information: 'Personal information',
-  create_resume: 'Create resume',
-  create_vacancy: 'Create vacancy',
   first_name: 'First name',
   last_name: 'Last name',
   gender: 'Gender',
@@ -16,8 +14,8 @@ export default {
   benefits_of_changing_your_password_regularly: 'Benefits of changing your password regularly',
   create_a_new_password_use_a_minimum_of_characters_including_uppercase_letters_lowercase_letters_and_numbers:
     'Create a new password. Use a minimum of 10 characters, including uppercase letters, lowercase letters, and numbers.',
-  it_limits_breaches_to_multiple_users:
-    'It limits breaches to multiple users, prevents constant access, prevents use of saved passwords, limits access gained by keystroke loggers.',
+  it_limits_breaches_to_multiple_accounts:
+    'It limits breaches to multiple accounts, prevents constant access, prevents use of saved passwords, limits access gained by keystroke loggers.',
   change_password: 'Change password',
   notifications: 'Notifications',
   phone_notifications: 'Phone notifications',
@@ -26,11 +24,4 @@ export default {
   email_notifications: 'Email notifications',
   by_submitting_the_form_and_checking_this_box_i_hereby_agree_to_receive_email_from_UPJOB_company_and_employers_who_use_UPJOB_including_automated_notifications_by_email:
     'By submitting the form and checking this box, I hereby agree to receive email from UPJOB company and employers who use UPJOB including automated notifications by email.',
-  my_resumes: 'My resumes',
-  city: 'City',
-  age: 'Age',
-  work_experience: 'Work experience',
-  published: 'Published',
-  on: 'on',
-  off: 'off',
 };

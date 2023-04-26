@@ -1,5 +1,5 @@
 export default {
-  create_new_user_or_sign_in: 'Create new User or Sign in',
+  create_new_account_or_sign_in: 'Create new Account or Sign in',
   enter_email: 'Enter Email',
   enter_password: 'Enter Password',
   enter_new_password: 'Enter new password',
@@ -7,7 +7,7 @@ export default {
   enter_first_name: 'Enter First name',
   password_confirmation: 'Password confirmation',
   sign_in_with_email: 'Sign in with Email',
-  or_register_with_social_users: 'or register with social users',
+  or_register_with_social_accounts: 'or register with social accounts',
   sign_with_google: 'Sign with Google',
   sign_with_facebook: 'Sign with Facebook',
   forgot_password: 'Forgot password?',

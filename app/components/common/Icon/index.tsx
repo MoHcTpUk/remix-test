@@ -7,9 +7,7 @@ import { Box } from '../Box';
 import SvgArrowLeft from '../Icons/ArrowLeft';
 import SvgBell from '../Icons/Bell';
 import SvgBellPush from '../Icons/BellPush';
-import SvgCart from '../Icons/Cart';
 import SvgClose from '../Icons/Close';
-import SvgCopy from '../Icons/Copy';
 import SvgDown from '../Icons/Down';
 import SvgEmail from '../Icons/Email';
 import SvgFb from '../Icons/Fb';
@@ -110,12 +108,6 @@ function IconNamed({ name, color, size = 24, className = '' }: IconNamedProps): 
 
     case IconEnum.arrowLeft:
       return <SvgArrowLeft {...props} />;
-
-    case IconEnum.cart:
-      return <SvgCart {...props} />;
-
-    case IconEnum.copy:
-      return <SvgCopy {...props} />;
 
     default:
       // eslint-disable-next-line react/jsx-no-useless-fragment

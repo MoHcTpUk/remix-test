@@ -75,19 +75,19 @@ export const Footer = memo((): JSX.Element => {
         <IconsWrapper>
           <Link to='#'>
             <SosialImg>
-              <img src='/images/social/ln.jpg' alt='line' />
+              <img src='images/social/ln.jpg' alt='line' />
             </SosialImg>
           </Link>
 
           <Link to='#'>
             <SosialImg>
-              <img src='/images/social/fb.jpg' alt='facebook' />
+              <img src='images/social/fb.jpg' alt='facebook' />
             </SosialImg>
           </Link>
 
           <Link to='#'>
             <SosialImg>
-              <img src='/images/social/in.jpg' alt='instagram' />
+              <img src='images/social/in.jpg' alt='instagram' />
             </SosialImg>
           </Link>
         </IconsWrapper>

@@ -40,13 +40,6 @@ export interface ITheme {
       iconDisable: string;
     };
   };
-  switcher: {
-    backgroundDefault: string;
-    backgroundChecked: string;
-    textDefaultColor: string;
-    textCheckedColor: string;
-    backgroundTogglerColor: string;
-  };
   inputs: {
     borderColor: string;
     borderFocusColor: string;
@@ -136,7 +129,7 @@ export interface ITheme {
     benefitBodyColorSmall: string;
     benefitBodyColor: string;
   };
-  user: {
+  account: {
     headinTextColor: string;
     backgroundPageColor: string;
     backgroundCardColor: string;

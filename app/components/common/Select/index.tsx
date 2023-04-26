@@ -51,9 +51,6 @@ export function Select({
     entriesSorted = entriesSorted.sort((a, b) => (a[1] > b[1] ? 1 : 0));
   }
 
-  const selectedRaw = entries.filter(([key]) => values.includes(key)).map(([key, value]) => value);
-  const selected = selectedRaw.join(', ');
-
   const dropdownOverlay = (
     <DropdownOverlayEntry background={background}>
       {entriesSorted.map(([key, value]) => {

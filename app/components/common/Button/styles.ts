@@ -5,15 +5,13 @@ import type { ButtonProps } from './index';
 
 export const Button = styled.button<ButtonProps>`
   cursor: pointer;
-  border-radius: ${({ onlyIcon }) => (onlyIcon ? '50%' : '80px')};
+  border-radius: 80px;
   display: flex;
   flex-direction: row;
   gap: 8px;
   justify-content: center;
   align-items: center;
-  width: ${({ fullwidth, onlyIcon }) =>
-    // eslint-disable-next-line no-nested-ternary
-    onlyIcon ? '40px' : fullwidth ? '100%' : 'fit-content'};
+  width: ${({ fullwidth }) => (fullwidth ? '100%' : 'fit-content')};
   height: 40px;
   transition: all 0.1s ease-in;
   padding: ${({ size }) => (size === ButtonSizeEnum.M ? '15px 32px 14px' : '12px 20px 10px')};

@@ -51,7 +51,7 @@ export const DropdownOverlayEntry = styled.div<{
   flex-direction: column;
   position: absolute;
   width: 100%;
-  top: -5px;
+  top: -4px;
   background-color: white ${({ isSelected }) => (isSelected ? 'white' : 'rgba(234, 234, 239, 0.4)')};
   display: flex;
   background: ${({ background, theme }) => background || theme.inputs.backgroundDefaultColor};
@@ -108,9 +108,4 @@ export const WrpperIcon = styled.div<{ dropdownVisible: boolean }>`
   height: 24px;
   transform: ${({ dropdownVisible }) => (dropdownVisible ? '0' : 'rotate(180deg)')};
   transition: all 0.4s ease-in;
-
-  @media (min-width: 1024px) {
-    top: 12px;
-    right: 12px;
-  }
 `;

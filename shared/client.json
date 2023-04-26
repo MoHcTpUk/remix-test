@@ -1,8 +1,5 @@
 {
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "swagger": "2.0",
   "info": {
     "description": "",
@@ -16,12 +13,8 @@
     "/citizenship": {
       "get": {
         "description": "return citizenship",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "parameters": [
           {
             "type": "string",
@@ -68,12 +61,8 @@
     "/companies": {
       "get": {
         "description": "return companies",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "companies"
-        ],
+        "produces": ["application/json"],
+        "tags": ["companies"],
         "parameters": [
           {
             "type": "boolean",
@@ -133,15 +122,9 @@
       },
       "post": {
         "description": "create company",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "companies"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["companies"],
         "parameters": [
           {
             "description": "add company request",
@@ -184,12 +167,8 @@
     "/companies/{id}": {
       "get": {
         "description": "return company by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "companies"
-        ],
+        "produces": ["application/json"],
+        "tags": ["companies"],
         "parameters": [
           {
             "type": "string",
@@ -234,12 +213,8 @@
       },
       "delete": {
         "description": "delete company by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "companies"
-        ],
+        "produces": ["application/json"],
+        "tags": ["companies"],
         "parameters": [
           {
             "type": "string",
@@ -286,12 +261,8 @@
     "/compliance-of-requirements": {
       "get": {
         "description": "return dictionary for compliance of requirements",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -314,12 +285,8 @@
     "/countries": {
       "get": {
         "description": "return countries",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "countries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["countries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -342,12 +309,8 @@
     "/countries/{country_id}/regions": {
       "get": {
         "description": "return regions",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "countries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["countries"],
         "parameters": [
           {
             "type": "string",
@@ -379,12 +342,8 @@
     "/countries/{country_id}/regions/{region_id}/location": {
       "get": {
         "description": "return locations",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "countries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["countries"],
         "parameters": [
           {
             "type": "string",
@@ -423,12 +382,8 @@
     "/currency": {
       "get": {
         "description": "return currencies",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -451,12 +406,8 @@
     "/driving-licenses": {
       "get": {
         "description": "return driving licenses",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -479,12 +430,8 @@
     "/education-level": {
       "get": {
         "description": "return education level",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -507,12 +454,8 @@
     "/email-notifications-settings": {
       "get": {
         "description": "return dictionary for email notification settings",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -535,12 +478,8 @@
     "/employee/numbers": {
       "get": {
         "description": "return number of employees",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -563,12 +502,8 @@
     "/employments": {
       "get": {
         "description": "return employments",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -591,12 +526,8 @@
     "/faq": {
       "get": {
         "description": "returns questions for the question page",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "faq"
-        ],
+        "produces": ["application/json"],
+        "tags": ["faq"],
         "parameters": [
           {
             "maximum": 100,
@@ -630,15 +561,9 @@
     "/feedback": {
       "post": {
         "description": "create feedback",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "feedback"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["feedback"],
         "parameters": [
           {
             "description": "create feedback request",
@@ -675,15 +600,9 @@
     "/file/upload": {
       "post": {
         "description": "Upload file (only jpeg)",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "upload"
-        ],
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "tags": ["upload"],
         "parameters": [
           {
             "type": "file",
@@ -724,12 +643,8 @@
     "/genders": {
       "get": {
         "description": "return genders",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -752,12 +667,8 @@
     "/init/index": {
       "get": {
         "description": "get main page feed",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "init"
-        ],
+        "produces": ["application/json"],
+        "tags": ["init"],
         "summary": "Main page feed",
         "responses": {
           "200": {
@@ -772,12 +683,8 @@
     "/job-types": {
       "get": {
         "description": "return job types",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -800,12 +707,8 @@
     "/language-level": {
       "get": {
         "description": "return language levels",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "languages"
-        ],
+        "produces": ["application/json"],
+        "tags": ["languages"],
         "responses": {
           "200": {
             "description": "OK",
@@ -828,12 +731,8 @@
     "/languages": {
       "get": {
         "description": "return languages",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "languages"
-        ],
+        "produces": ["application/json"],
+        "tags": ["languages"],
         "responses": {
           "200": {
             "description": "OK",
@@ -856,12 +755,8 @@
     "/location": {
       "get": {
         "description": "return locations",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "countries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["countries"],
         "parameters": [
           {
             "type": "string",
@@ -908,12 +803,8 @@
     "/marital-statuses": {
       "get": {
         "description": "return marital statuses",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -936,12 +827,8 @@
     "/materials/articles": {
       "get": {
         "description": "return articles for the main page and articles page",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "materials"
-        ],
+        "produces": ["application/json"],
+        "tags": ["materials"],
         "parameters": [
           {
             "maximum": 100,
@@ -985,12 +872,8 @@
     "/materials/articles/{id}": {
       "get": {
         "description": "return article by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "materials"
-        ],
+        "produces": ["application/json"],
+        "tags": ["materials"],
         "parameters": [
           {
             "type": "string",
@@ -1025,12 +908,8 @@
     "/materials/news": {
       "get": {
         "description": "return news for the main page and news page",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "materials"
-        ],
+        "produces": ["application/json"],
+        "tags": ["materials"],
         "parameters": [
           {
             "maximum": 100,
@@ -1074,12 +953,8 @@
     "/materials/news/{id}": {
       "get": {
         "description": "return news by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "materials"
-        ],
+        "produces": ["application/json"],
+        "tags": ["materials"],
         "parameters": [
           {
             "type": "string",
@@ -1114,12 +989,8 @@
     "/payout-periods": {
       "get": {
         "description": "return payout periods",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1142,12 +1013,8 @@
     "/religions": {
       "get": {
         "description": "return religions",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1170,12 +1037,8 @@
     "/relocations": {
       "get": {
         "description": "return relocations",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1198,12 +1061,8 @@
     "/requirements-level": {
       "get": {
         "description": "return dictionary for show requirements level",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1226,12 +1085,8 @@
     "/response-can-be-done-by": {
       "get": {
         "description": "return dictionary for vacancy (response can be done by)",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1254,15 +1109,9 @@
     "/resume": {
       "post": {
         "description": "create resume for current user",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "description": "create resume request",
@@ -1305,20 +1154,11 @@
     "/resumes": {
       "get": {
         "description": "return published resumes",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
-            "enum": [
-              0,
-              1,
-              2,
-              3
-            ],
+            "enum": [0, 1, 2, 3],
             "type": "integer",
             "description": "0 [last 24 hours], 1 [last 5 days], 2 [last 14 days], 3 [last month]",
             "name": "date_of_post",
@@ -1442,15 +1282,9 @@
     "/resumes/request-personal-data/{id}": {
       "get": {
         "description": "Request by json personal data",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "summary": "Request personal data of resume",
         "parameters": [
           {
@@ -1493,12 +1327,8 @@
     "/resumes/{id}": {
       "get": {
         "description": "return published or created by current user resume",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "type": "string",
@@ -1537,12 +1367,8 @@
       },
       "delete": {
         "description": "delete resume by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "type": "string",
@@ -1589,15 +1415,9 @@
     "/resumes/{id}/copy": {
       "post": {
         "description": "copy resume",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "type": "string",
@@ -1638,15 +1458,9 @@
     "/resumes/{id}/provide": {
       "get": {
         "description": "Provide by json access",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "summary": "Provide access to resume",
         "parameters": [
           {
@@ -1689,12 +1503,8 @@
     "/resumes/{id}/publish": {
       "post": {
         "description": "publish resume by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "type": "string",
@@ -1741,12 +1551,8 @@
     "/resumes/{id}/unpublish": {
       "post": {
         "description": "unpublish resume by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "resume"
-        ],
+        "produces": ["application/json"],
+        "tags": ["resume"],
         "parameters": [
           {
             "type": "string",
@@ -1793,12 +1599,8 @@
     "/show-email": {
       "get": {
         "description": "return dictionary for show email",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1821,12 +1623,8 @@
     "/show-phone-number": {
       "get": {
         "description": "return dictionary for show phone number",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1849,12 +1647,8 @@
     "/skills": {
       "get": {
         "description": "return skills",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "parameters": [
           {
             "type": "string",
@@ -1901,12 +1695,8 @@
     "/source_of_information": {
       "get": {
         "description": "return source of information",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "source-of-information"
-        ],
+        "produces": ["application/json"],
+        "tags": ["source-of-information"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1929,12 +1719,8 @@
     "/specializations": {
       "get": {
         "description": "return specializations",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "parameters": [
           {
             "type": "string",
@@ -1975,12 +1761,8 @@
     "/specializations/{specialization_id}/job-positions": {
       "get": {
         "description": "return job positions for chosen specializations",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "parameters": [
           {
             "type": "string",
@@ -2034,12 +1816,8 @@
     "/static-pages/{urn}": {
       "get": {
         "description": "return static page by urn",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "static-pages"
-        ],
+        "produces": ["application/json"],
+        "tags": ["static-pages"],
         "parameters": [
           {
             "type": "string",
@@ -2068,9 +1846,7 @@
     "/user-service/forgot-password": {
       "post": {
         "description": "restore password by email",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "parameters": [
           {
             "description": "forgot password request",
@@ -2107,9 +1883,7 @@
     "/user-service/forgot-password-verify/{secret}": {
       "get": {
         "description": "verify secret that sent to email",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "parameters": [
           {
             "type": "string",
@@ -2144,12 +1918,8 @@
     "/user-service/info": {
       "get": {
         "description": "return info about current user",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2173,12 +1943,8 @@
       },
       "put": {
         "description": "update info of current user",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "description": "update info request",
@@ -2221,12 +1987,8 @@
     "/user-service/info/{id}": {
       "get": {
         "description": "return user info by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "type": "string",
@@ -2261,15 +2023,9 @@
     "/user-service/login": {
       "post": {
         "description": "sign in with email and password",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "description": "sign in request",
@@ -2315,9 +2071,7 @@
     "/user-service/login/facebook": {
       "get": {
         "description": "sign in with facebook",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "responses": {
           "500": {
             "description": "custom codes: 7 (can't prepare oauth url)",
@@ -2331,9 +2085,7 @@
     "/user-service/login/google": {
       "get": {
         "description": "sign in with google",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "responses": {
           "500": {
             "description": "custom codes: 7 (can't prepare oauth url)",
@@ -2347,21 +2099,15 @@
     "/user-service/logout": {
       "post": {
         "description": "sign out",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "responses": {}
       }
     },
     "/user-service/me": {
       "get": {
         "description": "return info about current user",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2387,15 +2133,9 @@
     "/user-service/registration": {
       "post": {
         "description": "sign up with email and password",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "description": "sign up request",
@@ -2438,12 +2178,8 @@
     "/user-service/registration/confirm/{hash}": {
       "get": {
         "description": "confirm email",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "type": "string",
@@ -2472,12 +2208,8 @@
     "/user-service/registration/facebook/callback": {
       "get": {
         "description": "callback for sign in with facebook",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "type": "string",
@@ -2506,12 +2238,8 @@
     "/user-service/registration/google/callback": {
       "get": {
         "description": "callback for sign in with google",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "user-service"
-        ],
+        "produces": ["application/json"],
+        "tags": ["user-service"],
         "parameters": [
           {
             "type": "string",
@@ -2540,9 +2268,7 @@
     "/user-service/reset-password": {
       "post": {
         "description": "reset password",
-        "tags": [
-          "user-service"
-        ],
+        "tags": ["user-service"],
         "parameters": [
           {
             "description": "reset password request",
@@ -2585,12 +2311,8 @@
     "/vacancies": {
       "get": {
         "description": "return published vacancies",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -2599,12 +2321,7 @@
             "in": "query"
           },
           {
-            "enum": [
-              0,
-              1,
-              2,
-              3
-            ],
+            "enum": [0, 1, 2, 3],
             "type": "integer",
             "description": "0 [last 24 hours], 1 [last 5 days], 2 [last 14 days], 3 [last month]",
             "name": "date_of_post",
@@ -2738,15 +2455,9 @@
     "/vacancies/request-personal-data/{id}": {
       "get": {
         "description": "Request by json personal data",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "summary": "Request personal data of vacancy",
         "parameters": [
           {
@@ -2789,12 +2500,8 @@
     "/vacancies/{id}": {
       "get": {
         "description": "return published or created by current user vacancy",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -2839,12 +2546,8 @@
       },
       "delete": {
         "description": "delete vacancy by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -2891,12 +2594,8 @@
     "/vacancies/{id}/archive": {
       "post": {
         "description": "archive vacancy by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -2943,15 +2642,9 @@
     "/vacancies/{id}/provide": {
       "get": {
         "description": "Provide by json access",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "summary": "Provide access to vacancy",
         "parameters": [
           {
@@ -2994,12 +2687,8 @@
     "/vacancies/{id}/publish": {
       "post": {
         "description": "publish vacancy by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -3046,12 +2735,8 @@
     "/vacancies/{id}/unarchive": {
       "post": {
         "description": "unarchive vacancy by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -3098,12 +2783,8 @@
     "/vacancies/{id}/unpublish": {
       "post": {
         "description": "unpublish vacancy by id",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "type": "string",
@@ -3150,15 +2831,9 @@
     "/vacancy": {
       "post": {
         "description": "create vacancy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "vacancy"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["vacancy"],
         "parameters": [
           {
             "description": "create vacancy request",
@@ -3201,12 +2876,8 @@
     "/work-features": {
       "get": {
         "description": "return work features",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -3229,12 +2900,8 @@
     "/years-of-experience": {
       "get": {
         "description": "return education level",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "dictionaries"
-        ],
+        "produces": ["application/json"],
+        "tags": ["dictionaries"],
         "responses": {
           "200": {
             "description": "OK",
@@ -3476,14 +3143,8 @@
     },
     "entity.EmailNotificationsType": {
       "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "x-enum-varnames": [
-        "Response",
-        "Never"
-      ]
+      "enum": [0, 1],
+      "x-enum-varnames": ["Response", "Never"]
     },
     "entity.Faq": {
       "type": "object",
@@ -3569,18 +3230,14 @@
           "items": {
             "type": "string"
           },
-          "example": [
-            "url_to_all_vacancies"
-          ]
+          "example": ["url_to_all_vacancies"]
         },
         "opened": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "example": [
-            "url_to_opened_vacancies"
-          ]
+          "example": ["url_to_opened_vacancies"]
         }
       }
     },
@@ -3701,14 +3358,8 @@
     },
     "entity.Lang": {
       "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "x-enum-varnames": [
-        "Thai",
-        "Eng"
-      ]
+      "enum": [0, 1],
+      "x-enum-varnames": ["Thai", "Eng"]
     },
     "entity.MainPageResponse": {
       "type": "object",
@@ -4193,14 +3844,8 @@
     },
     "entity.ShowTo": {
       "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "x-enum-varnames": [
-        "Anyone",
-        "Nobody"
-      ]
+      "enum": [0, 1],
+      "x-enum-varnames": ["Anyone", "Nobody"]
     },
     "entity.SignInRequest": {
       "type": "object",
@@ -4361,18 +4006,14 @@
           "items": {
             "type": "string"
           },
-          "example": [
-            "c4582cf6-6b63-47b8-a59f-ea619c25f6ce"
-          ]
+          "example": ["c4582cf6-6b63-47b8-a59f-ea619c25f6ce"]
         },
         "otherLicenseNeeded": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "example": [
-            "some license"
-          ]
+          "example": ["some license"]
         },
         "skills": {
           "type": "array",
@@ -4459,9 +4100,7 @@
           "items": {
             "type": "string"
           },
-          "example": [
-            "cb8a3870-b274-423f-8f10-662d12777997"
-          ]
+          "example": ["cb8a3870-b274-423f-8f10-662d12777997"]
         }
       }
     },

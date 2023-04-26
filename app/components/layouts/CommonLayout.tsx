@@ -20,7 +20,6 @@ export function CommonLayout({ children }: Props): JSX.Element {
       <Box
         width='100%'
         flexDirection='column'
-        alignItems='center'
         // flexGrow='1'
       >
         {children}

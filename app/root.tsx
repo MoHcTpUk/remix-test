@@ -25,14 +25,14 @@ import { ThemeProvider } from 'styled-components';
 import { UserContextProvider } from '~/providers/userContextProvider';
 
 import { useApp } from './hooks';
-import { getUserContextStorage } from './storages/userContext.server';
+import { getUserContextSession } from './storages/userContext.server';
 
 export type LoaderData = {
   userContext: IUserContext | null;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userContextSession = await getUserContextStorage(request);
+  const userContextSession = await getUserContextSession(request);
 
   const data: LoaderData = {
     userContext: userContextSession.getUserContext(),
