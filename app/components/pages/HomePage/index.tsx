@@ -7,14 +7,17 @@ import { SectionBenefits } from './SectionBenefits';
 import { SectionCompanies } from './SectionCompanies';
 import { SectionArticles } from './SectionArticles';
 import { SectionNews } from './SectionNews';
+import { SectionInnerContaier } from './styles';
 
 export const HomePage = memo(function HomePageMemoized(): JSX.Element {
   return (
     <CommonLayout>
       <SectionTop />
       <SectionTrending />
-      <SectionCompanies />
-      <SectionBenefits />
+      <SectionInnerContaier>
+        <SectionCompanies />
+        <SectionBenefits />
+      </SectionInnerContaier>
       <SectionNews />
       <SectionArticles />
     </CommonLayout>

@@ -84,7 +84,7 @@ export const Search = memo(function NavbarMemoized({ theme }: { theme: DefaultTh
   let { t } = useTranslation();
 
   return (
-    <Form method='get' className='search-form' style={{ width: '100%' }}>
+    <Form method='GET' className='search-form' style={{ width: '100%' }}>
       <SearchContainer>
         <WrapperInput>
           <MainInputSearch placeholder={t('home:job_title_keywords_or_company')} type='text' />

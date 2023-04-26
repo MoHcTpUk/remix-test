@@ -1,4 +1,6 @@
 import styled, { DefaultTheme } from 'styled-components';
+import { FONT_SIZES_DESC, FONT_SIZES_MOB } from '~/components/common/Text';
+import { TextVariantEnum } from '~/components/common/Text/enums';
 
 export const SearchContainer = styled.div`
   width: 100%;
@@ -15,17 +17,21 @@ export const SearchContainer = styled.div`
 
 export const MainInputSearch = styled.input`
   background-color: ${({ theme }) => theme.search.backgroundWrapper};
-  padding: 18px 26px 18px 65px;
+  padding: 20px 26px 18px 65px;
   display: flex;
   flex-direction: row;
   width: 100%;
+  font-size: ${FONT_SIZES_MOB[TextVariantEnum.textBody1]};
+
   &:nth-child(1) {
     border-bottom: 1px solid ${({ theme }) => theme.search.borderColor};
   }
+
   @media (min-width: 940px) {
     border-radius: 0 0 0 16px;
-    padding: 24px 14px 24px 76px;
+    padding: 26px 13px 24px 76px;
     min-width: 480px;
+    font-size: ${FONT_SIZES_DESC[TextVariantEnum.textBody1]};
     &:nth-child(1) {
       border-bottom: none;
     }
@@ -39,9 +45,12 @@ export const PlaceInputSearch = styled.input`
   flex-direction: row;
   width: 100%;
   border-radius: 0px 0px 8px 8px;
+  font-size: ${FONT_SIZES_MOB[TextVariantEnum.textBody1]};
+
   @media (min-width: 940px) {
-    padding: 24px 14px 24px 54px;
+    padding: 26px 14px 24px 54px;
     border-radius: 0px 0px 16px 0px;
+    font-size: ${FONT_SIZES_DESC[TextVariantEnum.textBody1]};
   }
 `;
 

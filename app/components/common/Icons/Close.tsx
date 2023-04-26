@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
-const SvgMenu = (props: SVGProps<SVGSVGElement>) => (
+const SvgClose = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}
@@ -10,7 +10,7 @@ const SvgMenu = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      d='M1 12h22M1 4h22M1 20h22'
+      d='M18 18 6 6M18 6 6 18'
       stroke='CurrentColor'
       strokeWidth={2}
       strokeLinecap='round'
@@ -18,4 +18,4 @@ const SvgMenu = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default SvgMenu;
+export default SvgClose;

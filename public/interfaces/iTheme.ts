@@ -1,5 +1,6 @@
 export interface ITheme {
   backgroundColor: string;
+  defaultTextColor: string;
   buttons: {
     primary: {
       backgroundColor: string;
@@ -38,6 +39,11 @@ export interface ITheme {
       iconDisable: string;
     };
   };
+  inputs: {
+    borderColor: string;
+    borderFocusColor: string;
+    backgroundDefaultColor: string;
+  };
   search: {
     backgroundWrapper: string;
     svgColor: string;
@@ -69,6 +75,10 @@ export interface ITheme {
     activeTabColor: string;
     disabledTabColor: string;
   };
+  modal: {
+    backgroundColor: string;
+    svgColor: string;
+  };
   ui: {
     logoLinkColor: string;
     logoLinkHoverColor: string;
@@ -95,9 +105,16 @@ export interface ITheme {
     linkSpanColorMedia1024: string;
     boxCopirightSpanColorMedia1024: string;
     linkTextColor: string;
+    borderColor: string;
+  };
+  auth: {
+    helpButtonColor: string;
+    helpButtonHoverColor: string;
+    helpButtonActiveColor: string;
   };
   mainPage: {
     headingColor: string;
+    titleColor: string;
     backgroundSectionTrendingColor: string;
     backgroundSectionCompaniesColor: string;
     backgroundSectionArticlesColor: string;

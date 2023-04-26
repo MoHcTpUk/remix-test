@@ -1,6 +1,7 @@
 import { createCookieSessionStorage } from "@remix-run/cloudflare";
 import type { IUserContext } from "public/interfaces/iUserContext";
 import { isUserContext } from "public/interfaces/iUserContext";
+import { defaultUserContext } from "../public/defaultUserContext";
 
 // TODO: Security - add cookie secrets
 
@@ -29,7 +30,7 @@ async function getUserContextSession(request: Request) {
 			const rawSession = session.get(SESSION_NAME);
 
 			if (!rawSession)
-				return null
+				return defaultUserContext()
 
 			const userContext = JSON.parse(rawSession);
 			return isUserContext(userContext) ? userContext : null;

@@ -57,5 +57,6 @@ export const ChipsContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
+  max-width: 1090px;
   gap: 16px;
 `;

@@ -88,7 +88,9 @@ export const SectionCompanies = memo(function HomePageMemoized(): JSX.Element {
   return (
     <WrapperSection>
       <TitleContainer>
-        <Text variant={TextVariantEnum.textHeading1}>{t('home:companies')}</Text>
+        <Text variant={TextVariantEnum.textHeading1} color={theme.mainPage.titleColor}>
+          {t('home:companies')}
+        </Text>
       </TitleContainer>
       <SliderContainer>
         <Slider theme={theme} variant='companies' slides={temporaryCompanies} />

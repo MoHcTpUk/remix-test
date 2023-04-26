@@ -1,8 +1,11 @@
 export { default as Bell } from './Bell';
 export { default as BellPush } from './BellPush';
+export { default as Close } from './Close';
 export { default as Down } from './Down';
 export { default as Email } from './Email';
 export { default as EmailPush } from './EmailPush';
+export { default as Fb } from './Fb';
+export { default as Google } from './Google';
 export { default as Left } from './Left';
 export { default as LeftLine } from './LeftLine';
 export { default as Logo } from './Logo';

@@ -18,7 +18,7 @@ export const CardWrapper = styled.a<CardProps>`
     min-width: ${({ variant }) => (variant === 'companies' ? '152px' : '256px')};
   }
   @media (min-width: 1024px) {
-    min-width: 100%
+    min-width: 100%;
 
     margin: ${({ variant }) => (variant === 'companies' ? '14px 0' : '0')};
   }
@@ -29,8 +29,8 @@ export const CardWrapper = styled.a<CardProps>`
 
   &:hover {
     z-index: 1;
-    transform: translateZ(0) ${({ variant }) =>
-      variant === 'companies' ? 'scale(1.1)' : 'scale(1.05)'}; ;
+    transform: translateZ(0)
+      ${({ variant }) => (variant === 'companies' ? 'scale(1.1)' : 'scale(1.05)')};
   }
 `;
 

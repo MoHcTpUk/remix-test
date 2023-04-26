@@ -71,10 +71,24 @@ export const SwiperControl = styled.div<{ variant?: string }>`
     & .swiper-pagination-bullet {
       background-color: ${({ theme }) => theme.slider.backgroundBulletColor};
       opacity: 1;
+      transition: all 0.15s ease-in;
     }
 
     & .swiper-pagination-bullet-active {
+      position: relative;
       background-color: ${({ theme }) => theme.slider.backgroundBulletActiveColor};
+
+      &::after {
+        content: '';
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        border: 1.5px solid ${({ theme }) => theme.slider.backgroundBulletActiveColor};
+        left: -4px;
+        top: -4px;
+        border-radius: 50%;
+        transition: all 0.15s ease-in;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -84,7 +98,7 @@ export const SwiperControl = styled.div<{ variant?: string }>`
 
   @media (min-width: 1300px) {
     justify-content: ${({ variant }) => (variant === 'companies' ? 'space-between' : 'center')};
-    bottom: ${({ variant }) => (variant === 'companies' ? '41%' : '-38px')};
+    bottom: ${({ variant }) => (variant === 'companies' ? '45%' : '-38px')};
     left: ${({ variant }) => (variant === 'companies' ? '-56px' : 'auto')};
     width: ${({ variant }) => (variant === 'companies' ? '1200px' : '100%')};
     & button {
@@ -117,4 +131,5 @@ export const ChipsContainer = styled.div`
   flex-wrap: wrap;
   gap: 8px;
   padding-bottom: 56px;
+  height: fit-content;
 `;

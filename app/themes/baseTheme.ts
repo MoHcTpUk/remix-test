@@ -4,6 +4,7 @@ import type { ITheme } from '../../public/interfaces/iTheme';
 export function getTheme(palette: IPalette): ITheme {
   return {
     backgroundColor: palette.neutral.neutral4,
+    defaultTextColor: palette.darken.darken1.darken1_base,
     buttons: {
       primary: {
         backgroundColor: palette.accent.accent1.accent1_base,
@@ -42,6 +43,11 @@ export function getTheme(palette: IPalette): ITheme {
         iconDisable: palette.darken.darken2.darken2_variant2,
       },
     },
+    inputs: {
+      borderColor: palette.darken.darken1.darken1_variant1,
+      borderFocusColor: palette.accent.accent1.accent1_base,
+      backgroundDefaultColor: palette.neutral.neutral2,
+    },
     сards: {
       articlesTextColor: palette.darken.darken1.darken1_variant2,
       vacanciesTextColor: palette.accent.accent1.accent1_base,
@@ -73,6 +79,10 @@ export function getTheme(palette: IPalette): ITheme {
       activeTabColor: palette.darken.darken1.darken1_base,
       disabledTabColor: palette.darken.darken1.darken1_variant1,
     },
+    modal: {
+      backgroundColor: palette.neutral.neutral2,
+      svgColor: palette.darken.darken1.darken1_base,
+    },
     ui: {
       logoLinkColor: palette.darken.darken2.darken2_base,
       logoLinkHoverColor: palette.accent.accent1.accent1_base,
@@ -99,9 +109,16 @@ export function getTheme(palette: IPalette): ITheme {
       linkSpanColorMedia1024: palette.darken.darken2.darken2_base,
       boxCopirightSpanColorMedia1024: palette.darken.darken2.darken2_variant1,
       linkTextColor: palette.darken.darken1.darken1_variant1,
+      borderColor: palette.darken.darken2.darken2_variant2,
+    },
+    auth: {
+      helpButtonColor: palette.accent.accent1.accent1_base,
+      helpButtonHoverColor: palette.accent.accent1.accent1_variant2,
+      helpButtonActiveColor: palette.accent.accent2,
     },
     mainPage: {
       headingColor: palette.neutral.neutral1,
+      titleColor: palette.darken.darken1.darken1_base,
       backgroundSectionTrendingColor: palette.neutral.neutral2,
       backgroundSectionCompaniesColor: palette.darken.darken2.darken2_variant2,
       backgroundSectionArticlesColor: palette.neutral.neutral2,

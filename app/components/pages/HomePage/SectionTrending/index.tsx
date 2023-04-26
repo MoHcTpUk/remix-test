@@ -34,8 +34,12 @@ export const SectionTrending = memo(function HomePageMemoized(): JSX.Element {
   return (
     <WrapperSection>
       <TitleContainer>
-        <Text variant={TextVariantEnum.textBody2medium}>{t('home:dont_know_where_to_start')}</Text>
-        <Text variant={TextVariantEnum.textHeading1}>{t('home:trending_searches')}</Text>
+        <Text variant={TextVariantEnum.textBody2medium} color={theme.mainPage.titleColor}>
+          {t('home:dont_know_where_to_start')}
+        </Text>
+        <Text variant={TextVariantEnum.textHeading1} color={theme.mainPage.titleColor}>
+          {t('home:trending_searches')}
+        </Text>
       </TitleContainer>
       <MobileContainer>
         <Slider theme={theme} variant='chips' slides={temporaryTrending} slideElements={6} />

@@ -1,0 +1,15 @@
+export default {
+  create_new_account_or_sign_in: 'Create new Account or Sign in',
+  enter_email: 'Enter Email',
+  enter_password: 'Enter Password',
+  sign_in_with_email: 'Sign in with Email',
+  or_register_with_social_accounts: 'or register with social accounts',
+  sign_with_google: 'Sign with Google',
+  sign_with_facebook: 'Sign with Facebook',
+  forgot_password: 'Forgot password?',
+  registration: 'Registration',
+  by_continuing_i_agree_to_the: 'By continuing, I agree to the',
+  and: 'and',
+  terms_of_use: 'Terms of Use',
+  privacy_policy: 'Privacy Policy',
+};
