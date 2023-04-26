@@ -8,14 +8,14 @@ export const loader = async ({ request }: LoaderArgs) => {
   const client = new Api();
   const response = await client.materials.newsList();
 
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  return json(await res.text());
+  // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  // return json(await res.text());
 
-  // if (response.data.data) {
-  //   return json(response.data.data)
-  // }
+  if (response.data.data) {
+    return json(response.data.data)
+  }
 
-  // return json([]);
+  return json([]);
 };
 
 

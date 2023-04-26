@@ -753,10 +753,10 @@ export class HttpClient<SecurityDataType = unknown> {
   private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
-    credentials: 'same-origin',
-    headers: {},
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
+    // credentials: 'same-origin',
+    // headers: {},
+    // redirect: 'follow',
+    // referrerPolicy: 'no-referrer',
   };
 
   constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
