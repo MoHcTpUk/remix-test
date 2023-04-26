@@ -1,8 +1,6 @@
-import type { ActionArgs } from '@remix-run/cloudflare';
-import { redirect } from '@remix-run/cloudflare';
-import type { EntitySignInRequest } from 'shared/client';
-import { Api } from 'shared/client';
-import { badRequest, } from '~/utils/request.server';
+import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
+import { Api, EntitySignInRequest } from 'shared/client';
+import { badRequest, noContent } from '~/utils/request.server';
 
 function validateEmail(email: unknown) {
   if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
@@ -41,17 +39,38 @@ export const action = async ({ request }: ActionArgs) => {
   const creds: EntitySignInRequest = { email, password };
 
   try {
-    const client = new Api()
-    // dirt hack to bypass issue when swagger generator make only http client but server require https
-    client.baseUrl = 'https://upjob.com/api/v1'
-    const signInResult = await client.userService.loginCreate(creds)
-    const sessionCookie = signInResult.headers.get('Set-Cookie');
+    // добавить в env process.env.BASE_HOST
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    const requestOptions: Request | RequestInit | undefined = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(creds),
+      redirect: 'follow',
+    };
+
+    const data = await fetch(`https://upjob.com/api/v1/user-service/login`, requestOptions);
+
+    const sessionCookie = data.headers.get('Set-Cookie');
     const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
 
     return redirect('/account', {
       status: 302,
       headers,
     });
+
+    // console.warn(creds)
+
+    // const client = new Api()
+    // const signInResult = await client.userService.loginCreate(creds)
+
+    // console.log('>>>>>>>>>', signInResult.ok)
+    // console.log('>>>>>>>>>', signInResult.headers)
+    // const sessionCookie = signInResult.headers.get('Set-Cookie');
+
+    // console.log('>>>>>>>>>', sessionCookie)
+    // return noContent()
+
   } catch (error) {
     return badRequest({
       fieldErrors: null,
