@@ -1,11 +1,8 @@
 import { memo } from 'react';
-
 import Button from '~/components/common/Button';
-import { Text } from '~/components/common/Text';
-import { TextVariantEnum } from '~/components/common/Text/enums';
-import { Slider } from '~/components/lib/Slider';
-import { useApp } from '~/hooks';
 
+import { Text } from '~/components/common/Text';
+import { Slider } from '~/components/lib/Slider';
 import {
   ChipsContainer,
   MobileContainer,
@@ -13,8 +10,10 @@ import {
   TitleContainer,
   WrapperSection,
 } from './styles';
+import { useApp } from '~/hooks';
+import { TextVariantEnum } from '~/components/common/Text/enums';
 
-export const SectionTrending = memo((): JSX.Element => {
+export const SectionTrending = memo(function HomePageMemoized(): JSX.Element {
   const { theme, t } = useApp();
 
   const temporaryTrending = [

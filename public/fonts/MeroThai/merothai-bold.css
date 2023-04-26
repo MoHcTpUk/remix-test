@@ -15,12 +15,13 @@ License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
 */
 
 @font-face {
-  font-family: 'MeroThai-Bold';
-  src: url('merothai-bold.eot');
-  src: url('merothai-bold.eot?#iefix') format('embedded-opentype'),
-    url('merothai-bold.woff2') format('woff2'), url('merothai-bold.woff') format('woff'),
-    url('merothai-bold.ttf') format('truetype'),
-    url('merothai-bold.svg#youworkforthem') format('svg');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'MeroThai-Bold';
+	src: url('merothai-bold.eot');
+	src: url('merothai-bold.eot?#iefix') format('embedded-opentype'),
+             url('merothai-bold.woff2') format('woff2'),
+	     url('merothai-bold.woff') format('woff'),
+	     url('merothai-bold.ttf') format('truetype'),
+	     url('merothai-bold.svg#youworkforthem') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }

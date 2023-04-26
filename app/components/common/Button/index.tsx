@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 import React from 'react';
-
-import { Icon } from '../Icon';
-import { ButtonColorEnum, ButtonPriorityEnum, ButtonSizeEnum } from './enums';
+import SvgPensil from '../Icons/Pensil';
+import { ButtonPriorityEnum, ButtonColorEnum, ButtonSizeEnum } from './enums';
 import { Button } from './styles';
+import { Icon } from '../Icon';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSizeEnum;
@@ -18,7 +18,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   fullwidth?: boolean;
 };
 
-function ButtonComponent({
+const ButtonComponent: React.FC<ButtonProps> = ({
   className,
   size = ButtonSizeEnum.S,
   color = ButtonColorEnum.blue,
@@ -30,7 +30,7 @@ function ButtonComponent({
   iconSize,
   fullwidth,
   ...other
-}: ButtonProps) {
+}) => {
   return (
     <Button
       priority={priority}
@@ -46,6 +46,6 @@ function ButtonComponent({
       {children}
     </Button>
   );
-}
+};
 
 export default ButtonComponent;

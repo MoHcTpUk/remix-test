@@ -1,4 +1,3 @@
-export { default as ArrowLeft } from './ArrowLeft';
 export { default as Bell } from './Bell';
 export { default as BellPush } from './BellPush';
 export { default as Close } from './Close';

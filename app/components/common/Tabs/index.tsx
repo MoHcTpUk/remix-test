@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-
+import { Text } from '../Text';
+import { MiddleBorder, TabButton, TabContainer } from './styles';
 import { Search } from '~/components/lib/Search';
 import { useApp } from '~/hooks';
-
-import { Text } from '../Text';
 import { TextVariantEnum } from '../Text/enums';
-import { MiddleBorder, TabButton, TabContainer } from './styles';
 
 export interface TabProps {
   id: string;
@@ -13,7 +11,10 @@ export interface TabProps {
   content: string;
 }
 
-function TabSwitcher() {
+export interface TabSwitcherProps {
+}
+
+const TabSwitcher: React.FC<TabSwitcherProps> = () => {
   const { theme, t } = useApp();
 
   const tabs: TabProps[] = [
@@ -63,6 +64,6 @@ function TabSwitcher() {
       <Search theme={theme} />
     </>
   );
-}
+};
 
 export default TabSwitcher;

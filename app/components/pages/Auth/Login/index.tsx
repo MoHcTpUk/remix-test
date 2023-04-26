@@ -1,37 +1,31 @@
-import { Form, Link, useFetcher } from '@remix-run/react';
-import { IconEnum } from 'public/enums/iconEnum';
-import type { EntitySignInRequest } from 'shared/client/data-contracts';
-
-import Button from '~/components/common/Button';
-import { Input } from '~/components/common/Input';
+import { useEffect, useRef } from 'react';
+import { Link, useFetcher } from '@remix-run/react';
 import { Modal } from '~/components/common/Modal';
+import { Input } from '~/components/common/Input';
+import { useApp } from '~/hooks';
 import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
-import { useApp } from '~/hooks';
-
+import Button from '~/components/common/Button';
+import { IconEnum } from 'public/enums/iconEnum';
 import { BoxContainer, BoxForm, BoxHelp, BoxSocial, HelpButton, PoliciesText } from './styles';
-
-interface ISignInResponse {
-  fields: EntitySignInRequest;
-  formError: null | string;
-  fieldErrors: {
-    email: string | undefined;
-    password: string | undefined;
-  };
-}
 
 export default function Login({
   visibility,
   setVisibility,
-  setVisibilityForgotPassword,
 }: {
   visibility: boolean;
   setVisibility: (visibility: boolean) => void;
-  setVisibilityForgotPassword: (visibility: boolean) => void;
 }) {
   const { t, theme } = useApp();
 
-  const login = useFetcher<ISignInResponse>();
+  const login = useFetcher();
+  const ref = useRef<any>();
+
+  useEffect(() => {
+    if (login.type === 'done' && login.data.ok) {
+      ref.current?.reset();
+    }
+  }, [login]);
 
   return (
     <Modal visibility={visibility} setVisibility={setVisibility}>
@@ -41,25 +35,8 @@ export default function Login({
         </Text>
         <login.Form method='POST' action='/auth/login' style={{ width: '100%' }}>
           <BoxForm>
-            <Input
-              // ref={ref}
-              placeholder={t('auth:enter_email')}
-              id='i_email'
-              name='email'
-              value='qwe@qwe.ru'
-              aria-invalid={login.data?.fieldErrors.email ? true : undefined}
-              errorText={login.data?.fieldErrors.email ? login.data?.fieldErrors.email : undefined}
-            />
-            <Input
-              placeholder={t('auth:enter_password')}
-              id='i_password'
-              name='password'
-              value='qwerty123'
-              aria-invalid={login.data?.fieldErrors.password ? true : undefined}
-              errorText={
-                login.data?.fieldErrors.password ? login.data?.fieldErrors.password : undefined
-              }
-            />
+            <Input placeholder={t('auth:enter_email')} id='i_email' name={'email'} />
+            <Input placeholder={t('auth:enter_password')} id='i_password' name={'password'} />
             <Button priority='primary' fullwidth>
               <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_in_with_email')}</Text>
             </Button>
@@ -69,30 +46,21 @@ export default function Login({
           {t('auth:or_register_with_social_accounts')}
         </Text>
         <BoxSocial>
-          <Form method='POST' action='/auth/login-google'>
-            <Button priority='small' fullwidth iconName={IconEnum.google}>
-              <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_with_google')}</Text>
-            </Button>
-          </Form>
-          <Form method='POST' action='/auth/login-facebook'>
-            <Button priority='small' fullwidth iconName={IconEnum.fb}>
-              <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_with_facebook')}</Text>
-            </Button>
-          </Form>
+          <Button priority='small' fullwidth iconName={IconEnum.google}>
+            <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_with_google')}</Text>
+          </Button>
+          <Button priority='small' fullwidth iconName={IconEnum.fb}>
+            <Text variant={TextVariantEnum.textBody2}>{t('auth:sign_with_facebook')}</Text>
+          </Button>
         </BoxSocial>
         <BoxHelp>
-          <HelpButton
-            onClick={() => {
-              setVisibility(false);
-              setVisibilityForgotPassword(true);
-            }}
-          >
+          <HelpButton>
             <Text variant={TextVariantEnum.textBody2medium} color={theme.auth.helpButtonColor}>
               {t('auth:forgot_password')}
             </Text>
           </HelpButton>
           <HelpButton>
-            <Link to='/auth/register'>
+            <Link to={'/register'}>
               <Text variant={TextVariantEnum.textBody2medium} color={theme.auth.helpButtonColor}>
                 {t('auth:registration')}
               </Text>

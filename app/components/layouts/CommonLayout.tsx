@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-
 import { Box } from '../common/Box';
 import { Footer } from '../lib/Footer';
 import { Navbar } from '../lib/Navbar';
+import { getUserTheme } from '~/i18n/utils';
 
 type Props = {
   children: JSX.Element | JSX.Element[];
@@ -12,7 +12,7 @@ const Container = styled(Box)`
   background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
-export function CommonLayout({ children }: Props): JSX.Element {
+export const CommonLayout = ({ children }: Props): JSX.Element => {
   return (
     <Container flexDirection='column' minHeight='100vh'>
       <Navbar />
@@ -20,7 +20,7 @@ export function CommonLayout({ children }: Props): JSX.Element {
       <Box
         width='100%'
         flexDirection='column'
-        // flexGrow='1'
+      // flexGrow='1'
       >
         {children}
       </Box>
@@ -28,4 +28,4 @@ export function CommonLayout({ children }: Props): JSX.Element {
       <Footer />
     </Container>
   );
-}
+};

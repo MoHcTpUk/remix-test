@@ -1,12 +1,10 @@
 import type { IPalette } from 'public/interfaces/iPalette';
-
 import type { ITheme } from '../../public/interfaces/iTheme';
 
 export function getTheme(palette: IPalette): ITheme {
   return {
     backgroundColor: palette.neutral.neutral4,
     defaultTextColor: palette.darken.darken1.darken1_base,
-    errorTextColor: palette.error.error_base,
     buttons: {
       primary: {
         backgroundColor: palette.accent.accent1.accent1_base,
@@ -133,14 +131,6 @@ export function getTheme(palette: IPalette): ITheme {
       benefitHeaderColor: palette.darken.darken2.darken2_base,
       benefitBodyColorSmall: palette.darken.darken2.darken2_base,
       benefitBodyColor: palette.darken.darken2.darken2_variant1,
-    },
-    account: {
-      headinTextColor: palette.neutral.neutral1,
-      backgroundPageColor: palette.darken.darken2.darken2_variant2,
-      backgroundCardColor: palette.neutral.neutral2,
-      borderColor: palette.neutral.neutral4,
-      descriptionTextColor: palette.darken.darken1.darken1_variant1,
-      iconColor: palette.accent.accent1.accent1_base,
     },
   } as ITheme;
 }

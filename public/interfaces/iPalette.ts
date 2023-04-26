@@ -32,8 +32,4 @@ export interface IPalette {
     accent2: string;
     accent3: string;
   };
-
-  error: {
-    error_base: string;
-  };
 }

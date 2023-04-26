@@ -33,6 +33,7 @@ export const BoxSocial = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
   gap: 24px;
   margin-top: -8px;
   @media (min-width: 1024px) {

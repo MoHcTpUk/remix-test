@@ -1,6 +1,5 @@
 import { LanguageEnum } from 'public/enums/languageEnum';
 import styled from 'styled-components';
-
 import { Text } from '~/components/common/Text';
 
 export const TextContainer = styled.div`

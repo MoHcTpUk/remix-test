@@ -1,20 +1,25 @@
 import type { ActionArgs } from '@remix-run/cloudflare';
 import { redirect } from '@remix-run/cloudflare';
-import type { IUser } from 'public/interfaces/iUserContext';
-import type { EntitySignInRequest } from 'shared/client/data-contracts';
-import { UserService } from 'shared/client/UserService';
-import Routes from 'shared/routing/routes';
+import type { EntitySignInRequest } from 'shared/client';
+import { Api } from 'shared/client';
+import { badRequest, } from '~/utils/request.server';
 
-import { getSessionStorage } from '~/storages/session.server';
-import { getUserContextStorage } from '~/storages/userContext.server';
-import { badRequest } from '~/utils/request.server';
-import { validateEmail, validatePassword } from '~/utils/validations';
+function validateEmail(email: unknown) {
+  if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
+    return `Usernames must be at least 3 characters long`;
+  }
+}
+
+function validatePassword(password: unknown) {
+  if (typeof password !== 'string' || password.length < 6) {
+    return `Passwords must be at least 6 characters long`;
+  }
+}
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
   const email = form.get('email')?.toString();
   const password = form.get('password')?.toString();
-  const creds: EntitySignInRequest = { email, password };
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
@@ -24,46 +29,26 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 
-  const fieldErrors = {
-    email: validateEmail(email),
-    password: validatePassword(password),
-  };
+  // const fieldErrors = {
+  //   email: validateEmail(email),
+  //   password: validatePassword(password),
+  // };
 
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, creds, formError: null });
-  }
+  // if (Object.values(fieldErrors).some(Boolean)) {
+  //   return badRequest({ fieldErrors, fields, formError: null });
+  // }
+
+  const creds: EntitySignInRequest = { email, password };
 
   try {
-    const client = new UserService();
-    const signInResult = await client.loginCreate(creds);
-
+    const client = new Api()
+    // dirt hack to bypass issue when swagger generator make only http client but server require https
+    client.baseUrl = 'https://upjob.com/api/v1'
+    const signInResult = await client.userService.loginCreate(creds)
     const sessionCookie = signInResult.headers.get('Set-Cookie');
-    const sessionStorage = await getSessionStorage(request);
-    const session = sessionStorage.getSession();
-    session.session = sessionCookie;
-    sessionStorage.setSession(session);
+    const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
 
-    client.auth(session);
-    const userInfo = (await client.infoList()).data;
-    const userContextStorage = await getUserContextStorage(request);
-    const userContext = userContextStorage.getUserContext();
-
-    userContext.user = {
-      id: userInfo.id,
-      firstName: userInfo.firstName,
-      lastName: userInfo.lastName,
-      email: userInfo.email,
-      isAuthenticated: true,
-    } as IUser;
-
-    userContextStorage.setUserContext(userContext);
-
-    const headers: HeadersInit = new Headers();
-
-    headers.append('Set-Cookie', await userContextStorage.commit());
-    headers.append('Set-Cookie', await sessionStorage.commit());
-
-    return redirect(Routes.user.root, {
+    return redirect('/account', {
       status: 302,
       headers,
     });

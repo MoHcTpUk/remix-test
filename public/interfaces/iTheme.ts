@@ -1,7 +1,6 @@
 export interface ITheme {
   backgroundColor: string;
   defaultTextColor: string;
-  errorTextColor: string;
   buttons: {
     primary: {
       backgroundColor: string;
@@ -128,13 +127,5 @@ export interface ITheme {
     benefitHeaderColor: string;
     benefitBodyColorSmall: string;
     benefitBodyColor: string;
-  };
-  account: {
-    headinTextColor: string;
-    backgroundPageColor: string;
-    backgroundCardColor: string;
-    borderColor: string;
-    descriptionTextColor: string;
-    iconColor: string;
   };
 }

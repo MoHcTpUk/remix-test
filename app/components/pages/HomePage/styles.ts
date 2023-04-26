@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SectionInnerContainer = styled.div`
+export const SectionInnerContaier = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

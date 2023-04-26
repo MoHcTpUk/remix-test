@@ -1,17 +1,16 @@
-import type { EntryContext } from '@remix-run/cloudflare';
 import { RemixServer } from '@remix-run/react';
-import { createInstance } from 'i18next';
 import Backend from 'i18next-fs-backend';
 import { resolve } from 'path';
-import { LanguageEnum } from 'public/enums/languageEnum';
 import { renderToString } from 'react-dom/server';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-import { ServerStyleSheet } from 'styled-components';
-
 import i18n from './i18n/i18n';
-import resources from './i18n/i18next.resources';
-import i18next from './i18n/i18next.server';
-import { getUserContextSession } from './storages/userContext.server';
+import i18next from './i18n/i18next.server'
+import { ServerStyleSheet } from 'styled-components';
+import type { EntryContext } from '@remix-run/cloudflare';
+import { createInstance } from 'i18next';
+import resources from './i18n/i18next.resources'
+import { getUserContextSession } from './userContext.server';
+import { LanguageEnum } from 'public/enums/languageEnum';
 
 export default async function handleRequest(
   request: Request,
@@ -19,11 +18,11 @@ export default async function handleRequest(
   headers: Headers,
   context: EntryContext,
 ) {
-  const instance = createInstance();
+  let instance = createInstance();
   const userContextSession = await getUserContextSession(request);
 
-  const lng = userContextSession.getUserContext()?.language ?? LanguageEnum.EN;
-  const ns = i18next.getRouteNamespaces(context);
+  let lng = userContextSession.getUserContext()?.language ?? LanguageEnum.EN
+  let ns = i18next.getRouteNamespaces(context);
 
   await instance
     .use(initReactI18next)
@@ -53,8 +52,8 @@ export default async function handleRequest(
 
   headers.set('Content-Type', 'text/html');
 
-  return new Response(`<!DOCTYPE html>${markup}`, {
+  return new Response('<!DOCTYPE html>' + markup, {
     status: statusCode,
-    headers,
+    headers: headers,
   });
 }

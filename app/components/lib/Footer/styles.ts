@@ -36,7 +36,7 @@ export const LinksWrapper = styled.div`
   }
 `;
 
-export const LinkItem = styled.div`
+export const Link = styled.a`
   cursor: pointer;
   span:hover {
     color: ${({ theme }) => theme.footer.linkSpanColor};
@@ -71,8 +71,9 @@ export const IconsWrapper = styled.div`
   }
 `;
 
-export const SosialImg = styled.div`
+export const SosialImg = styled.a`
   cursor: pointer;
+
   img:hover {
     transform: scale(1.05);
   }

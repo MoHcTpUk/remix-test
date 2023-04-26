@@ -21,7 +21,6 @@ export const IconEnum = {
   up: 'up',
   google: 'google',
   fb: 'fb',
-  arrowLeft: 'arrowLeft',
 } as const;
 
 export type IconEnum = ValueOf<typeof IconEnum>;

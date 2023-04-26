@@ -34,8 +34,4 @@ export const basePalette: IPalette = {
     accent2: '#3B67C0', // Vasil dark
     accent3: '#E5E8F9',
   },
-
-  error: {
-    error_base: '#BA2320',
-  },
 };

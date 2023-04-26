@@ -1,7 +1,6 @@
-import { Link, Outlet } from '@remix-run/react';
+import { Link, Outlet, useLocation } from '@remix-run/react';
 import { LanguageEnum } from 'public/enums/languageEnum';
 import { memo, useEffect, useState } from 'react';
-
 import { Button } from '~/components/common/Button/styles';
 import SvgBell from '~/components/common/Icons/Bell';
 import SvgEmail from '~/components/common/Icons/Email';
@@ -9,10 +8,7 @@ import SvgLogo from '~/components/common/Icons/Logo';
 import SvgMenu from '~/components/common/Icons/Menu';
 import { Switcher } from '~/components/common/Switcher';
 import { Text } from '~/components/common/Text';
-import ForgotPasswordPage from '~/components/pages/Auth/ForgotPassword';
-import Login from '~/components/pages/Auth/Login';
 import { useApp } from '~/hooks';
-
 import {
   BoxText,
   ContainerHeader,
@@ -24,23 +20,48 @@ import {
   TranslateBox,
   WrapperHeader,
 } from './styles';
+import styled from 'styled-components';
+import Login from '~/components/pages/Auth/Login';
 
 export * from './NavbarItem';
 export * from './types';
 
-export const Navbar = memo((): JSX.Element => {
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalWindow = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+`;
+
+export const Navbar = memo(function NavbarMemoized(): JSX.Element {
   const [visibilityLogin, setVisibilityLogin] = useState(false);
-  const [visibilityForgotPassword, setVisibilityForgotPassword] = useState(false);
 
   const { userContext, setUserContext, theme, t, i18n } = useApp();
+
   function setLang(language: LanguageEnum) {
-    setUserContext((prevContext) => ({ ...prevContext, language }));
+    setUserContext((prevContext) => ({ ...prevContext!, language: language }));
   }
 
-  const changeLanguage = () =>
+  const changeLanguage = () => {
     userContext?.language === LanguageEnum.TH
-      ? setUserContext((prevContext) => ({ ...prevContext, language: LanguageEnum.EN }))
-      : setUserContext((prevContext) => ({ ...prevContext, language: LanguageEnum.TH }));
+      ? setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.EN }))
+      : setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.TH }));
+  };
 
   useEffect(() => {
     i18n.changeLanguage(userContext?.language);
@@ -98,32 +119,17 @@ export const Navbar = memo((): JSX.Element => {
 
         <MenuContainer>
           <IconButtons>
-            <IconButton>
-              <SvgBell color={theme.navbar.svgColor} />
-            </IconButton>
-            <IconButton>
-              <SvgEmail color={theme.navbar.svgColor} />
-            </IconButton>
+            <IconButton>{<SvgBell color={theme.navbar.svgColor} />}</IconButton>
+            <IconButton>{<SvgEmail color={theme.navbar.svgColor} />}</IconButton>
           </IconButtons>
           <Button onClick={() => setVisibilityLogin(!visibilityLogin)} priority='small'>
             <Text>{t('signIn')}</Text>
           </Button>
           <Outlet />
-          <IconButton>
-            <SvgMenu color={theme.navbar.svgColor} />
-          </IconButton>
+          <IconButton>{<SvgMenu color={theme.navbar.svgColor} />}</IconButton>
         </MenuContainer>
       </ContainerHeader>
-      <Login
-        visibility={visibilityLogin}
-        setVisibility={setVisibilityLogin}
-        setVisibilityForgotPassword={setVisibilityForgotPassword}
-      />
-      <ForgotPasswordPage
-        visibility={visibilityForgotPassword}
-        setVisibility={setVisibilityForgotPassword}
-        setVisibilityLogin={setVisibilityLogin}
-      />
+      <Login visibility={visibilityLogin} setVisibility={setVisibilityLogin} />
     </WrapperHeader>
   );
 });

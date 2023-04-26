@@ -1,15 +1,14 @@
 import { memo } from 'react';
-
-import Button from '~/components/common/Button';
 import { Text } from '~/components/common/Text';
-import { TextVariantEnum } from '~/components/common/Text/enums';
 import { Slider } from '~/components/lib/Slider';
-import { useApp } from '~/hooks';
-
-import { ButtonInner } from '../SectionNews/styles';
 import { ButtonWrapper, SliderContainer, TitleContainer, WrapperSection } from './styles';
+import { useApp } from '~/hooks';
+import { TextVariantEnum } from '~/components/common/Text/enums';
+import styled from 'styled-components';
+import Button from '~/components/common/Button';
+import { ButtonInner } from '../SectionNews/styles';
 
-export const SectionArticles = memo((): JSX.Element => {
+export const SectionArticles = memo(function HomePageMemoized(): JSX.Element {
   const { theme, t } = useApp();
 
   const temporaryNews = [

@@ -1,27 +1,25 @@
 import { memo } from 'react';
-
-import { Box } from '~/components/common/Box';
-import SvgLogo from '~/components/common/Icons/Logo';
-import { Text } from '~/components/common/Text';
-import { TextVariantEnum } from '~/components/common/Text/enums';
-import { useApp } from '~/hooks';
-
 import {
   BenefitFrame,
   BenefitHeader,
-  BenefitsWrapper,
   BenefitText,
+  BenefitsWrapper,
   TextContainer,
   WrapperBanner,
   WrapperSection,
 } from './styles';
+import { TextVariantEnum } from '~/components/common/Text/enums';
+import SvgLogo from '~/components/common/Icons/Logo';
+import { useApp } from '~/hooks';
+import { Text } from '~/components/common/Text';
+import { Box } from '~/components/common/Box';
 
 interface IBenefits {
   header: string;
   body: string;
 }
 
-export const SectionBenefits = memo((): JSX.Element => {
+export const SectionBenefits = memo(function HomePageMemoized(): JSX.Element {
   const { theme, t, userContext } = useApp();
 
   const benefits: IBenefits[] = [
@@ -44,7 +42,7 @@ export const SectionBenefits = memo((): JSX.Element => {
   ];
 
   return (
-    <Box width='100%' flexDirection='column'>
+    <Box width={'100%'} flexDirection='column'>
       <WrapperBanner lang={userContext?.language} />
       <WrapperSection>
         <TextContainer>
@@ -63,8 +61,8 @@ export const SectionBenefits = memo((): JSX.Element => {
           </Text>
         </TextContainer>
         <BenefitsWrapper>
-          {benefits.map((benefit) => (
-            <BenefitFrame key={benefit.body}>
+          {benefits.map((benefit, index) => (
+            <BenefitFrame key={index}>
               <BenefitHeader variant={TextVariantEnum.textHeading3}>{benefit.header}</BenefitHeader>
               <BenefitText variant={TextVariantEnum.textBody2}>{benefit.body}</BenefitText>
             </BenefitFrame>
