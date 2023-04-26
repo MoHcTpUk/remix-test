@@ -128,7 +128,7 @@ export const LINE_HEIGHTS_DESC: Record<TextVariantEnum, string> = {
 };
 
 export const Text = styled.span<Props>`
-  color: ${({ color, theme }) => color || theme.defaultTextColor};
+  color: ${(props) => props.color};
   font-style: ${(props) => props.fontStyle};
   letter-spacing: -0.026em;
   font-size: ${({ variant = TextVariantEnum.textBody1 }) => FONT_SIZES_MOB[variant]};

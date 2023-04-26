@@ -74,7 +74,6 @@ function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <div id='modal-container' />
       </body>
     </html>
   );

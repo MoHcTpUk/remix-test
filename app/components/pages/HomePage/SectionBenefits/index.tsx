@@ -12,7 +12,6 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import SvgLogo from '~/components/common/Icons/Logo';
 import { useApp } from '~/hooks';
 import { Text } from '~/components/common/Text';
-import { Box } from '~/components/common/Box';
 
 interface IBenefits {
   header: string;
@@ -42,7 +41,7 @@ export const SectionBenefits = memo(function HomePageMemoized(): JSX.Element {
   ];
 
   return (
-    <Box width={'100%'} flexDirection='column'>
+    <>
       <WrapperBanner lang={userContext?.language} />
       <WrapperSection>
         <TextContainer>
@@ -69,6 +68,6 @@ export const SectionBenefits = memo(function HomePageMemoized(): JSX.Element {
           ))}
         </BenefitsWrapper>
       </WrapperSection>
-    </Box>
+    </>
   );
 });

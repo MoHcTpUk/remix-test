@@ -1,16 +1,15 @@
 import { LanguageEnum } from 'public/enums/languageEnum';
 import { ThemeEnum } from 'public/enums/themeEnum';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 import { Box } from '~/components/common/Box';
 import Button from '~/components/common/Button';
 import Card from '~/components/common/Card';
 import SvgLogo from '~/components/common/Icons/Logo';
-import { Input } from '~/components/common/Input';
 import { Switcher } from '~/components/common/Switcher';
 import TabSwitcher from '~/components/common/Tabs';
 import { Text } from '~/components/common/Text';
 import { CommonLayout } from '~/components/layouts/CommonLayout';
-import { BoxText, TranslateBox } from '~/components/lib/Navbar/styles';
+import { BoxText, TranslateBox } from '~/components/lib/Navbar';
 import { useApp } from '~/hooks';
 
 export default function Index() {
@@ -163,13 +162,13 @@ export default function Index() {
   }
 
   function setLang(language: LanguageEnum) {
-    setUserContext((prevContext) => ({ ...prevContext!, language: language }));
+    setUserContext((prevContext) => ({ ...prevContext!, language: language }))
   }
 
   const changeLanguage = () => {
-    userContext?.language === LanguageEnum.TH
-      ? setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.EN }))
-      : setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.TH }));
+    userContext?.language === LanguageEnum.TH ?
+      setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.EN })) :
+      setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.TH }));
   };
 
   function themeIsCheckedRadiobutton(value: string) {
@@ -252,7 +251,9 @@ export default function Index() {
                   selectedLang={userContext?.language ?? ''}
                   onClick={() => setLang(LanguageEnum.TH)}
                 >
-                  <Text>ภาษาไทย</Text>
+                  <Text>
+                    ภาษาไทย
+                  </Text>
                 </BoxText>
                 <Switcher
                   onChange={changeLanguage}
@@ -265,7 +266,9 @@ export default function Index() {
                   selectedLang={userContext?.language ?? ''}
                   onClick={() => setLang(LanguageEnum.EN)}
                 >
-                  <Text>English</Text>
+                  <Text>
+                    English
+                  </Text>
                 </BoxText>
               </TranslateBox>
               <p>Greeting from Common: {t('greeting')}</p>
@@ -287,9 +290,7 @@ export default function Index() {
           </Box>
         </Box>
 
-        <Box flexDirection='column' gap='10px'>
-          <Input background='#D9DBDE' placeholder='Cammmon' id='i_firstname' />
-
+        <Box flexDirection='row' gap='10px'>
           <Button priority='primary'>
             <Text>Primary S</Text>
           </Button>
@@ -308,6 +309,14 @@ export default function Index() {
 
           <Button priority='secondary' size='M'>
             <Text>Secondary M</Text>
+          </Button>
+
+          <Button priority='primary' pensil>
+            <Text>Primary S</Text>
+          </Button>
+
+          <Button priority='small' pensil>
+            <Text>Secondary S</Text>
           </Button>
 
           <Button priority='chips' size='M'>

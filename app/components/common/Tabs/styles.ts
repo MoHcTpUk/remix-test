@@ -71,12 +71,12 @@ export const TabButton = styled.button<{ isActive: boolean }>`
 
   @media (min-width: 940px) {
     max-width: fit-content;
-    padding: 24px 43px 24px;
+    padding: 24px 44px;
   }
 
   @media (min-width: 1280px) {
     max-width: fit-content;
-    padding: 24px 43px 24px;
+    padding: 24px 40px;
   }
 
   @media (max-width: 768px) {

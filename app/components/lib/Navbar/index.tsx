@@ -1,6 +1,6 @@
-import { Link, Outlet, useLocation } from '@remix-run/react';
 import { LanguageEnum } from 'public/enums/languageEnum';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect } from 'react';
+import styled from 'styled-components';
 import { Button } from '~/components/common/Button/styles';
 import SvgBell from '~/components/common/Icons/Bell';
 import SvgEmail from '~/components/common/Icons/Email';
@@ -9,58 +9,100 @@ import SvgMenu from '~/components/common/Icons/Menu';
 import { Switcher } from '~/components/common/Switcher';
 import { Text } from '~/components/common/Text';
 import { useApp } from '~/hooks';
-import {
-  BoxText,
-  ContainerHeader,
-  IconButton,
-  IconButtons,
-  LeftContainer,
-  LogoWrapper,
-  MenuContainer,
-  TranslateBox,
-  WrapperHeader,
-} from './styles';
-import styled from 'styled-components';
-import Login from '~/components/pages/Auth/Login';
 
 export * from './NavbarItem';
 export * from './types';
 
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+export const WrapperHeader = styled.div`
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }) => theme.navbar.wrapperHeaderBackgroundColor};
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
-const ModalWindow = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
+export const ContainerHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 22px 20px;
+  width: 100%;
+`;
+
+const LogoWrapper = styled.a`
+  cursor: pointer;
+  svg {
+    max-width: 99px;
+    height: 40px;
+    transition: all 0.15s ease-in;
+  }
+
+  &:hover {
+    svg {
+      color: ${({ theme }) => theme.navbar.hoverColor};
+    }
+  }
+`;
+
+export const BoxText = styled.div<{ lang: string; selectedLang: string }>`
+  cursor: pointer;
+  span:hover {
+    color: ${({ lang, selectedLang, theme }) =>
+    lang !== selectedLang ? theme.navbar.hoverColor : theme.navbar.noHoverColor};
+  }
+`;
+
+export const MenuContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+`;
+
+export const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+`;
+
+export const TranslateBox = styled.div`
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+`;
+
+export const IconButton = styled.button`
+  cursor: pointer;
+  transition: all 0.15s ease-in;
+  &:hover {
+    svg {
+      color: ${({ theme }) => theme.navbar.hoverColor};
+    }
+  }
+`;
+
+export const IconButtons = styled.div`
+  display: none;
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    gap: 38px;
+  }
 `;
 
 export const Navbar = memo(function NavbarMemoized(): JSX.Element {
-  const [visibilityLogin, setVisibilityLogin] = useState(false);
-
   const { userContext, setUserContext, theme, t, i18n } = useApp();
 
   function setLang(language: LanguageEnum) {
-    setUserContext((prevContext) => ({ ...prevContext!, language: language }));
+    setUserContext((prevContext) => ({ ...prevContext!, language: language }))
   }
 
   const changeLanguage = () => {
-    userContext?.language === LanguageEnum.TH
-      ? setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.EN }))
-      : setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.TH }));
+    userContext?.language === LanguageEnum.TH ?
+      setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.EN })) :
+      setUserContext((prevContext) => ({ ...prevContext!, language: LanguageEnum.TH }));
   };
 
   useEffect(() => {
@@ -71,11 +113,9 @@ export const Navbar = memo(function NavbarMemoized(): JSX.Element {
     <WrapperHeader>
       <ContainerHeader>
         <LeftContainer>
-          <Link to='/'>
-            <LogoWrapper>
-              <SvgLogo color={theme.navbar.logoColor} />
-            </LogoWrapper>
-          </Link>
+          <LogoWrapper href='#'>
+            <SvgLogo color={theme.navbar.logoColor} />
+          </LogoWrapper>
           <TranslateBox>
             <BoxText
               style={{ cursor: 'pointer' }}
@@ -122,14 +162,12 @@ export const Navbar = memo(function NavbarMemoized(): JSX.Element {
             <IconButton>{<SvgBell color={theme.navbar.svgColor} />}</IconButton>
             <IconButton>{<SvgEmail color={theme.navbar.svgColor} />}</IconButton>
           </IconButtons>
-          <Button onClick={() => setVisibilityLogin(!visibilityLogin)} priority='small'>
+          <Button priority='small'>
             <Text>{t('signIn')}</Text>
           </Button>
-          <Outlet />
           <IconButton>{<SvgMenu color={theme.navbar.svgColor} />}</IconButton>
         </MenuContainer>
       </ContainerHeader>
-      <Login visibility={visibilityLogin} setVisibility={setVisibilityLogin} />
     </WrapperHeader>
   );
 });

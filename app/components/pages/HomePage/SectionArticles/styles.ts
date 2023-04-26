@@ -14,7 +14,6 @@ export const WrapperSection = styled.div`
   @media (min-width: 768px) {
     padding: 40px 0 48px;
     gap: 32px;
-    background-color: ${({ theme }) => theme.mainPage.backgroundSectionNewsColor};
   }
 
   @media (min-width: 1024px) {

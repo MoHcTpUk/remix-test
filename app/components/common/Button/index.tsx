@@ -3,7 +3,6 @@ import React from 'react';
 import SvgPensil from '../Icons/Pensil';
 import { ButtonPriorityEnum, ButtonColorEnum, ButtonSizeEnum } from './enums';
 import { Button } from './styles';
-import { Icon } from '../Icon';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSizeEnum;
@@ -12,10 +11,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean;
   className?: string;
   children?: ReactNode;
-  iconName?: string;
-  iconColor?: string;
-  iconSize?: number;
-  fullwidth?: boolean;
+  pensil?: boolean;
 };
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -25,10 +21,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   priority = ButtonPriorityEnum.primary,
   children,
   disabled,
-  iconName,
-  iconColor,
-  iconSize,
-  fullwidth,
+  pensil,
   ...other
 }) => {
   return (
@@ -38,11 +31,10 @@ const ButtonComponent: React.FC<ButtonProps> = ({
       size={size}
       color={color}
       disabled={disabled}
-      iconName={iconName}
-      fullwidth={fullwidth}
+      pensil={pensil}
       {...other}
     >
-      {iconName && <Icon name={iconName} color={iconColor} size={iconSize} />}
+      {pensil && <SvgPensil />}
       {children}
     </Button>
   );

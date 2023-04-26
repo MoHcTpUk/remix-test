@@ -9,10 +9,10 @@ export const Button = styled.button<ButtonProps>`
   flex-direction: row;
   gap: 8px;
   justify-content: center;
-  align-items: center;
-  width: ${({ fullwidth }) => (fullwidth ? '100%' : 'fit-content')};
+  align-items: flex-start;
+  width: fit-content;
   transition: all 0.1s ease-in;
-  padding: ${({ size }) => (size === ButtonSizeEnum.M ? '15px 32px 14px' : '12px 20px 10px')};
+  padding: ${({ size }) => (size === ButtonSizeEnum.M ? '16px 32px' : '10px 24px')};
   &:hover,
   &:focus {
     transform: scale(0.95);
@@ -21,16 +21,12 @@ export const Button = styled.button<ButtonProps>`
     transition: all 0.1s ease-in;
   }
 
-  span {
-    height: fit-content;
-  }
-
   @media (min-width: 768px) {
-    padding: ${({ size, iconName }) => {
-      if (size === ButtonSizeEnum.M && iconName) return '15px 32px 14px 24px';
-      if (size === ButtonSizeEnum.M && !iconName) return '15px 32px 14px';
-      if (size === ButtonSizeEnum.S && iconName) return '12px 20px 10px 16px';
-      if (size === ButtonSizeEnum.S && !iconName) return '12px 20px 10px';
+    padding: ${({ size, pensil }) => {
+      if (size === ButtonSizeEnum.M && pensil) return '16px 32px 16px 24px';
+      if (size === ButtonSizeEnum.M && !pensil) return '16px 32px';
+      if (size === ButtonSizeEnum.S && pensil) return '10px 24px 10px 16px';
+      if (size === ButtonSizeEnum.S && !pensil) return '10px 24px';
     }};
     &:hover {
       transform: scale(1);
@@ -45,9 +41,9 @@ export const Button = styled.button<ButtonProps>`
 
   @media (min-width: 1024px) {
     cursor: pointer;
-    padding: ${({ size, iconName }) => {
-      if (size === ButtonSizeEnum.S && iconName) return '15px 32px 14px 56px';
-      if (size === ButtonSizeEnum.S && !iconName) return '15px 32px 14px';
+    padding: ${({ size, pensil }) => {
+      if (size === ButtonSizeEnum.S && pensil) return '16px 32px 16px 56px';
+      if (size === ButtonSizeEnum.S && !pensil) return '16px 32px';
     }};
   }
 
@@ -75,7 +71,7 @@ export const Button = styled.button<ButtonProps>`
         return css`
           background-color: ${({ theme }) => theme.buttons.small.backgroundColor};
           border: 1px solid ${({ theme }) => theme.buttons.small.borderColor};
-          padding: 10px 20px;
+          padding: 10px 24px;
           span {
             color: ${({ theme }) => theme.buttons.small.borderColor};
           }
@@ -100,7 +96,7 @@ export const Button = styled.button<ButtonProps>`
           }
           @media (min-width: 1024px) {
             cursor: pointer;
-            padding: 12px 20px 10px;
+            padding: 10px 24px;
           }
         `;
       case ButtonPriorityEnum.secondary:
@@ -126,7 +122,7 @@ export const Button = styled.button<ButtonProps>`
       case ButtonPriorityEnum.chips:
         return css`
           background-color: ${({ theme }) => theme.buttons.chips.backgroundColor};
-          padding: 8px 14px 5px;
+          padding: 8px 14px;
 
           span {
             color: ${({ theme }) => theme.buttons.chips.spanColor};
@@ -146,7 +142,7 @@ export const Button = styled.button<ButtonProps>`
             }
           }
           @media (min-width: 768px) {
-            padding: 12px 20px 8px;
+            padding: 12px 24px;
           }
         `;
     }
