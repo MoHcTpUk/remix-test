@@ -1,5 +1,4 @@
 import { memo } from 'react';
-
 import { CommonLayout } from '~/components/layouts/CommonLayout';
 import { SectionTop } from './SectionTop';
 import { SectionTrending } from './SectionTrending';
@@ -8,8 +7,13 @@ import { SectionCompanies } from './SectionCompanies';
 import { SectionArticles } from './SectionArticles';
 import { SectionNews } from './SectionNews';
 import { SectionInnerContaier } from './styles';
+import type { EntityMaterial } from 'shared/client';
 
-export const HomePage = memo(function HomePageMemoized(): JSX.Element {
+export interface IHomePageProps {
+  news: EntityMaterial[];
+}
+
+export const HomePage = memo(function HomePageMemoized({ news }: IHomePageProps): JSX.Element {
   return (
     <CommonLayout>
       <SectionTop />
@@ -18,7 +22,7 @@ export const HomePage = memo(function HomePageMemoized(): JSX.Element {
         <SectionCompanies />
         <SectionBenefits />
       </SectionInnerContaier>
-      <SectionNews />
+      <SectionNews news={news} />
       <SectionArticles />
     </CommonLayout>
   );

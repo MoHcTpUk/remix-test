@@ -71,9 +71,11 @@ export const Navbar = memo(function NavbarMemoized(): JSX.Element {
     <WrapperHeader>
       <ContainerHeader>
         <LeftContainer>
-          <LogoWrapper href='#'>
-            <SvgLogo color={theme.navbar.logoColor} />
-          </LogoWrapper>
+          <Link to='/'>
+            <LogoWrapper>
+              <SvgLogo color={theme.navbar.logoColor} />
+            </LogoWrapper>
+          </Link>
           <TranslateBox>
             <BoxText
               style={{ cursor: 'pointer' }}

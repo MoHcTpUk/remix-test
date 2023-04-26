@@ -9,7 +9,7 @@ import { ServerStyleSheet } from 'styled-components';
 import type { EntryContext } from '@remix-run/cloudflare';
 import { createInstance } from 'i18next';
 import resources from './i18n/i18next.resources'
-import { getUserContextSession } from './userContext.server';
+import { getUserContextSession } from './storages/userContext.server';
 import { LanguageEnum } from 'public/enums/languageEnum';
 
 export default async function handleRequest(

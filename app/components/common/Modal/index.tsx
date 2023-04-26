@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import SvgLogo from '../Icons/Logo';
 import SvgClose from '../Icons/Close';
 import { useApp } from '~/hooks';
 
@@ -23,7 +22,7 @@ const ModalInner = styled(motion.div)`
   padding: 64px 16px 32px;
   background-color: ${({ theme }) => theme.modal.backgroundColor};
   width: 95vw;
-  max-width: 588px;
+  max-width: 590px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;

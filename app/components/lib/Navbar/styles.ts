@@ -18,7 +18,7 @@ export const ContainerHeader = styled.div`
   }
 `;
 
-export const LogoWrapper = styled.a`
+export const LogoWrapper = styled.div`
   cursor: pointer;
   svg {
     max-width: 99px;

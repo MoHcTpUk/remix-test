@@ -115,6 +115,9 @@ export function getTheme(palette: IPalette): ITheme {
       helpButtonColor: palette.accent.accent1.accent1_base,
       helpButtonHoverColor: palette.accent.accent1.accent1_variant2,
       helpButtonActiveColor: palette.accent.accent2,
+      radioButtonColor: palette.accent.accent1.accent1_base,
+      backgroundRegisterPage: palette.darken.darken2.darken2_variant2,
+      backgroundRegisterContainerColor: palette.neutral.neutral2,
     },
     mainPage: {
       headingColor: palette.neutral.neutral1,

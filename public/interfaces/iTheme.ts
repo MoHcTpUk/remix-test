@@ -111,6 +111,9 @@ export interface ITheme {
     helpButtonColor: string;
     helpButtonHoverColor: string;
     helpButtonActiveColor: string;
+    radioButtonColor: string;
+    backgroundRegisterPage: string;
+    backgroundRegisterContainerColor: string;
   };
   mainPage: {
     headingColor: string;

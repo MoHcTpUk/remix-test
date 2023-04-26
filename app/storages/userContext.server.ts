@@ -1,7 +1,7 @@
 import { createCookieSessionStorage } from "@remix-run/cloudflare";
 import type { IUserContext } from "public/interfaces/iUserContext";
 import { isUserContext } from "public/interfaces/iUserContext";
-import { defaultUserContext } from "../public/defaultUserContext";
+import { defaultUserContext } from "../../public/defaultUserContext";
 
 // TODO: Security - add cookie secrets
 

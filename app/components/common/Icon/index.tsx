@@ -43,7 +43,7 @@ function IconNamed({ name, color, size = 24, className = '' }: IconNamedProps): 
   const props = {
     width: size,
     height: size,
-    color: theme.defaultTextColor,
+    color: color || theme.defaultTextColor,
     className,
   };
 
@@ -92,9 +92,6 @@ function IconNamed({ name, color, size = 24, className = '' }: IconNamedProps): 
 
     case IconEnum.show:
       return <SvgShow {...props} />;
-
-    case IconEnum.up:
-      return <SvgUp {...props} />;
 
     case IconEnum.up:
       return <SvgUp {...props} />;

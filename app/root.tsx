@@ -16,7 +16,7 @@ import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/clo
 import { ThemeProvider } from 'styled-components';
 import { UserContextProvider } from '~/providers/userContextProvider';
 import type { IUserContext } from 'public/interfaces/iUserContext';
-import { getUserContextSession } from './userContext.server';
+import { getUserContextSession } from './storages/userContext.server';
 import { LanguageEnum } from 'public/enums/languageEnum';
 import 'swiper/css';
 import 'swiper/css/pagination';

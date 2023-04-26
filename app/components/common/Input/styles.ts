@@ -36,6 +36,10 @@ export const InputComponent = styled.input<{ backgrond?: string }>`
     &:focus {
       border: 1px solid ${({ theme }) => theme.inputs.borderFocusColor};
     }
+
+    &:active {
+      border: 1px solid ${({ theme }) => theme.inputs.borderFocusColor};
+    }
   }
 
   @media (min-width: 1024px) {
@@ -51,6 +55,9 @@ export const InputComponent = styled.input<{ backgrond?: string }>`
       }
 
       &:focus {
+        border: 1px solid ${({ theme }) => theme.inputs.borderFocusColor};
+      }
+      &:active {
         border: 1px solid ${({ theme }) => theme.inputs.borderFocusColor};
       }
     }
