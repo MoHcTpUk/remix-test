@@ -27,4 +27,10 @@ export default {
   by_submitting_the_form_and_checking_this_box_i_hereby_agree_to_receive_email_from_UPJOB_company_and_employers_who_use_UPJOB_including_automated_notifications_by_email:
     'By submitting the form and checking this box, I hereby agree to receive email from UPJOB company and employers who use UPJOB including automated notifications by email.',
   my_resumes: 'My resumes',
+  city: 'City',
+  age: 'Age',
+  work_experience: 'Work experience',
+  published: 'Published',
+  on: 'on',
+  off: 'off',
 };

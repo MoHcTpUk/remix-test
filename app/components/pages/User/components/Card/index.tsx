@@ -20,7 +20,7 @@ export const BoxCard = memo(
     withControl,
     children,
   }: {
-    title: string;
+    title?: string;
     state?: StateCard;
     setState?: Dispatch<SetStateAction<StateCard>>;
     withEditButton?: boolean;
@@ -30,15 +30,17 @@ export const BoxCard = memo(
     const { theme, t } = useApp();
 
     return (
-      <Card>
-        <BoxCardHeading>
-          <Text variant={TextVariantEnum.textHeading2}>{title}</Text>
-          {withEditButton && state === 'info' && (
-            <Button priority='small' onClick={() => setState && setState('edit')}>
-              <Text> {t('common:edit')}</Text>
-            </Button>
-          )}
-        </BoxCardHeading>
+      <Card title={title}>
+        {title && (
+          <BoxCardHeading>
+            {title && <Text variant={TextVariantEnum.textHeading2}>{title}</Text>}
+            {withEditButton && state === 'info' && (
+              <Button priority='small' onClick={() => setState && setState('edit')}>
+                <Text> {t('common:edit')}</Text>
+              </Button>
+            )}
+          </BoxCardHeading>
+        )}
 
         {children}
 

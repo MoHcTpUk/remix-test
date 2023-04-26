@@ -76,6 +76,7 @@ export const Navbar = memo((): JSX.Element => {
               onChange={changeLanguage}
               checked={userContext?.language === LanguageEnum.EN}
               htmlLabel='lang'
+              variant='lang'
             />
             <BoxText
               style={{ cursor: 'pointer' }}

@@ -89,7 +89,7 @@ export const GeneralInfo = memo(
               <BoxPicture>
                 <Text variant={TextVariantEnum.textBody1medium}>{t('user:profile_picture')}</Text>
                 <BoxAvatar>
-                  <img src='images/user/avatarDefault.png' alt='avatar' />
+                  <img src='/images/user/avatarDefault.png' alt='avatar' />
                   <Button priority='small' fullwidth>
                     <Text> {t('user:edit_photo')}</Text>
                   </Button>

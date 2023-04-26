@@ -8,26 +8,38 @@ import { useApp } from '~/hooks';
 
 import { BoxHeading, ButtonsControl } from './styles';
 
-export const Heading = memo(({ title }: { title: string }): JSX.Element => {
-  const { theme, t } = useApp();
+export const Heading = memo(
+  ({
+    title,
+    variant = 'default',
+  }: {
+    title: string;
+    variant?: 'default' | 'resumes' | 'vacancies';
+  }): JSX.Element => {
+    const { theme, t } = useApp();
 
-  return (
-    <BoxHeading>
-      <Text
-        className='title'
-        variant={TextVariantEnum.textHeading1}
-        color={theme.user.headinTextColor}
-      >
-        {title}
-      </Text>
-      <ButtonsControl>
-        <Button priority='primary'>
-          <Text variant={TextVariantEnum.textBody2}>{t('user:create_resume')}</Text>
-        </Button>
-        <Button priority='primary'>
-          <Text variant={TextVariantEnum.textBody2}>{t('user:create_vacancy')}</Text>
-        </Button>
-      </ButtonsControl>
-    </BoxHeading>
-  );
-});
+    return (
+      <BoxHeading>
+        <Text
+          className='title'
+          variant={TextVariantEnum.textHeading1}
+          color={theme.user.headinTextColor}
+        >
+          {title}
+        </Text>
+        <ButtonsControl>
+          {variant !== 'vacancies' && (
+            <Button priority='primary'>
+              <Text variant={TextVariantEnum.textBody2}>{t('user:create_resume')}</Text>
+            </Button>
+          )}
+          {variant !== 'resumes' && (
+            <Button priority='primary'>
+              <Text variant={TextVariantEnum.textBody2}>{t('user:create_vacancy')}</Text>
+            </Button>
+          )}
+        </ButtonsControl>
+      </BoxHeading>
+    );
+  },
+);

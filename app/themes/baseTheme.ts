@@ -45,6 +45,13 @@ export function getTheme(palette: IPalette): ITheme {
         iconDisable: palette.darken.darken2.darken2_variant2,
       },
     },
+    switcher: {
+      backgroundDefault: palette.darken.darken2.darken2_variant2,
+      backgroundChecked: palette.accent.accent1.accent1_base,
+      textCheckedColor: palette.neutral.neutral1,
+      textDefaultColor: palette.darken.darken2.darken2_base,
+      backgroundTogglerColor: palette.neutral.neutral1,
+    },
     inputs: {
       borderColor: palette.darken.darken1.darken1_variant1,
       borderFocusColor: palette.accent.accent1.accent1_base,

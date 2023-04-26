@@ -22,6 +22,8 @@ export const IconEnum = {
   google: 'google',
   fb: 'fb',
   arrowLeft: 'arrowLeft',
+  cart: 'cart',
+  copy: 'copy',
 } as const;
 
 export type IconEnum = ValueOf<typeof IconEnum>;

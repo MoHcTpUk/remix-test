@@ -7,7 +7,7 @@ import { Modal } from '~/components/common/Modal';
 import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 import { useApp } from '~/hooks';
-import type { IForgotPasswordResponse } from '~/routes/auth.forgot-password';
+import type { IForgotPasswordResponse } from '~/routes/auth/forgot-password';
 
 import { BoxContainer, BoxTextWrapper } from './styles';
 
