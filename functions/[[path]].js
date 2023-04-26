@@ -36239,6 +36239,690 @@ __export(routes_exports, {
 var import_cloudflare7 = __toESM(require_dist());
 init_esm2();
 
+// shared/client.ts
+var HttpClient = class {
+  constructor(apiConfig = {}) {
+    this.baseUrl = "http://upjob.com/api/v1";
+    this.securityData = null;
+    this.abortControllers = /* @__PURE__ */ new Map();
+    this.customFetch = (...fetchParams) => fetch(...fetchParams);
+    this.baseApiParams = {
+      credentials: "same-origin",
+      headers: {},
+      redirect: "follow",
+      referrerPolicy: "no-referrer"
+    };
+    this.setSecurityData = (data2) => {
+      this.securityData = data2;
+    };
+    this.contentFormatters = {
+      ["application/json" /* Json */]: (input) => input !== null && (typeof input == "object" || typeof input == "string") ? JSON.stringify(input) : input,
+      ["text/plain" /* Text */]: (input) => input !== null && typeof input != "string" ? JSON.stringify(input) : input,
+      ["multipart/form-data" /* FormData */]: (input) => Object.keys(input || {}).reduce((formData, key2) => {
+        let property = input[key2];
+        return formData.append(
+          key2,
+          property instanceof Blob ? property : typeof property == "object" && property !== null ? JSON.stringify(property) : `${property}`
+        ), formData;
+      }, new FormData()),
+      ["application/x-www-form-urlencoded" /* UrlEncoded */]: (input) => this.toQueryString(input)
+    };
+    this.createAbortSignal = (cancelToken) => {
+      if (this.abortControllers.has(cancelToken)) {
+        let abortController2 = this.abortControllers.get(cancelToken);
+        return abortController2 ? abortController2.signal : void 0;
+      }
+      let abortController = new AbortController();
+      return this.abortControllers.set(cancelToken, abortController), abortController.signal;
+    };
+    this.abortRequest = (cancelToken) => {
+      let abortController = this.abortControllers.get(cancelToken);
+      abortController && (abortController.abort(), this.abortControllers.delete(cancelToken));
+    };
+    this.request = async ({
+      body,
+      secure,
+      path: path2,
+      type: type2,
+      query,
+      format: format2,
+      baseUrl,
+      cancelToken,
+      ...params
+    }) => {
+      let secureParams = (typeof secure == "boolean" ? secure : this.baseApiParams.secure) && this.securityWorker && await this.securityWorker(this.securityData) || {}, requestParams = this.mergeRequestParams(params, secureParams), queryString = query && this.toQueryString(query), payloadFormatter = this.contentFormatters[type2 || "application/json" /* Json */], responseFormat = format2 || requestParams.format;
+      return this.customFetch(
+        `${baseUrl || this.baseUrl || ""}${path2}${queryString ? `?${queryString}` : ""}`,
+        {
+          ...requestParams,
+          headers: {
+            ...requestParams.headers || {},
+            ...type2 && type2 !== "multipart/form-data" /* FormData */ ? { "Content-Type": type2 } : {}
+          },
+          signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
+          body: typeof body > "u" || body === null ? null : payloadFormatter(body)
+        }
+      ).then(async (response) => {
+        let r3 = response;
+        r3.data = null, r3.error = null;
+        let data2 = responseFormat ? await response[responseFormat]().then((data3) => (r3.ok ? r3.data = data3 : r3.error = data3, r3)).catch((e3) => (r3.error = e3, r3)) : r3;
+        if (cancelToken && this.abortControllers.delete(cancelToken), !response.ok)
+          throw data2;
+        return data2;
+      });
+    };
+    Object.assign(this, apiConfig);
+  }
+  encodeQueryParam(key2, value2) {
+    return `${encodeURIComponent(key2)}=${encodeURIComponent(typeof value2 == "number" ? value2 : `${value2}`)}`;
+  }
+  addQueryParam(query, key2) {
+    return this.encodeQueryParam(key2, query[key2]);
+  }
+  addArrayQueryParam(query, key2) {
+    return query[key2].map((v2) => this.encodeQueryParam(key2, v2)).join("&");
+  }
+  toQueryString(rawQuery) {
+    let query = rawQuery || {};
+    return Object.keys(query).filter((key2) => typeof query[key2] < "u").map(
+      (key2) => Array.isArray(query[key2]) ? this.addArrayQueryParam(query, key2) : this.addQueryParam(query, key2)
+    ).join("&");
+  }
+  addQueryParams(rawQuery) {
+    let queryString = this.toQueryString(rawQuery);
+    return queryString ? `?${queryString}` : "";
+  }
+  mergeRequestParams(params1, params2) {
+    return {
+      ...this.baseApiParams,
+      ...params1,
+      ...params2 || {},
+      headers: {
+        ...this.baseApiParams.headers || {},
+        ...params1.headers || {},
+        ...params2 && params2.headers || {}
+      }
+    };
+  }
+}, Api = class extends HttpClient {
+  constructor() {
+    super(...arguments);
+    this.citizenship = {
+      citizenshipList: (query, params = {}) => this.request({
+        path: "/citizenship",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      })
+    };
+    this.companies = {
+      companiesList: (query, params = {}) => this.request({
+        path: "/companies",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      companiesCreate: (request, params = {}) => this.request({
+        path: "/companies",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      companiesDetail: (id4, params = {}) => this.request({
+        path: `/companies/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      companiesDelete: (id4, params = {}) => this.request({
+        path: `/companies/${id4}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      })
+    };
+    this.complianceOfRequirements = {
+      complianceOfRequirementsList: (params = {}) => this.request({
+        path: "/compliance-of-requirements",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.countries = {
+      countriesList: (params = {}) => this.request({
+        path: "/countries",
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      regionsDetail: (countryId, params = {}) => this.request({
+        path: `/countries/${countryId}/regions`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      regionsLocationDetail: (countryId, regionId, params = {}) => this.request({
+        path: `/countries/${countryId}/regions/${regionId}/location`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.currency = {
+      currencyList: (params = {}) => this.request({
+        path: "/currency",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.drivingLicenses = {
+      drivingLicensesList: (params = {}) => this.request({
+        path: "/driving-licenses",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.educationLevel = {
+      educationLevelList: (params = {}) => this.request({
+        path: "/education-level",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.emailNotificationsSettings = {
+      emailNotificationsSettingsList: (params = {}) => this.request({
+        path: "/email-notifications-settings",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.employee = {
+      numbersList: (params = {}) => this.request({
+        path: "/employee/numbers",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.employments = {
+      employmentsList: (params = {}) => this.request({
+        path: "/employments",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.faq = {
+      getFaq: (query, params = {}) => this.request({
+        path: "/faq",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      })
+    };
+    this.feedback = {
+      feedbackCreate: (request, params = {}) => this.request({
+        path: "/feedback",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      })
+    };
+    this.file = {
+      uploadCreate: (data2, params = {}) => this.request({
+        path: "/file/upload",
+        method: "POST",
+        body: data2,
+        type: "multipart/form-data" /* FormData */,
+        format: "json",
+        ...params
+      })
+    };
+    this.genders = {
+      gendersList: (params = {}) => this.request({
+        path: "/genders",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.init = {
+      indexList: (params = {}) => this.request({
+        path: "/init/index",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.jobTypes = {
+      jobTypesList: (params = {}) => this.request({
+        path: "/job-types",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.languageLevel = {
+      languageLevelList: (params = {}) => this.request({
+        path: "/language-level",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.languages = {
+      languagesList: (params = {}) => this.request({
+        path: "/languages",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.location = {
+      locationList: (query, params = {}) => this.request({
+        path: "/location",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      })
+    };
+    this.maritalStatuses = {
+      maritalStatusesList: (params = {}) => this.request({
+        path: "/marital-statuses",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.materials = {
+      articlesList: (query, params = {}) => this.request({
+        path: "/materials/articles",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      articlesDetail: (id4, params = {}) => this.request({
+        path: `/materials/articles/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      newsList: (query, params = {}) => this.request({
+        path: "/materials/news",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      newsDetail: (id4, params = {}) => this.request({
+        path: `/materials/news/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.payoutPeriods = {
+      payoutPeriodsList: (params = {}) => this.request({
+        path: "/payout-periods",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.religions = {
+      religionsList: (params = {}) => this.request({
+        path: "/religions",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.relocations = {
+      relocationsList: (params = {}) => this.request({
+        path: "/relocations",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.requirementsLevel = {
+      requirementsLevelList: (params = {}) => this.request({
+        path: "/requirements-level",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.responseCanBeDoneBy = {
+      responseCanBeDoneByList: (params = {}) => this.request({
+        path: "/response-can-be-done-by",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.resume = {
+      resumeCreate: (request, params = {}) => this.request({
+        path: "/resume",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      })
+    };
+    this.resumes = {
+      resumesList: (query, params = {}) => this.request({
+        path: "/resumes",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      requestPersonalDataDetail: (id4, query, params = {}) => this.request({
+        path: `/resumes/request-personal-data/${id4}`,
+        method: "GET",
+        query,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      resumesDetail: (id4, params = {}) => this.request({
+        path: `/resumes/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      resumesDelete: (id4, params = {}) => this.request({
+        path: `/resumes/${id4}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      }),
+      copyCreate: (id4, params = {}) => this.request({
+        path: `/resumes/${id4}/copy`,
+        method: "POST",
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      provideDetail: (id4, query, params = {}) => this.request({
+        path: `/resumes/${id4}/provide`,
+        method: "GET",
+        query,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      publishCreate: (id4, params = {}) => this.request({
+        path: `/resumes/${id4}/publish`,
+        method: "POST",
+        format: "json",
+        ...params
+      }),
+      unpublishCreate: (id4, params = {}) => this.request({
+        path: `/resumes/${id4}/unpublish`,
+        method: "POST",
+        format: "json",
+        ...params
+      })
+    };
+    this.showEmail = {
+      showEmailList: (params = {}) => this.request({
+        path: "/show-email",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.showPhoneNumber = {
+      showPhoneNumberList: (params = {}) => this.request({
+        path: "/show-phone-number",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.skills = {
+      skillsList: (query, params = {}) => this.request({
+        path: "/skills",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      })
+    };
+    this.sourceOfInformation = {
+      sourceOfInformationList: (params = {}) => this.request({
+        path: "/source_of_information",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.specializations = {
+      specializationsList: (query, params = {}) => this.request({
+        path: "/specializations",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      jobPositionsDetail: (specializationId, query, params = {}) => this.request({
+        path: `/specializations/${specializationId}/job-positions`,
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      })
+    };
+    this.staticPages = {
+      staticPagesDetail: (urn, params = {}) => this.request({
+        path: `/static-pages/${urn}`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.userService = {
+      forgotPasswordCreate: (request, params = {}) => this.request({
+        path: "/user-service/forgot-password",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        ...params
+      }),
+      forgotPasswordVerifyDetail: (secret, params = {}) => this.request({
+        path: `/user-service/forgot-password-verify/${secret}`,
+        method: "GET",
+        ...params
+      }),
+      infoList: (params = {}) => this.request({
+        path: "/user-service/info",
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      infoUpdate: (request, params = {}) => this.request({
+        path: "/user-service/info",
+        method: "PUT",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      infoDetail: (id4, params = {}) => this.request({
+        path: `/user-service/info/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      loginCreate: (request, params = {}) => this.request({
+        path: "/user-service/login",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      loginFacebookList: (params = {}) => this.request({
+        path: "/user-service/login/facebook",
+        method: "GET",
+        ...params
+      }),
+      loginGoogleList: (params = {}) => this.request({
+        path: "/user-service/login/google",
+        method: "GET",
+        ...params
+      }),
+      logoutCreate: (params = {}) => this.request({
+        path: "/user-service/logout",
+        method: "POST",
+        ...params
+      }),
+      getUserService: (params = {}) => this.request({
+        path: "/user-service/me",
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      registrationCreate: (request, params = {}) => this.request({
+        path: "/user-service/registration",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      registrationConfirmDetail: (hash, params = {}) => this.request({
+        path: `/user-service/registration/confirm/${hash}`,
+        method: "GET",
+        ...params
+      }),
+      registrationFacebookCallbackList: (query, params = {}) => this.request({
+        path: "/user-service/registration/facebook/callback",
+        method: "GET",
+        query,
+        ...params
+      }),
+      registrationGoogleCallbackList: (query, params = {}) => this.request({
+        path: "/user-service/registration/google/callback",
+        method: "GET",
+        query,
+        ...params
+      }),
+      resetPasswordCreate: (request, params = {}) => this.request({
+        path: "/user-service/reset-password",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        ...params
+      })
+    };
+    this.vacancies = {
+      vacanciesList: (query, params = {}) => this.request({
+        path: "/vacancies",
+        method: "GET",
+        query,
+        format: "json",
+        ...params
+      }),
+      requestPersonalDataDetail: (id4, query, params = {}) => this.request({
+        path: `/vacancies/request-personal-data/${id4}`,
+        method: "GET",
+        query,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      vacanciesDetail: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+      vacanciesDelete: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      }),
+      archiveCreate: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}/archive`,
+        method: "POST",
+        format: "json",
+        ...params
+      }),
+      provideDetail: (id4, query, params = {}) => this.request({
+        path: `/vacancies/${id4}/provide`,
+        method: "GET",
+        query,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      }),
+      publishCreate: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}/publish`,
+        method: "POST",
+        format: "json",
+        ...params
+      }),
+      unarchiveCreate: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}/unarchive`,
+        method: "POST",
+        format: "json",
+        ...params
+      }),
+      unpublishCreate: (id4, params = {}) => this.request({
+        path: `/vacancies/${id4}/unpublish`,
+        method: "POST",
+        format: "json",
+        ...params
+      })
+    };
+    this.vacancy = {
+      vacancyCreate: (request, params = {}) => this.request({
+        path: "/vacancy",
+        method: "POST",
+        body: request,
+        type: "application/json" /* Json */,
+        format: "json",
+        ...params
+      })
+    };
+    this.workFeatures = {
+      workFeaturesList: (params = {}) => this.request({
+        path: "/work-features",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+    this.yearsOfExperience = {
+      yearsOfExperienceList: (params = {}) => this.request({
+        path: "/years-of-experience",
+        method: "GET",
+        format: "json",
+        ...params
+      })
+    };
+  }
+};
+
 // app/components/pages/HomePage/index.tsx
 var import_react64 = __toESM(require_react());
 
@@ -40378,20 +41062,20 @@ var import_jsx_dev_runtime44 = __toESM(require_jsx_dev_runtime()), HomePage = (0
 var import_jsx_dev_runtime45 = __toESM(require_jsx_dev_runtime()), loader4 = async ({
   request
 }) => {
-  let res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  let response = await new Api().materials.newsList(), res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
   return (0, import_cloudflare7.json)(await res.text());
 };
 function Index3() {
   let data2 = useLoaderData2();
   return console.warn(data2), /* @__PURE__ */ (0, import_jsx_dev_runtime45.jsxDEV)(HomePage, { news: [] }, void 0, !1, {
     fileName: "app/routes/index.tsx",
-    lineNumber: 25,
+    lineNumber: 24,
     columnNumber: 10
   }, this);
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "35f75638", entry: { module: "/build/entry.client-BO7O7ZGA.js", imports: ["/build/_shared/chunk-K3XNAXQX.js", "/build/_shared/chunk-OF2VCJAG.js", "/build/_shared/chunk-AAZ33T2Z.js", "/build/_shared/chunk-CUPSZOF3.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-6VGX5E3F.js", imports: ["/build/_shared/chunk-CADVNLEE.js", "/build/_shared/chunk-P24T54YX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/account/index": { id: "routes/account/index", parentId: "root", path: "account", index: !0, caseSensitive: void 0, module: "/build/routes/account/index-NEEQ6TL2.js", imports: ["/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/actions/set-user-context": { id: "routes/actions/set-user-context", parentId: "root", path: "actions/set-user-context", index: void 0, caseSensitive: void 0, module: "/build/routes/actions/set-user-context-H2FRT7H5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/login": { id: "routes/auth/login", parentId: "root", path: "auth/login", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/login-OOA3Y7FJ.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-E5YLFAYA.js", imports: ["/build/_shared/chunk-KGWUFLIU.js", "/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-2OOYYXU4.js", imports: ["/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/ui/index": { id: "routes/ui/index", parentId: "root", path: "ui", index: !0, caseSensitive: void 0, module: "/build/routes/ui/index-X5GYHKXG.js", imports: ["/build/_shared/chunk-KGWUFLIU.js", "/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-35F75638.js" };
+var assets_manifest_default = { version: "4967d07c", entry: { module: "/build/entry.client-BO7O7ZGA.js", imports: ["/build/_shared/chunk-K3XNAXQX.js", "/build/_shared/chunk-OF2VCJAG.js", "/build/_shared/chunk-AAZ33T2Z.js", "/build/_shared/chunk-CUPSZOF3.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-6VGX5E3F.js", imports: ["/build/_shared/chunk-CADVNLEE.js", "/build/_shared/chunk-P24T54YX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/account/index": { id: "routes/account/index", parentId: "root", path: "account", index: !0, caseSensitive: void 0, module: "/build/routes/account/index-NEEQ6TL2.js", imports: ["/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/actions/set-user-context": { id: "routes/actions/set-user-context", parentId: "root", path: "actions/set-user-context", index: void 0, caseSensitive: void 0, module: "/build/routes/actions/set-user-context-H2FRT7H5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/login": { id: "routes/auth/login", parentId: "root", path: "auth/login", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/login-OOA3Y7FJ.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-4OHAVEXD.js", imports: ["/build/_shared/chunk-KGWUFLIU.js", "/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-2OOYYXU4.js", imports: ["/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/ui/index": { id: "routes/ui/index", parentId: "root", path: "ui", index: !0, caseSensitive: void 0, module: "/build/routes/ui/index-X5GYHKXG.js", imports: ["/build/_shared/chunk-KGWUFLIU.js", "/build/_shared/chunk-KQVSHBGD.js", "/build/_shared/chunk-3LQHUPDF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-4967D07C.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_postcss: !1, unstable_tailwind: !0, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_normalizeFormMethod: !1, v2_routeConvention: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

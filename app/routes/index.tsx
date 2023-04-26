@@ -5,8 +5,8 @@ import { Api } from 'shared/client';
 import { HomePage } from '~/components/pages/HomePage';
 
 export const loader = async ({ request }: LoaderArgs) => {
-  // const client = new Api();
-  // const response = await client.materials.newsList();
+  const client = new Api();
+  const response = await client.materials.newsList();
 
   const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
   return json(await res.text());
