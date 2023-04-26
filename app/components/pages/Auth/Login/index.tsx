@@ -1,16 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-
-import { useNavigate, useActionData, Form, Link, useFetcher } from '@remix-run/react';
+import { useEffect, useRef } from 'react';
+import { Link, useFetcher } from '@remix-run/react';
 import { Modal } from '~/components/common/Modal';
 import { Input } from '~/components/common/Input';
 import { useApp } from '~/hooks';
 import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
-import { Box } from '~/components/common/Box';
 import Button from '~/components/common/Button';
 import { IconEnum } from 'public/enums/iconEnum';
-import { Icon } from '~/components/common/Icon';
-import styled from 'styled-components';
 import { BoxContainer, BoxForm, BoxHelp, BoxSocial, HelpButton, PoliciesText } from './styles';
 
 export default function Login({

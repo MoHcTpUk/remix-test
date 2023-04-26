@@ -1,5 +1,8 @@
-import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
-import { badRequest } from '~/utils/request.server';
+import type { ActionArgs } from '@remix-run/cloudflare';
+import { redirect } from '@remix-run/cloudflare';
+import type { EntitySignInRequest } from 'shared/client';
+import { Api } from 'shared/client';
+import { badRequest, } from '~/utils/request.server';
 
 function validateEmail(email: unknown) {
   if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
@@ -15,9 +18,8 @@ function validatePassword(password: unknown) {
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
-  const email = form.get('email');
-  const password = form.get('password');
-  const fields = { email, password };
+  const email = form.get('email')?.toString();
+  const password = form.get('password')?.toString();
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
@@ -27,30 +29,25 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 
-  const fieldErrors = {
-    email: validateEmail(email),
-    password: validatePassword(password),
-  };
+  // const fieldErrors = {
+  //   email: validateEmail(email),
+  //   password: validatePassword(password),
+  // };
 
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, fields, formError: null });
-  }
+  // if (Object.values(fieldErrors).some(Boolean)) {
+  //   return badRequest({ fieldErrors, fields, formError: null });
+  // }
+
+  const creds: EntitySignInRequest = { email, password };
 
   try {
-    // добавить в env process.env.BASE_HOST
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    const requestOptions: Request | RequestInit | undefined = {
-      method: 'POST',
-      headers: myHeaders,
-      body: JSON.stringify(fields),
-      redirect: 'follow',
-    };
-
-    const data = await fetch(`https://upjob.com/api/v1/user-service/login`, requestOptions);
-
-    const sessionCookie = data.headers.get('Set-Cookie');
+    const client = new Api()
+    // dirt hack to bypass issue when swagger generator make only http client but server require https
+    client.baseUrl = 'https://upjob.com/api/v1'
+    const signInResult = await client.userService.loginCreate(creds)
+    const sessionCookie = signInResult.headers.get('Set-Cookie');
     const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
+
     return redirect('/account', {
       status: 302,
       headers,
@@ -58,7 +55,7 @@ export const action = async ({ request }: ActionArgs) => {
   } catch (error) {
     return badRequest({
       fieldErrors: null,
-      fields,
+      fields: creds,
       formError: `Username/Password combination is incorrect`,
     });
   }
