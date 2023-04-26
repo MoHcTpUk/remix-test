@@ -5,3 +5,5 @@ import { json } from '@remix-run/cloudflare';
  * 400 Bad Request, to the client.
  */
 export const badRequest = <T>(data: T) => json<T>(data, { status: 400 });
+
+export const noContent = () => json({}, { status: 204 });
