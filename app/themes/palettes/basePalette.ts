@@ -13,8 +13,6 @@ export const basePalette: IPalette = {
       darken1_base: '#454857',
       darken1_variant1: '#7D7F89',
       darken1_variant2: '#A2A3AB',
-      darken1_variant3: 'rgba(69, 72, 87, 0.12)',
-      darken1_variant4: 'rgba(69, 72, 87, 0.08)',
     },
     darken2: {
       darken2_base: '#566178',
@@ -35,9 +33,5 @@ export const basePalette: IPalette = {
     },
     accent2: '#3B67C0', // Vasil dark
     accent3: '#E5E8F9',
-  },
-
-  error: {
-    error_base: '#BA2320',
   },
 };

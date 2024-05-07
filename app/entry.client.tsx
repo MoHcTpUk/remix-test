@@ -1,14 +1,13 @@
 import { RemixBrowser } from '@remix-run/react';
-import i18next from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-http-backend';
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { I18nextProvider, initReactI18next } from 'react-i18next';
-import { getInitialNamespaces } from 'remix-i18next';
-
 import i18n from './i18n/i18n';
-import resources from './i18n/i18next.resources';
+import i18next from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
+import { getInitialNamespaces } from 'remix-i18next';
+import resources from './i18n/i18next.resources'
 
 async function hydrate() {
   await i18next
@@ -38,11 +37,9 @@ async function hydrate() {
 }
 
 if (window.requestIdleCallback) {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   window.requestIdleCallback(hydrate);
 } else {
   // Safari doesn't support requestIdleCallback
   // https://caniuse.com/requestidlecallback
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   window.setTimeout(hydrate, 1);
 }

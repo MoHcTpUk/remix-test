@@ -1,19 +1,11 @@
 import { IconEnum } from 'public/enums/iconEnum';
-
+import { Box, BoxProps } from '../Box';
 import { useApp } from '~/hooks';
-
-import type { BoxProps } from '../Box';
-import { Box } from '../Box';
-import SvgArrowLeft from '../Icons/ArrowLeft';
 import SvgBell from '../Icons/Bell';
 import SvgBellPush from '../Icons/BellPush';
-import SvgCart from '../Icons/Cart';
 import SvgClose from '../Icons/Close';
-import SvgCopy from '../Icons/Copy';
 import SvgDown from '../Icons/Down';
 import SvgEmail from '../Icons/Email';
-import SvgFb from '../Icons/Fb';
-import SvgGoogle from '../Icons/Google';
 import SvgLeft from '../Icons/Left';
 import SvgLeftLine from '../Icons/LeftLine';
 import SvgMap from '../Icons/Map';
@@ -23,6 +15,8 @@ import SvgRight from '../Icons/Right';
 import SvgSearch from '../Icons/Search';
 import SvgShow from '../Icons/Show';
 import SvgUp from '../Icons/Up';
+import SvgGoogle from '../Icons/Google';
+import SvgFb from '../Icons/Fb';
 
 export type IconNamedProps = {
   name: IconEnum | string;
@@ -108,17 +102,7 @@ function IconNamed({ name, color, size = 24, className = '' }: IconNamedProps): 
     case IconEnum.fb:
       return <SvgFb {...props} />;
 
-    case IconEnum.arrowLeft:
-      return <SvgArrowLeft {...props} />;
-
-    case IconEnum.cart:
-      return <SvgCart {...props} />;
-
-    case IconEnum.copy:
-      return <SvgCopy {...props} />;
-
     default:
-      // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
   }
 }

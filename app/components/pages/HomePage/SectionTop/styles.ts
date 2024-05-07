@@ -6,13 +6,13 @@ export const WrapperSection = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url('/images/homePage/backgroundSectionTop.jpg') no-repeat;
+  background: url('images/homePage/backgroundSectionTop.jpg') no-repeat;
   background-size: cover;
   background-repeat: round;
   padding: 32px 16px 40px 16px;
   gap: 16px;
   @media (min-width: 768px) {
-    background: url('/images/homePage/backgroundSectionTopTablet.jpg');
+    background: url('images/homePage/backgroundSectionTopTablet.jpg');
     background-size: cover;
     background-repeat: round;
     padding: 94px 44px 130px;
@@ -24,7 +24,7 @@ export const WrapperSection = styled.div`
   }
 
   @media (min-width: 1280px) {
-    background: url('/images/homePage/backgroundSectionTopDestop.jpg');
+    background: url('images/homePage/backgroundSectionTopDestop.jpg');
     background-size: cover;
     background-repeat: round;
   }

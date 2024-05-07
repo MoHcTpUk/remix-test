@@ -1,7 +1,6 @@
 export interface ITheme {
   backgroundColor: string;
   defaultTextColor: string;
-  errorTextColor: string;
   buttons: {
     primary: {
       backgroundColor: string;
@@ -28,7 +27,6 @@ export interface ITheme {
       activeBorderColor: string;
     };
     small: {
-      textColor: string;
       backgroundColor: string;
       borderColor: string;
       hoverBackgroundColor: string;
@@ -40,13 +38,6 @@ export interface ITheme {
       iconColorHover: string;
       iconDisable: string;
     };
-  };
-  switcher: {
-    backgroundDefault: string;
-    backgroundChecked: string;
-    textDefaultColor: string;
-    textCheckedColor: string;
-    backgroundTogglerColor: string;
   };
   inputs: {
     borderColor: string;
@@ -136,13 +127,5 @@ export interface ITheme {
     benefitHeaderColor: string;
     benefitBodyColorSmall: string;
     benefitBodyColor: string;
-  };
-  user: {
-    headinTextColor: string;
-    backgroundPageColor: string;
-    backgroundCardColor: string;
-    borderColor: string;
-    descriptionTextColor: string;
-    iconColor: string;
   };
 }

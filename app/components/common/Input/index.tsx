@@ -1,104 +1,82 @@
-import { IconEnum } from 'public/enums/iconEnum';
-import { RefObject, useEffect, useRef } from 'react';
-
-import { useApp } from '~/hooks';
-
-import { Icon } from '../Icon';
+import styled, { CSSProperties } from 'styled-components';
+import { useState } from 'react';
 import { Text } from '../Text';
-import { TextVariantEnum } from '../Text/enums';
-import {
-  BoxErrors,
-  ButtonClear,
-  InputComponent,
-  PlaceHolder,
-  Wrapper,
-  WrapperInner,
-} from './styles';
+import { InputComponent, PlaceHolder, WrapperInput } from './styles';
 
 export type InputProps = {
   value?: string;
   id: string;
+  // onChange?: (nextValue: string) => void;
   placeholder?: string;
+  className?: string;
   errorText?: string;
+  inputClass?: string;
+  placeholderClass?: string;
+  textariaClass?: string;
+  style?: CSSProperties;
   disabled?: boolean;
   htmlType?: HTMLInputElement['type'];
   variant?: 'default' | 'password' | 'search';
   background?: string;
   name?: string;
-  textHelper?: string;
 };
 
-export function Input({
+export const Input = ({
   id,
-  value = '',
+  value,
+  // onChange,
   placeholder,
+  className,
   errorText,
+  style,
   disabled,
+  inputClass,
+  placeholderClass,
+  textariaClass,
   name,
   htmlType = 'text',
   variant,
   background,
-  textHelper,
-}: InputProps) {
-  // const [type, setType] = useState(htmlType);
+}: InputProps) => {
+  const [type, setType] = useState(htmlType);
 
-  const { theme } = useApp();
-
-  // // скрыть/показать пароль
-  // const handlePassword = () => {
-  //   if (type === 'password') {
-  //     setType(() => 'text');
-  //   } else {
-  //     setType(() => 'password');
-  //   }
+  // const custom = {
+  //   onChange: (ev: React.ChangeEvent<HTMLInputElement>) => {
+  //     if (onChange) {
+  //       onChange(ev.target.value);
+  //     } else {
+  //       // eslint-disable-next-line no-console
+  //       console.log(ev.target.value);
+  //     }
+  //   },
+  //   value,
   // };
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = value;
+  // скрыть/показать пароль
+  const handlePassword = () => {
+    if (type === 'password') {
+      setType(() => 'text');
+    } else {
+      setType(() => 'password');
     }
-  }, [value]);
-
-  function clearInput() {
-    if (inputRef.current) {
-      inputRef.current.value = '';
-    }
-  }
+  };
 
   return (
-    <Wrapper>
-      <WrapperInner>
-        <InputComponent
-          ref={inputRef}
-          backgrond={background}
-          // type={type}
-          placeholder=' '
-          disabled={disabled}
-          id={id}
-          name={name}
-          error={Boolean(errorText)}
-        />
-        {placeholder && variant !== 'search' && (
-          <PlaceHolder htmlFor={id} className='placeholder'>
-            {placeholder}
-          </PlaceHolder>
-        )}
-        <ButtonClear onClick={() => clearInput()}>
-          <Icon name={IconEnum.close} />
-        </ButtonClear>
-      </WrapperInner>
-      <BoxErrors isText={Boolean(errorText) || Boolean(textHelper)}>
-        {Boolean(errorText) && (
-          <Text variant={TextVariantEnum.textSmall} color={theme.errorTextColor}>
-            {errorText}
-          </Text>
-        )}
-        {!errorText && Boolean(textHelper) && (
-          <Text variant={TextVariantEnum.textSmall}>{textHelper}</Text>
-        )}
-      </BoxErrors>
-    </Wrapper>
+    <WrapperInput>
+      <InputComponent
+        backgrond={background}
+        type={type}
+        placeholder=' '
+        disabled={disabled}
+        id={id}
+        name={name}
+      ></InputComponent>
+      {placeholder && variant !== 'search' && (
+        <PlaceHolder htmlFor={id} className='placeholder'>
+          {placeholder}
+        </PlaceHolder>
+      )}
+      {Boolean(errorText) && <Text>{errorText}</Text>}
+    </WrapperInput>
   );
-}
+};

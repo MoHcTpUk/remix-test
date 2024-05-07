@@ -1,6 +1,5 @@
 import { LanguageEnum } from 'public/enums/languageEnum';
 import styled from 'styled-components';
-
 import { Text } from '~/components/common/Text';
 
 export const TextContainer = styled.div`
@@ -27,12 +26,12 @@ export const WrapperBanner = styled.div<{ lang?: LanguageEnum }>`
     display: flex;
     height: 560px;
     width: 100%;
-    background: url('/images/homePage/bannerTablet.jpg');
+    background: url('images/homePage/bannerTablet.jpg');
     background-size: cover;
     background-repeat: round;
   }
   @media (min-width: 1024px) {
-    background: url('/images/homePage/bannerTabletM.jpg');
+    background: url('images/homePage/bannerTabletM.jpg');
     background-size: cover;
     background-repeat: round;
   }
@@ -40,8 +39,8 @@ export const WrapperBanner = styled.div<{ lang?: LanguageEnum }>`
     height: 640px;
     background: ${({ lang }) =>
       lang === LanguageEnum.EN
-        ? "url('/images/homePage/bannerDesctopEn.jpg')"
-        : "url('/images/homePage/bannerDesctopTh.jpg')"};
+        ? "url('images/homePage/bannerDesctopEn.jpg')"
+        : "url('images/homePage/bannerDesctopTh.jpg')"};
     background-size: cover;
     background-repeat: round;
   }

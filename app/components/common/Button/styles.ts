@@ -1,20 +1,16 @@
+import { ButtonSizeEnum, ButtonPriorityEnum } from './enums';
 import styled, { css } from 'styled-components';
-
-import { ButtonPriorityEnum, ButtonSizeEnum } from './enums';
 import type { ButtonProps } from './index';
 
 export const Button = styled.button<ButtonProps>`
   cursor: pointer;
-  border-radius: ${({ onlyIcon }) => (onlyIcon ? '50%' : '80px')};
+  border-radius: 80px;
   display: flex;
   flex-direction: row;
   gap: 8px;
   justify-content: center;
   align-items: center;
-  width: ${({ fullwidth, onlyIcon }) =>
-    // eslint-disable-next-line no-nested-ternary
-    onlyIcon ? '40px' : fullwidth ? '100%' : 'fit-content'};
-  height: 40px;
+  width: ${({ fullwidth }) => (fullwidth ? '100%' : 'fit-content')};
   transition: all 0.1s ease-in;
   padding: ${({ size }) => (size === ButtonSizeEnum.M ? '15px 32px 14px' : '12px 20px 10px')};
   &:hover,
@@ -35,8 +31,6 @@ export const Button = styled.button<ButtonProps>`
       if (size === ButtonSizeEnum.M && !iconName) return '15px 32px 14px';
       if (size === ButtonSizeEnum.S && iconName) return '12px 20px 10px 16px';
       if (size === ButtonSizeEnum.S && !iconName) return '12px 20px 10px';
-
-      return '12px 20px 10px';
     }};
     &:hover {
       transform: scale(1);
@@ -44,30 +38,46 @@ export const Button = styled.button<ButtonProps>`
     &:active {
       transform: scale(0.95);
       span {
-        /* font-weight: 600; */
+        font-weight: 600;
       }
     }
   }
 
   @media (min-width: 1024px) {
     cursor: pointer;
-    padding: ${({ size, iconName }): string => {
+    padding: ${({ size, iconName }) => {
       if (size === ButtonSizeEnum.S && iconName) return '15px 32px 14px 56px';
       if (size === ButtonSizeEnum.S && !iconName) return '15px 32px 14px';
-
-      return '15px 32px 14px';
     }};
   }
 
   ${({ priority = ButtonPriorityEnum.primary, size = ButtonSizeEnum.M }) => {
     switch (priority) {
+      case ButtonPriorityEnum.primary:
+        return css`
+          background-color: ${({ theme }) => theme.buttons.primary.backgroundColor};
+          span {
+            color: ${({ theme }) => theme.buttons.primary.spanColor};
+          }
+          svg {
+            color: ${({ theme }) => theme.buttons.primary.iconColor};
+            &:hover,
+            &:focus {
+              color: ${({ theme }) => theme.buttons.primary.iconColorHover};
+            }
+          }
+          &:hover,
+          &:focus {
+            background-color: ${({ theme }) => theme.buttons.primary.focusBackgroundColor};
+          }
+        `;
       case ButtonPriorityEnum.small:
         return css`
           background-color: ${({ theme }) => theme.buttons.small.backgroundColor};
           border: 1px solid ${({ theme }) => theme.buttons.small.borderColor};
           padding: 10px 20px;
           span {
-            color: ${({ theme }) => theme.buttons.small.textColor};
+            color: ${({ theme }) => theme.buttons.small.borderColor};
           }
           svg {
             color: ${({ theme }) => theme.buttons.small.iconColor};
@@ -76,7 +86,7 @@ export const Button = styled.button<ButtonProps>`
             background-color: ${({ theme }) => theme.buttons.small.hoverBackgroundColor};
             border: 1px solid ${({ theme }) => theme.buttons.small.hoverBorderColor};
             span {
-              color: ${({ theme }) => theme.buttons.small.textColor};
+              color: ${({ theme }) => theme.buttons.small.hoverBorderSpanColor};
             }
             svg {
               color: ${({ theme }) => theme.buttons.small.iconColorHover};
@@ -132,30 +142,11 @@ export const Button = styled.button<ButtonProps>`
             border: 1px solid ${({ theme }) => theme.buttons.chips.focusSpanColor};
             span {
               color: ${({ theme }) => theme.buttons.chips.focusSpanColor};
-              /* font-weight: 600; */
+              font-weight: 600;
             }
           }
           @media (min-width: 768px) {
             padding: 12px 20px 8px;
-          }
-        `;
-      case ButtonPriorityEnum.primary:
-      default:
-        return css`
-          background-color: ${({ theme }) => theme.buttons.primary.backgroundColor};
-          span {
-            color: ${({ theme }) => theme.buttons.primary.spanColor};
-          }
-          svg {
-            color: ${({ theme }) => theme.buttons.primary.iconColor};
-            &:hover,
-            &:focus {
-              color: ${({ theme }) => theme.buttons.primary.iconColorHover};
-            }
-          }
-          &:hover,
-          &:focus {
-            background-color: ${({ theme }) => theme.buttons.primary.focusBackgroundColor};
           }
         `;
     }

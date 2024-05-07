@@ -1,20 +1,23 @@
-import type { ActionArgs } from '@remix-run/cloudflare';
-import { redirect } from '@remix-run/cloudflare';
-import type { IUser } from 'public/interfaces/iUserContext';
-import type { EntitySignInRequest } from 'shared/client/data-contracts';
-import { UserService } from 'shared/client/UserService';
-import Routes from 'shared/routing/routes';
-
-import { getSessionStorage } from '~/storages/session.server';
-import { getUserContextStorage } from '~/storages/userContext.server';
+import { ActionArgs, json, redirect } from '@remix-run/cloudflare';
 import { badRequest } from '~/utils/request.server';
-import { validateEmail, validatePassword } from '~/utils/validations';
+
+function validateEmail(email: unknown) {
+  if (typeof email !== 'string' || email.length < 3 || !email.includes('@')) {
+    return `Usernames must be at least 3 characters long`;
+  }
+}
+
+function validatePassword(password: unknown) {
+  if (typeof password !== 'string' || password.length < 6) {
+    return `Passwords must be at least 6 characters long`;
+  }
+}
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData();
-  const email = form.get('email')?.toString();
-  const password = form.get('password')?.toString();
-  const creds: EntitySignInRequest = { email, password };
+  const email = form.get('email');
+  const password = form.get('password');
+  const fields = { email, password };
 
   if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
@@ -30,47 +33,32 @@ export const action = async ({ request }: ActionArgs) => {
   };
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, creds, formError: null });
+    return badRequest({ fieldErrors, fields, formError: null });
   }
 
   try {
-    const client = new UserService();
-    const signInResult = await client.loginCreate(creds);
+    // добавить в env process.env.BASE_HOST
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    const requestOptions: Request | RequestInit | undefined = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(fields),
+      redirect: 'follow',
+    };
 
-    const sessionCookie = signInResult.headers.get('Set-Cookie');
-    const sessionStorage = await getSessionStorage(request);
-    const session = sessionStorage.getSession();
-    session.session = sessionCookie;
-    sessionStorage.setSession(session);
+    const data = await fetch(`https://upjob.com/api/v1/user-service/login`, requestOptions);
 
-    client.auth(session);
-    const userInfo = (await client.infoList()).data;
-    const userContextStorage = await getUserContextStorage(request);
-    const userContext = userContextStorage.getUserContext();
-
-    userContext.user = {
-      id: userInfo.id,
-      firstName: userInfo.firstName,
-      lastName: userInfo.lastName,
-      email: userInfo.email,
-      isAuthenticated: true,
-    } as IUser;
-
-    userContextStorage.setUserContext(userContext);
-
-    const headers: HeadersInit = new Headers();
-
-    headers.append('Set-Cookie', await userContextStorage.commit());
-    headers.append('Set-Cookie', await sessionStorage.commit());
-
-    return redirect(Routes.user.root, {
+    const sessionCookie = data.headers.get('Set-Cookie');
+    const headers: HeadersInit = sessionCookie ? { 'Set-Cookie': sessionCookie } : {};
+    return redirect('/account', {
       status: 302,
       headers,
     });
   } catch (error) {
     return badRequest({
       fieldErrors: null,
-      fields: creds,
+      fields,
       formError: `Username/Password combination is incorrect`,
     });
   }

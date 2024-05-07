@@ -1,15 +1,14 @@
 import { memo } from 'react';
-
-import Button from '~/components/common/Button';
 import { Text } from '~/components/common/Text';
-import { TextVariantEnum } from '~/components/common/Text/enums';
 import { Slider } from '~/components/lib/Slider';
-import { useApp } from '~/hooks';
-
-import { ButtonInner } from '../SectionNews/styles';
 import { ButtonWrapper, SliderContainer, TitleContainer, WrapperSection } from './styles';
+import { useApp } from '~/hooks';
+import { TextVariantEnum } from '~/components/common/Text/enums';
+import styled from 'styled-components';
+import Button from '~/components/common/Button';
+import { ButtonInner } from '../SectionNews/styles';
 
-export const SectionArticles = memo((): JSX.Element => {
+export const SectionArticles = memo(function HomePageMemoized(): JSX.Element {
   const { theme, t } = useApp();
 
   const temporaryNews = [
@@ -17,73 +16,73 @@ export const SectionArticles = memo((): JSX.Element => {
       id: '1',
       title: ' 1 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '2',
       title: '2 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '3',
       title: '3 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '4',
       title: '4 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '5',
       title: '5 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '6',
       title: '6 - Apple company-2',
       vacancies: 0,
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '7',
       title: ' 1 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '8',
       title: '2 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '9',
       title: '3 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '10',
       title: '4 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '11',
       title: '5 - The first Episode of NBT “Mee Kam Tob” Features MOL’s Liveasdas',
       date: '17.02.2023',
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
     {
       id: '12',
       title: '6 - Apple company-2',
       vacancies: 0,
-      image: '/images/homePage/new.png',
+      image: 'images/homePage/new.png',
     },
   ];
 

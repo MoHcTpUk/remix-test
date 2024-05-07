@@ -1,8 +1,3 @@
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-import type { LinksFunction, LoaderFunction } from '@remix-run/cloudflare';
 import {
   Links,
   LiveReload,
@@ -12,27 +7,28 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { LanguageEnum } from 'public/enums/languageEnum';
-import fonts from 'public/fonts/MeroThai/fonts.css';
-import type { IUserContext } from 'public/interfaces/iUserContext';
-import stylesConstants from 'public/styles/constants.css';
-import stylesGlobal from 'public/styles/globals.css';
-import stylesTailwind from 'public/styles/tailwind.css';
-import stylesDropdown from 'rc-dropdown/assets/index.css';
 import { useChangeLanguage } from 'remix-i18next';
+import stylesTailwind from 'public/styles/tailwind.css';
+import stylesGlobal from 'public/styles/globals.css';
+import fonts from 'public/fonts/MeroThai/fonts.css';
+import stylesConstants from 'public/styles/constants.css';
+import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/cloudflare';
 import { ThemeProvider } from 'styled-components';
-
 import { UserContextProvider } from '~/providers/userContextProvider';
-
+import type { IUserContext } from 'public/interfaces/iUserContext';
+import { getUserContextSession } from './userContext.server';
+import { LanguageEnum } from 'public/enums/languageEnum';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { useApp } from './hooks';
-import { getUserContextStorage } from './storages/userContext.server';
 
 export type LoaderData = {
   userContext: IUserContext | null;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userContextSession = await getUserContextStorage(request);
+  const userContextSession = await getUserContextSession(request);
 
   const data: LoaderData = {
     userContext: userContextSession.getUserContext(),
@@ -47,19 +43,17 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesTailwind },
   { rel: 'stylesheet', href: stylesGlobal },
   { rel: 'stylesheet', href: stylesConstants },
-  { rel: 'stylesheet', href: stylesDropdown },
   {
     rel: 'stylesheet',
     href: 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css',
   },
 ];
-export function meta() {
-  return [
-    { title: 'Search job app' },
-    { charset: 'utf-8' },
-    { viewport: 'width=device-width,initial-scale=1' },
-  ];
-}
+
+export const meta: MetaFunction = () => ({
+  charset: 'utf-8',
+  title: 'Search job app',
+  viewport: 'width=device-width,initial-scale=1',
+});
 
 function App() {
   const { userContext, theme, i18n } = useApp();
