@@ -1,0 +1,7 @@
+name: page_token
+in: query
+description: token for get next page
+required: false
+schema:
+  type: string
+  description: token for get next page

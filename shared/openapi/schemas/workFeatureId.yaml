@@ -1,0 +1,5 @@
+type: string
+format: uuid
+x-oapi-codegen-extra-tags:
+  json: work_feature_id,omitempty
+example: "cb8a3870-b274-423f-8f10-662d12777997"

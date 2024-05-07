@@ -1,0 +1,257 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Users API
+  description: Users API
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com
+paths:
+  /api/v2/users/me:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - user-service
+      summary: Get current user info
+      description: Request to get current user info
+      operationId: getUsersMe
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/UserInfo"
+                  error:
+                    type: object
+                required:
+                  - data
+    patch:
+      summary: Update current user info
+      description: Request to update current user info
+      operationId: patchUsersMe
+      requestBody:
+        description: Request to update current user info
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserInfo"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+      tags:
+        - user-service
+  /api/v2/users/{id}/resend-confirmation:
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Users
+      summary: Resend email confirmation
+      description: Request to resend email confirmation
+      operationId: postResendConfirmation
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  $ref: "./schemas/locale.yaml"
+      responses:
+        "204":
+          description: Successful
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+  /api/v2/users/{id}/sign-in:
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Users
+      security:
+        - cookieAuth: [ admin ]
+      summary: Sign in as root admin
+      operationId: postUsersSignIn
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "204":
+          description: Successful
+        "400":
+          description: BadRequest
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignInRequest"
+  /api/v2/users:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Users
+      security:
+        - cookieAuth: [ admin ]
+      summary: Returns a list of users
+      operationId: getUsers
+      responses:
+        "200":
+          description: A JSON array of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserInfo"
+                required:
+                  - data
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    UpdateUserInfo:
+      type: object
+      properties:
+        photo:
+          type: string
+          format: uri
+          example: "2023/4/S5gSf7.jpg"
+        first_name:
+          type: string
+          example: "Ainur"
+        last_name:
+          type: string
+          example: "Peretz"
+        gender:
+          type: string
+          format: uuid
+          example: "ccac9dea-5a03-4ce6-9ef5-a26090544f3e"
+        birthday:
+          type: string
+          format: date
+          nullable: true
+          example: "1990-05-06"
+        birthday_experimental:
+          $ref: "#/components/schemas/MultiDateValue"
+        phone:
+          type: string
+          example: "+79270000000"
+        primary_language:
+          type: string
+          format: uuid
+          example: "34e0f066-f0bf-426e-b4bd-492927202727"
+        notifications:
+          $ref: "#/components/schemas/Notifications"
+    UserInfo:
+      type: object
+      required:
+        - user_id
+        - photo
+        - first_name
+        - last_name
+        - email
+        - phone
+        - notifications
+        - email_confirmed
+      properties:
+        user_id:
+          $ref: "#/components/schemas/UserId"
+        photo:
+          type: string
+          format: uri
+          example: "2023/4/S5gSf7.jpg"
+        first_name:
+          type: string
+          example: "Ainur"
+        last_name:
+          type: string
+          example: "Peretz"
+        gender:
+          type: string
+          format: uuid
+          example: "ccac9dea-5a03-4ce6-9ef5-a26090544f3e"
+        birthday:
+          $ref: "#/components/schemas/MultiDateValue"
+        email:
+          type: string
+          example: "ainur.peretz@yahoo.com"
+          readOnly: true
+        phone:
+          type: string
+          example: "+79270000000"
+        primary_language:
+          type: string
+          format: uuid
+          example: "34e0f066-f0bf-426e-b4bd-492927202727"
+        notifications:
+          $ref: "#/components/schemas/Notifications"
+        email_confirmed:
+          type: boolean
+          example: true
+    UserId:
+      x-go-name: UserID
+      type: string
+      format: uuid
+      example: "a5a2cd36-54a9-41a2-b8de-b0dcbdf75acc"
+      readOnly: true
+    Notifications:
+      type: object
+      required:
+        - email
+        - phone
+      properties:
+        email:
+          type: boolean
+        phone:
+          type: boolean
+    SignInRequest:
+      type: object
+    MultiDateValue:
+      type: object
+      nullable: true
+      properties:
+        en:
+          type: string
+          format: date
+          example: "1990-05-06"
+        th:
+          type: string
+          format: date
+          example: "2533-05-06"
+  parameters:
+    ID:
+      name: id
+      in: path
+      description: user identification
+      required: true
+      schema:
+        $ref: "#/components/schemas/UserId"
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session

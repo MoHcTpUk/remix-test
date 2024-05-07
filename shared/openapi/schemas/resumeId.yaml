@@ -1,0 +1,4 @@
+x-go-name: ResumeID
+type: string
+format: uuid
+example: "2ccbc1c1-2323-49bc-8b98-8614a32dd223"

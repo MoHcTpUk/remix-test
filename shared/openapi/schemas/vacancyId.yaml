@@ -1,0 +1,4 @@
+x-go-name: VacancyID
+type: string
+format: uuid
+example: "9fe0763d-d934-4a2a-a120-6c412e7114f7"

@@ -1,0 +1,10 @@
+type: object
+properties:
+  en:
+    type: string
+    format: date
+    example: "1990-05-06"
+  th:
+    type: string
+    format: date
+    example: "2533-05-06"

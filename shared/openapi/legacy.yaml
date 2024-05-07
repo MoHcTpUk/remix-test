@@ -1,0 +1,1667 @@
+basePath: /api/v1
+definitions:
+  controllers.EmptyResponse:
+    type: object
+  entity.CommonDictionary:
+    properties:
+      en:
+        $ref: '#/definitions/entity.TitleField'
+      id:
+        example: 5915aea0-cc50-48a0-9052-fa1593724ec7
+        type: string
+      th:
+        $ref: '#/definitions/entity.TitleField'
+    type: object
+  entity.Company:
+    properties:
+      address:
+        example: 9/123-124 Moo1
+        type: string
+      canEdit:
+        example: true
+        type: boolean
+      city:
+        example: a909ded0-c6c5-4108-a01a-0c9f544370e8
+        type: string
+      description:
+        example: The Acme Corporation is a fictional corporation that features prominently
+          in the Road Runner/Wile E. Coyote animated shorts as a running gag featuring
+          outlandish products that fail or backfire catastrophically at the worst
+          possible times.
+        type: string
+      employee:
+        type: string
+      id:
+        example: 4ba4fb61-85fa-491a-b63d-829afd14fa8f
+        type: string
+      logo:
+        example: path_to_logo
+        type: string
+      name:
+        example: ACME
+        type: string
+      onMainPage:
+        example: true
+        type: boolean
+      phone:
+        example: "+6621321888"
+        type: string
+      roles:
+        items:
+          type: string
+        type: array
+      users:
+        items:
+          type: string
+        type: array
+      vacancies:
+        $ref: '#/definitions/entity.GetCompanyVacancies'
+      website:
+        example: acme.com
+        type: string
+      zip:
+        example: "84330"
+        type: string
+    type: object
+  entity.CreateFeedbackRequest:
+    properties:
+      email:
+        example: miranda.kertzmann@yahoo.com
+        type: string
+      name:
+        example: Miranda
+        type: string
+      subject:
+        example: How can I place a vacancy?
+        type: string
+      text:
+        example: Hi! I want to try to post a job...'
+        type: string
+    type: object
+  entity.Faq:
+    properties:
+      created_at:
+        type: string
+      en:
+        $ref: '#/definitions/entity.MultiLanguageField'
+      id:
+        type: string
+      published:
+        type: boolean
+      sort_order:
+        type: integer
+      th:
+        $ref: '#/definitions/entity.MultiLanguageField'
+      updated_at:
+        type: string
+    type: object
+  entity.FindPublishedByTypeResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.Material'
+        type: array
+      hasMore:
+        type: boolean
+    type: object
+  entity.ForgotPasswordRequest:
+    properties:
+      email:
+        example: miranda.kertzmann@yahoo.com
+        type: string
+      locale:
+        example: en
+        type: string
+    type: object
+  entity.GetCompaniesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.Company'
+        type: array
+      hasMore:
+        example: true
+        type: boolean
+      limit:
+        example: 10
+        type: integer
+      offset:
+        example: 20
+        type: integer
+    type: object
+  entity.GetCompanyVacancies:
+    properties:
+      all:
+        example:
+          - url_to_all_vacancies
+        items:
+          type: string
+        type: array
+      opened:
+        example:
+          - url_to_opened_vacancies
+        items:
+          type: string
+        type: array
+    type: object
+  entity.Lang:
+    enum:
+      - 0
+      - 1
+    type: integer
+    x-enum-varnames:
+      - Thai
+      - Eng
+  entity.MainPageResponse:
+    properties:
+      articles:
+        $ref: '#/definitions/entity.FindPublishedByTypeResponse'
+      companies:
+        $ref: '#/definitions/entity.GetCompaniesResponse'
+      news:
+        $ref: '#/definitions/entity.FindPublishedByTypeResponse'
+      questions: { }
+    type: object
+  entity.Material:
+    properties:
+      created_at:
+        type: string
+      en:
+        $ref: '#/definitions/entity.MultiLanguageField'
+      id:
+        type: string
+      image:
+        type: string
+      language:
+        $ref: '#/definitions/entity.Lang'
+      onmainpage:
+        type: boolean
+      published:
+        type: boolean
+      published_at_utc:
+        type: string
+      source:
+        type: string
+      th:
+        $ref: '#/definitions/entity.MultiLanguageField'
+      thumbnail:
+        type: string
+      type:
+        type: integer
+      updated_at:
+        type: string
+      urn:
+        type: string
+    type: object
+  entity.Message:
+    properties:
+      en:
+        type: string
+      th:
+        type: string
+    type: object
+  entity.MultiLanguageField:
+    properties:
+      shorttext:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  entity.ProvideAccessToResumeRequest:
+    properties:
+      locale:
+        type: string
+      resumeID:
+        type: string
+      userID:
+        description: who want access
+        type: string
+    type: object
+  entity.ProvideAccessToVacancyResponse:
+    type: object
+  entity.RequestPersonalDataResponse:
+    properties:
+      message:
+        $ref: '#/definitions/entity.Message'
+    type: object
+  entity.ResetPasswordRequest:
+    properties:
+      newPassword:
+        example: qwerty123
+        type: string
+    type: object
+  entity.SignInRequest:
+    properties:
+      email:
+        example: miranda.kertzmann@yahoo.com
+        type: string
+      password:
+        example: qwerty123
+        type: string
+    type: object
+  entity.SignUpRequest:
+    properties:
+      email:
+        example: miranda.kertzmann@yahoo.com
+        type: string
+      first_name:
+        example: Miranda
+        type: string
+      last_name:
+        example: Kertzmann
+        type: string
+      locale:
+        example: en
+        type: string
+      password:
+        example: qwerty123
+        type: string
+    type: object
+  entity.StaticPage:
+    properties:
+      en:
+        $ref: '#/definitions/entity.MultiLanguageField'
+      id:
+        type: string
+      th:
+        $ref: '#/definitions/entity.MultiLanguageField'
+    type: object
+  entity.TitleField:
+    properties:
+      title:
+        example: some title
+        type: string
+    type: object
+  internal_controllers.ErrFields:
+    properties:
+      code:
+        example: 12
+        type: integer
+      params:
+        example: some additional info
+        type: string
+    type: object
+  internal_controllers.ErrResponse:
+    properties:
+      error:
+        $ref: '#/definitions/internal_controllers.ErrFields'
+    type: object
+  internal_services_models.Employee:
+    properties:
+      en:
+        $ref: '#/definitions/entity.TitleField'
+      id:
+        type: string
+      th:
+        $ref: '#/definitions/entity.TitleField'
+    type: object
+  internal_services_models.SourceOfInformation:
+    properties:
+      en:
+        $ref: '#/definitions/entity.TitleField'
+      id:
+        type: string
+      th:
+        $ref: '#/definitions/entity.TitleField'
+    type: object
+  models.UploadResponse:
+    properties:
+      url:
+        example: 2021/10/DVI6C7.jpg
+        type: string
+    type: object
+  users_controllers.ErrFields:
+    properties:
+      code:
+        example: 12
+        type: integer
+      params:
+        example: some additional info
+        type: string
+    type: object
+  users_controllers.ErrResponse:
+    properties:
+      error:
+        $ref: '#/definitions/users_controllers.ErrFields'
+    type: object
+info:
+  contact: { }
+  title: Upjob API
+  version: "1.0"
+paths:
+  /citizenship:
+    get:
+      description: return citizenship
+      parameters:
+        - description: title
+          in: query
+          name: title
+          type: string
+        - collectionFormat: multi
+          description: id or ids
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /compliance-of-requirements:
+    get:
+      description: return dictionary for compliance of requirements
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /countries:
+    get:
+      description: return countries
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - countries
+  /countries/{country_id}/regions:
+    get:
+      description: return regions
+      parameters:
+        - description: country_id
+          in: path
+          name: country_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - countries
+  /countries/{country_id}/regions/{region_id}/location:
+    get:
+      description: return locations
+      parameters:
+        - description: country_id
+          in: path
+          name: country_id
+          required: true
+          type: string
+        - description: region_id
+          in: path
+          name: region_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - countries
+  /currency:
+    get:
+      description: return currencies
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /driving-licenses:
+    get:
+      description: return driving licenses
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /education-level:
+    get:
+      description: return education level
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /email-notifications-settings:
+    get:
+      description: return dictionary for email notification settings
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /employee/numbers:
+    get:
+      description: return number of employees
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/internal_services_models.Employee'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /employments:
+    get:
+      description: return employments
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /faq:
+    get:
+      description: returns questions for the question page
+      parameters:
+        - default: 10
+          description: 'minimum value: 0, maximum value: 100'
+          in: query
+          maximum: 100
+          minimum: 0
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Faq'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - faq
+  /feedback:
+    post:
+      consumes:
+        - application/json
+      description: create feedback
+      parameters:
+        - description: create feedback request
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/entity.CreateFeedbackRequest'
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - feedback
+  /file/upload:
+    post:
+      consumes:
+        - multipart/form-data
+      description: Upload file (only jpeg)
+      parameters:
+        - description: file to upload
+          in: formData
+          name: file
+          required: true
+          type: file
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UploadResponse'
+        "400":
+          description: file is missed
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "403":
+          description: session is missed
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - upload
+  /genders:
+    get:
+      description: return genders
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /init/index:
+    get:
+      description: get main page feed
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.MainPageResponse'
+      summary: Main page feed
+      tags:
+        - init
+  /job-types:
+    get:
+      description: return job types
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /language-level:
+    get:
+      description: return language levels
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - languages
+  /languages:
+    get:
+      description: return languages
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - languages
+  /location:
+    get:
+      description: return locations
+      parameters:
+        - description: title
+          in: query
+          name: title
+          type: string
+        - collectionFormat: multi
+          description: id or ids
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - countries
+  /marital-statuses:
+    get:
+      description: return marital statuses
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /materials/articles:
+    get:
+      description: return articles for the main page and articles page
+      parameters:
+        - default: 10
+          description: 'minimum value: 0, maximum value: 100'
+          in: query
+          maximum: 100
+          minimum: 0
+          name: limit
+          type: integer
+        - description: 'format: 2006-01-02T15:04:05'
+          format: date
+          in: query
+          name: scroll
+          type: string
+        - description: is article in main page
+          in: query
+          name: onmainpage
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.FindPublishedByTypeResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - materials
+  /materials/articles/{id}:
+    get:
+      description: return article by id
+      parameters:
+        - description: article id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Material'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - materials
+  /materials/news:
+    get:
+      description: return news for the main page and news page
+      parameters:
+        - default: 10
+          description: 'minimum value: 0, maximum value: 100'
+          in: query
+          maximum: 100
+          minimum: 0
+          name: limit
+          type: integer
+        - description: 'format: 2006-01-02T15:04:05'
+          format: date
+          in: query
+          name: scroll
+          type: string
+        - description: is news in main page
+          in: query
+          name: onmainpage
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.FindPublishedByTypeResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - materials
+  /materials/news/{id}:
+    get:
+      description: return news by id
+      parameters:
+        - description: news id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Material'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - materials
+  /payout-periods:
+    get:
+      description: return payout periods
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /religions:
+    get:
+      description: return religions
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /relocations:
+    get:
+      description: return relocations
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /requirements-level:
+    get:
+      description: return dictionary for show requirements level
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /response-can-be-done-by:
+    get:
+      description: return dictionary for vacancy (response can be done by)
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /resumes/{id}/provide:
+    get:
+      consumes:
+        - application/json
+      description: Provide by json access
+      parameters:
+        - description: resume id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: user id (who want access)
+          in: query
+          name: user_id
+          required: true
+          type: string
+        - description: en or th
+          in: query
+          name: locale
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.ProvideAccessToResumeRequest'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Provide access to resume
+      tags:
+        - resume
+  /resumes/request-personal-data/{id}:
+    get:
+      consumes:
+        - application/json
+      deprecated: true
+      description: Request by json personal data
+      parameters:
+        - description: resume id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: en or th
+          in: query
+          name: locale
+          type: string
+        - description: vacancy id
+          in: query
+          name: vacancy_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.RequestPersonalDataResponse'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Request personal data of resume
+      tags:
+        - resume
+  /show-email:
+    get:
+      description: return dictionary for show email
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /show-phone-number:
+    get:
+      description: return dictionary for show phone number
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /skills:
+    get:
+      description: return skills
+      parameters:
+        - description: title
+          in: query
+          name: title
+          type: string
+        - collectionFormat: multi
+          description: id or ids
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /source_of_information:
+    get:
+      description: return source of information
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/internal_services_models.SourceOfInformation'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - source-of-information
+  /specializations:
+    get:
+      description: return specializations
+      parameters:
+        - description: title
+          in: query
+          name: title
+          type: string
+        - collectionFormat: multi
+          description: id or ids
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /specializations/{specialization_id}/job-positions:
+    get:
+      description: return job positions for chosen specializations
+      parameters:
+        - description: specialization id
+          in: path
+          name: specialization_id
+          required: true
+          type: string
+        - description: title
+          in: query
+          name: title
+          type: string
+        - collectionFormat: multi
+          description: position id or ids
+          in: query
+          items:
+            type: string
+          name: position_ids
+          type: array
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /static-pages/{urn}:
+    get:
+      description: return static page by urn
+      parameters:
+        - description: urn
+          in: path
+          name: urn
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.StaticPage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - static-pages
+  /user-service/forgot-password:
+    post:
+      description: restore password by email
+      parameters:
+        - description: forgot password request
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/entity.ForgotPasswordRequest'
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - user-service
+  /user-service/forgot-password-verify/{secret}:
+    get:
+      description: verify secret that sent to email
+      parameters:
+        - description: secret
+          in: path
+          name: secret
+          required: true
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "406":
+          description: 'custom codes: 17 (user not existed), 18 (forgot password not
+            requested for secret)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - user-service
+  /user-service/login:
+    post:
+      consumes:
+        - application/json
+      description: sign in with email and password
+      parameters:
+        - description: sign in request
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/entity.SignInRequest'
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: 'custom codes: 12 (bad request)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "401":
+          description: 'custom codes: 1 (incorrect email or password)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "404":
+          description: Not Found
+        "500":
+          description: 'custom codes: 4 (can''t receive data from service)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/login/facebook:
+    get:
+      description: sign in with facebook
+      responses:
+        "500":
+          description: 'custom codes: 7 (can''t prepare oauth url)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/login/google:
+    get:
+      description: sign in with google
+      responses:
+        "500":
+          description: 'custom codes: 7 (can''t prepare oauth url)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/logout:
+    post:
+      description: sign out
+      responses: { }
+      tags:
+        - user-service
+  /user-service/registration:
+    post:
+      consumes:
+        - application/json
+      description: sign up with email and password
+      parameters:
+        - description: sign up request
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/entity.SignUpRequest'
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: 'custom codes: 12 (bad request)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "409":
+          description: 'custom codes: 2 (user already exists)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: 'custom codes: 4 (can''t receive data from service)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/registration/confirm/{hash}:
+    get:
+      description: confirm email
+      parameters:
+        - description: hash
+          in: path
+          name: hash
+          required: true
+          type: string
+        - description: locale
+          in: query
+          name: locale
+          type: string
+      produces:
+        - application/json
+      responses:
+        "400":
+          description: 'custom codes: 12 (bad request)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: 'custom codes: 11 (can''t confirm email)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/registration/facebook/callback:
+    get:
+      description: callback for sign in with facebook
+      parameters:
+        - description: code
+          in: query
+          name: code
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "401":
+          description: 'custom codes: 6 (code is empty); 8 (can''t receive token)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: 'custom codes: 10 (can''t receive user info); 3 (can''t prepare
+            request to service); 4 (can''t receive data from service)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/registration/google/callback:
+    get:
+      description: callback for sign in with google
+      parameters:
+        - description: code
+          in: query
+          name: code
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "401":
+          description: 'custom codes: 6 (code is empty); 8 (can''t receive token)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: 'custom codes: 9 (can''t parse user info url); 10 (can''t receive
+            user info); 3 (can''t prepare request to service); 4 (can''t receive data
+            from service)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+      tags:
+        - user-service
+  /user-service/reset-password:
+    post:
+      description: reset password
+      parameters:
+        - description: reset password request
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/entity.ResetPasswordRequest'
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "406":
+          description: 'custom codes: 17 (user not existed)'
+          schema:
+            $ref: '#/definitions/users_controllers.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - user-service
+  /vacancies/{id}/archive:
+    post:
+      description: archive vacancy by id
+      parameters:
+        - description: id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+      tags:
+        - vacancy
+  /vacancies/{id}/provide:
+    get:
+      consumes:
+        - application/json
+      description: Provide by json access
+      parameters:
+        - description: vacancy id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: user id (who want access)
+          in: query
+          name: user_id
+          required: true
+          type: string
+        - description: en or th
+          in: query
+          name: locale
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.ProvideAccessToVacancyResponse'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Provide access to vacancy
+      tags:
+        - vacancy
+  /vacancies/{id}/unarchive:
+    post:
+      description: unarchive vacancy by id
+      parameters:
+        - description: id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_controllers.ErrResponse'
+      tags:
+        - vacancy
+  /vacancies/request-personal-data/{id}:
+    get:
+      consumes:
+        - application/json
+      deprecated: true
+      description: Request by json personal data
+      parameters:
+        - description: vacancy id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: en or th
+          in: query
+          name: locale
+          type: string
+        - description: resume id
+          in: query
+          name: resume_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.RequestPersonalDataResponse'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Request personal data of vacancy
+      tags:
+        - vacancy
+  /work-features:
+    get:
+      description: return work features
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+  /years-of-experience:
+    get:
+      description: return education level
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CommonDictionary'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controllers.EmptyResponse'
+      tags:
+        - dictionaries
+schemes:
+  - http
+  - https
+swagger: "2.0"

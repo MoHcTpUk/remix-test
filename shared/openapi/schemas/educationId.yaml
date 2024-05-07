@@ -1,0 +1,5 @@
+x-go-name: EducationID
+type: string
+format: uuid
+nullable: true
+example: "81b37c5e-7b17-48f4-a33d-d25c196a54f5"

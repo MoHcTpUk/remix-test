@@ -1,0 +1,7 @@
+name: specializations
+in: query
+required: false
+schema:
+  items:
+    $ref: "../schemas/specializationId.yaml"
+  type: array

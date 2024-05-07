@@ -1,0 +1,115 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Dictionary API
+  description: API for getting countries, regions, cities and etc.
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com  
+paths:
+  /api/v2/locations/{id}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - dictionary
+      summary: Get location (city)
+      description: Request to get location
+      operationId: getLocation
+      parameters:
+        - name: id
+          description: Location id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/LocationID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+  /api/v2/company-specializations:
+    get:
+      tags:
+        - dictionary
+      summary: Get company specializations
+      description: Request to get list of company specializations
+      operationId: getCompanySpecializations
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dictionary"
+  /api/v2/languages-of-notify:
+    get:
+      tags:
+        - dictionary
+      summary: Get languages of notify
+      description: Request to get list of languages of notify
+      operationId: getLanguagesOfNotify
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dictionary"
+components:
+  schemas:
+    LocationID:
+      type: string
+      format: uuid
+      x-oapi-codegen-extra-tags:
+        json: id,omitempty
+      description: Location id
+      readOnly: true
+      example: "8acb2016-3d57-489d-bf65-8347cc17668a"
+    Location:
+      type: object
+      required:
+        - ID
+        - name
+        - region_ID
+        - region_name
+        - country_ID
+        - country_name
+      properties:
+        ID:
+          $ref: "#/components/schemas/LocationID"
+        name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        region_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: region_id
+          example: "5e5622cf-9e35-4e4b-913c-f44c9d55fda4"
+        region_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        country_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: country_id
+          example: "3f6da6ce-0738-45e6-bfa5-2c0f42f9d62a"
+        country_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+    Dictionary:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - value
+        properties:
+          id:
+            type: string
+            readOnly: true
+            example: "1"
+          value:
+            $ref: "#/components/schemas/MultiLingualValue"
+    MultiLingualValue:
+      $ref: "./schemas/multiLingualValue.yaml"

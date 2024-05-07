@@ -1,0 +1,342 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Companies API
+  description: Companies API
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com
+paths:
+  /api/v2/companies:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Get companies
+      description: Request to get companies
+      operationId: getCompanies
+      parameters:
+        - $ref: "#/components/parameters/maxPageSize"
+        - $ref: "#/components/parameters/pages"
+        - $ref: "#/components/parameters/pageToken"
+        - name: specializations
+          description: Company specialization
+          in: query
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/SpecializationID"
+            type: array
+        - name: number_of_employees
+          description: Number of employees
+          in: query
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/NumberOfEmployeesID"
+            type: array
+        - name: number_of_vacancies
+          description: Number of vacancies
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: only_my
+          description: Show only current user's companies
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - $ref: "./parameters/q.yaml"
+        - $ref: "./parameters/location.yaml"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Company"
+                  page_tokens:
+                    type: array
+                    items:
+                      type: string
+                  max_pages:
+                    type: integer
+                required:
+                  - data
+                  - max_pages
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Create company
+      description: Request to create new company
+      operationId: postCompanies
+      parameters:
+        - name: source
+          description: Company id to copy
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/CompanyID"
+        - $ref: "#/components/parameters/locale"
+      requestBody:
+        description: Request to create new company
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+  /api/v2/companies/{id}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Get company
+      description: Request to get company
+      operationId: getCompany
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+    patch:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Update company
+      description: Request to update company info
+      operationId: patchCompany
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
+        description: Request to update company info
+    delete:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Delete company
+      description: Request to delete company
+      operationId: deleteCompany
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+  /api/v2/companies/{id}/resend-verification:
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Companies
+      summary: Resend email company confirmation
+      description: Request to resend email company confirmation
+      operationId: postResendVerification
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  $ref: "./schemas/locale.yaml"
+      responses:
+        "204":
+          description: Successful
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    CompanyID:
+      type: string
+      format: uuid
+      x-oapi-codegen-extra-tags:
+        json: id,omitempty
+      description: Company id
+      readOnly: true
+      example: "45f98e23-582a-4180-801f-0b5c6b66f655"
+    Company:
+      type: object
+      required:
+        - ID
+        - verified
+      properties:
+        ID:
+          $ref: "#/components/schemas/CompanyID"
+        logo_uri:
+          type: string
+          format: uri
+          example: "2023/5/V6dSf7.jpg"
+        name:
+          type: string
+          minLength: 1
+          example: "ACME"
+        specialization_ID:
+          $ref: "#/components/schemas/SpecializationID"
+        specialization_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        phone:
+          type: string
+          minLength: 8
+          maxLength: 20
+          example: "+6621321888"
+        city_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: city_id,omitempty
+          example: "8acb2016-3d57-489d-bf65-8347cc17668a"
+        city_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        address:
+          type: string
+          example: "9/123-124 Moo1"
+        zip_code:
+          type: string
+          example: "84330"
+        website:
+          type: string
+          format: uri
+          example: "https://acme.com"
+        number_of_employees_ID:
+          $ref: "#/components/schemas/NumberOfEmployeesID"
+        number_of_employees_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        description:
+          type: string
+          example: "The Acme Corporation is a fictional corporation that features prominently in the Road Runner/Wile E.
+           Coyote animated shorts as a running gag featuring outlandish products that fail or backfire catastrophically
+           at the worst possible times."
+        published:
+          type: boolean
+          description: "Publication flag"
+          example: false
+        number_of_vacancies:
+          type: integer
+          format: int32
+          readOnly: true
+        deleted:
+          type: boolean
+          description: "Deletion flag"
+          readOnly: true
+          example: false
+        verified:
+          type: boolean
+          readOnly: true
+        created_by:
+          type: string
+          format: uuid
+          readOnly: true
+          example: "a5a2cd36-54a9-41a2-b8de-b0dcbdf75acc"
+        tax_id:
+          x-go-name: TaxID
+          type: integer
+          format: int64
+          readOnly: true
+    SpecializationID:
+      type: string
+      x-oapi-codegen-extra-tags:
+        json: specialization_id,omitempty
+      example: ""
+    NumberOfEmployeesID:
+      type: string
+      format: uuid
+      x-oapi-codegen-extra-tags:
+        json: number_of_employees_id,omitempty
+      example: "1d7da288-421d-4449-a489-f4579b83eefa"
+    MultiLingualValue:
+      type: object
+      properties:
+        en:
+          type: string
+          example: "some title"
+        th:
+          type: string
+          example: "some title"
+      readOnly: true
+  parameters:
+    ID:
+      name: id
+      in: path
+      description: company identification
+      required: true
+      schema:
+        $ref: "#/components/schemas/CompanyID"
+    maxPageSize:
+      name: max_page_size
+      in: query
+      description: number of items per page
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+        default: 30
+    pageToken:
+      name: page_token
+      in: query
+      description: token for get next page
+      required: false
+      schema:
+        type: string
+        description: token for get next page
+    pages:
+      name: pages
+      in: query
+      description: page numbers (starting from 1) for which wants to receive tokens
+      required: false
+      schema:
+        type: array
+        items:
+          type: integer
+    locale:
+      name: locale
+      in: query
+      required: false
+      schema:
+        $ref: "./schemas/locale.yaml"
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+
+security:
+  - cookieAuth: [ ]

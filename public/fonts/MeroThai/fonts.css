@@ -1,0 +1,80 @@
+/*
+Font: 		MeroThai
+Style: 		Bold
+URL: 		https://www.youworkforthem.com/font/T12256/mero-thai
+Foundry: 	Deltatype
+Foundry: 	https://www.youworkforthem.com/designer/817/deltatype
+Copyright:	Copyright © 2020 by Kwanchai Akkaratammagul. All rights reserved.
+Version: 	17
+Created:	December 09, 2020
+License: 	https://www.youworkforthem.com/font-license
+License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
+			WebFont license rules. All other parties are strictly restricted
+			from using the WebFonts(s) listed without a purchased license.
+			All details above must always remain unaltered and visible in your CSS.
+*/
+
+@font-face {
+  font-family: 'MeroThai';
+  src: url('merothai-bold.eot');
+  src: url('merothai-bold.eot?#iefix') format('embedded-opentype'),
+    url('merothai-bold.woff2') format('woff2'), url('merothai-bold.woff') format('woff'),
+    url('merothai-bold.ttf') format('truetype'),
+    url('merothai-bold.svg#youworkforthem') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/*
+Font: 		MeroThai
+Style: 		Medium
+URL: 		https://www.youworkforthem.com/font/T12256/mero-thai
+Foundry: 	Deltatype
+Foundry: 	https://www.youworkforthem.com/designer/817/deltatype
+Copyright:	Copyright © 2020 by Kwanchai Akkaratammagul. All rights reserved.
+Version: 	17
+Created:	December 09, 2020
+License: 	https://www.youworkforthem.com/font-license
+License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
+			WebFont license rules. All other parties are strictly restricted
+			from using the WebFonts(s) listed without a purchased license.
+			All details above must always remain unaltered and visible in your CSS.
+*/
+
+@font-face {
+  font-family: 'MeroThai';
+  src: url('merothai-medium.eot');
+  src: url('merothai-medium.eot?#iefix') format('embedded-opentype'),
+    url('merothai-medium.woff2') format('woff2'), url('merothai-medium.woff') format('woff'),
+    url('merothai-medium.ttf') format('truetype'),
+    url('merothai-medium.svg#youworkforthem') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/*
+Font: 		MeroThai
+Style: 		Regular
+URL: 		https://www.youworkforthem.com/font/T12256/mero-thai
+Foundry: 	Deltatype
+Foundry: 	https://www.youworkforthem.com/designer/817/deltatype
+Copyright:	Copyright © 2020 by Kwanchai Akkaratammagul. All rights reserved.
+Version: 	17
+Created:	December 09, 2020
+License: 	https://www.youworkforthem.com/font-license
+License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
+			WebFont license rules. All other parties are strictly restricted
+			from using the WebFonts(s) listed without a purchased license.
+			All details above must always remain unaltered and visible in your CSS.
+*/
+
+@font-face {
+  font-family: 'MeroThai';
+  src: url('merothai-regular.eot');
+  src: url('merothai-regular.eot?#iefix') format('embedded-opentype'),
+    url('merothai-regular.woff2') format('woff2'), url('merothai-regular.woff') format('woff'),
+    url('merothai-regular.ttf') format('truetype'),
+    url('merothai-regular.svg#youworkforthem') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}

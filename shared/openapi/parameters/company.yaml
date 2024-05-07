@@ -1,0 +1,5 @@
+name: company
+in: query
+required: false
+schema:
+  $ref: "../schemas/companyId.yaml"

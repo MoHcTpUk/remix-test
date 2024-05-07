@@ -1,0 +1,3 @@
+type: string
+format: uuid
+example: "eee0b815-1f22-48a6-89d8-4199097aa4ef"

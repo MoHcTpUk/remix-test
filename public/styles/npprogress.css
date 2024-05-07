@@ -1,0 +1,10 @@
+#nprogress .bar {
+  background: #3c79f5 !important;
+  padding: 0 10px !important;
+  height: 6px !important;
+}
+
+#nprogress .spinner .spinner-icon {
+  border-top-color: #3c79f5 !important;
+  border-left-color: #3c79f5 !important;
+}

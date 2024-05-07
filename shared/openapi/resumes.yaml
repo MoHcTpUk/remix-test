@@ -1,0 +1,624 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Resumes API
+  description: API for creating, and modifying resume
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com
+paths:
+  /api/v2/resumes:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Get resumes
+      description: Request to get resumes
+      operationId: getResumes
+      parameters:
+        - $ref: "./parameters/maxPageSize.yaml"
+        - $ref: "./parameters/pages.yaml"
+        - $ref: "./parameters/pageToken.yaml"
+        - name: only_my
+          description: Show only current user's resumes
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - $ref: "./parameters/date.yaml"
+        - $ref: "./parameters/specializations.yaml"
+        - $ref: "./parameters/salaryFrom.yaml"
+        - $ref: "./parameters/employments.yaml"
+        - $ref: "./parameters/features.yaml"
+        - $ref: "./parameters/educations.yaml"
+        - $ref: "./parameters/experience.yaml"
+        - $ref: "./parameters/q.yaml"
+        - $ref: "./parameters/location.yaml"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Resume"
+                  page_tokens:
+                    type: array
+                    items:
+                      type: string
+                  max_pages:
+                    type: integer
+                required:
+                  - data
+                  - max_pages
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Create resume
+      description: Request to create new resume
+      operationId: postResume
+      parameters:
+        - name: source
+          description: Resume id to copy
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ResumeID"
+      requestBody:
+        description: Request to create new resume
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resume"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+  /api/v2/resumes/{id}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Get resume
+      description: Request to get resume
+      operationId: getResume
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+    patch:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Update resume
+      description: Request to update resume
+      operationId: patchResume
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resume"
+        description: Request to update resume
+    delete:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Delete resume
+      description: Request to delete resume
+      operationId: deleteResume
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resume"
+        description: Request to update resume
+  /api/v2/resumes/{id}/access:
+    post:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Request Access
+      description: Requests access to hidden fields
+      operationId: postResumesAccess
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestAccess"
+  /api/v2/batch/resumes/{ids}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Resumes
+      summary: Returns a list of resumes
+      operationId: getBatchResumes
+      parameters:
+        - $ref: "#/components/parameters/IDs"
+      responses:
+        "200":
+          description: A JSON array of resumes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Resume"
+                required:
+                  - data
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    ResumeID:
+      type: string
+      format: uuid
+      x-oapi-codegen-extra-tags:
+        json: id,omitempty
+      description: Resume id
+      readOnly: true
+      example: "2ccbc1c1-2323-49bc-8b98-8614a32dd223"
+    Resume:
+      type: object
+      required:
+        - ID
+      properties:
+        ID:
+          $ref: "#/components/schemas/ResumeID"
+        general_information:
+          $ref: "#/components/schemas/GeneralInformation"
+        location:
+          $ref: "#/components/schemas/Location"
+        job_position:
+          $ref: "#/components/schemas/JobPosition"
+        education:
+          type: array
+          items:
+            $ref: "#/components/schemas/Education"
+        work_experience:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkExperience"
+        additional_information:
+          $ref: "#/components/schemas/AdditionalInformation"
+        settings:
+          $ref: "#/components/schemas/Settings"
+        published:
+          type: boolean
+          description: "Publication flag"
+          example: false
+        access_requested:
+          type: boolean
+          description: Indicates if an access request has been made
+          example: true
+        deleted:
+          type: boolean
+          description: "Deletion flag"
+          readOnly: true
+          example: false
+        total_work_experience_in_months:
+          type: integer
+          readOnly: true
+        created_by:
+          type: string
+          format: uuid
+          readOnly: true
+          example: "a5a2cd36-54a9-41a2-b8de-b0dcbdf75acc"
+    GeneralInformation:
+      type: object
+      properties:
+        photo_uri:
+          type: string
+          format: uri
+          description: "Job seeker photo"
+          example: "2023/6/V6dSf7.jpg"
+        first_name:
+          type: "string"
+          description: "First name"
+          example: "Ainur"
+        last_name:
+          type: string
+          description: "Last name"
+          example: "Peretz"
+        gender_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: gender_id,omitempty
+          description: "Gender id"
+          example: "ccac9dea-5a03-4ce6-9ef5-a26090544f3e"
+        gender_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        birthdate:
+          $ref: "#/components/schemas/MultiDateValue"
+        email:
+          type: string
+          example: "ainur.peretz@yahoo.com"
+        phone:
+          type: string
+          pattern: "^\\+[1-9]{1}[0-9]{3,14}$"
+          description: "Phone"
+          example: "+6621321888"
+        language_of_notify_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: language_of_notify_id,omitempty
+          description: "Language of notify id"
+          example: "34e0f066-f0bf-426e-b4bd-492927202727"
+        language_of_notify_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+    Location:
+      type: object
+      properties:
+        country_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: country_id,omitempty
+          description: "Country id"
+          example: "3f6da6ce-0738-45e6-bfa5-2c0f42f9d62a"
+        country_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        region_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: region_id,omitempty
+          description: "Province/Region id"
+          example: "5e5622cf-9e35-4e4b-913c-f44c9d55fda4"
+        region_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        city_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: city_id,omitempty
+          example: "8acb2016-3d57-489d-bf65-8347cc17668a"
+        city_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        address:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: "Address"
+          example: "9/123-124 Moo1"
+        source_id:
+          type: string
+          format: uuid
+          x-go-name: SourceID
+          nullable: true
+          example: ""
+        source_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        relocation_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: relocation_id,omitempty
+          example: ""
+        relocation_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        business_trips:
+          type: boolean
+          example: false
+    JobPosition:
+      type: object
+      properties:
+        specialization_id:
+          $ref: "./schemas/specializationId.yaml"
+        specialization_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        position:
+          type: string
+          description: Position
+          minLength: 1
+          maxLength: 50
+          example: "Software Developer"
+        employment_type_ids:
+          $ref: "./schemas/employmentTypeIds.yaml"
+        employment_type_names:
+          type: array
+          items:
+            $ref: "#/components/schemas/MultiLingualValue"
+        work_feature_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          x-go-name: WorkFeatureIDs
+          nullable: true
+          example: [ "cb8a3870-b274-423f-8f10-662d12777997" ]
+        work_feature_names:
+          type: array
+          items:
+            $ref: "#/components/schemas/MultiLingualValue"
+        salary_payout_period_id:
+          type: string
+          format: uuid
+          x-go-name: SalaryPayoutPeriodID
+          nullable: true
+          example: "d69e2f46-3181-48c7-aaa8-a7ecc32fb71d"
+        salary_payout_period_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        salary_fixed:
+          type: number
+          format: float
+          minimum: 2
+          maximum: 7
+          description: Salary fixed
+          example: "85000"
+        salary_from:
+          $ref: "./schemas/salaryFrom.yaml"
+        salary_to:
+          type: number
+          format: float
+          minimum: 2
+          maximum: 7
+          description: Salary to
+          example: "90000"
+        currency_id:
+          type: string
+          format: uuid
+          x-go-name: CurrencyID
+          nullable: true
+          example: "0f9b9648-8b27-4802-9b7c-f43cffe92234"
+        currency_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        description:
+          type: string
+          minLength: 0
+          maxLength: 1000
+          description: Description
+          example: "Responsibilities: Terms:"
+    Education:
+      type: object
+      properties:
+        education_level_id:
+          type: string
+          format: uuid
+          x-go-name: EducationLevelID
+          nullable: true
+          example: "feb29275-1d74-4225-8fba-41af5fbe83f3"
+        education_level_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        institution:
+          type: string
+          example: ""
+        specialization_id:
+          $ref: "./schemas/specializationId.yaml"
+        specialization_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        position:
+          type: string
+          description: Position
+          minLength: 1
+          maxLength: 50
+          example: "Software Developer"
+        start_year:
+          $ref: "#/components/schemas/MultiYearValue"
+        end_year:
+          $ref: "#/components/schemas/MultiYearValue"
+    WorkExperience:
+      type: object
+      properties:
+        specialization_id:
+          type: string
+          format: uuid
+          x-go-name: SpecializationID
+          description: "Specialization id"
+          example: "7052791d-f5b6-4d80-8119-02658bbfbb9e"
+        specialization_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        position:
+          type: string
+          description: Position
+          minLength: 1
+          maxLength: 50
+          example: "Software Developer"
+        company:
+          type: string
+          description: Company name
+          minLength: 1
+          maxLength: 50
+          example: "ACME company"
+        from:
+          $ref: "#/components/schemas/MultiDateValue"
+        to:
+          $ref: "#/components/schemas/MultiDateValue"
+        description:
+          type: string
+          minLength: 0
+          maxLength: 1000
+          description: Description
+          example: "Responsibilities: Terms:"
+    AdditionalInformation:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            $ref: "#/components/schemas/Language"
+        skill_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          x-go-name: SkillIDs
+          nullable: true
+          example: [ "ea109481-3c33-4992-81fc-8024eb8610c2" ]
+        skill_names:
+          type: array
+          items:
+            $ref: "#/components/schemas/MultiLingualValue"
+        driver_license_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          x-go-name: DriverLicenseIDs
+          nullable: true
+          example: [ "c4582cf6-6b63-47b8-a59f-ea619c25f6ce" ]
+        driver_license_names:
+          type: array
+          items:
+            $ref: "#/components/schemas/MultiLingualValue"
+        other_license:
+          type: string
+          example: "some another license"
+        religion_id:
+          type: string
+          format: uuid
+          x-go-name: ReligionID
+          nullable: true
+          example: "6692e05f-ecc9-4eea-937b-1b2db68a9776"
+        religion_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        marital_status_id:
+          type: string
+          format: uuid
+          x-go-name: MaritalStatusID
+          nullable: true
+          example: "bee544f7-7d7b-4f70-9170-61a00951effc"
+        marital_status_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        citizenship_id:
+          type: string
+          format: uuid
+          x-go-name: CitizenshipID
+          nullable: true
+          example: "531c665d-2138-4616-94a1-67d6a2e4f988"
+        citizenship_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+    Language:
+      type: object
+      properties:
+        language_id:
+          x-go-name: LanguageID
+          type: string
+          format: uuid
+          example: "34e0f066-f0bf-426e-b4bd-492927202727"
+        language_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+        proficiency_level_ID:
+          type: string
+          format: uuid
+          x-oapi-codegen-extra-tags:
+            json: proficiency_level_id,omitempty
+          example: ""
+        proficiency_level_name:
+          $ref: "#/components/schemas/MultiLingualValue"
+    Settings:
+      type: object
+      properties:
+        show_resume_to:
+          type: string
+          enum:
+            - nobody
+            - anyone
+        show_phone_number_to:
+          type: string
+          enum:
+            - nobody
+            - anyone
+        show_email_to:
+          type: string
+          enum:
+            - nobody
+            - anyone
+        email_notifications:
+          type: string
+          enum:
+            - response
+            - never
+    MultiLingualValue:
+      type: object
+      properties:
+        en:
+          type: string
+          example: "some title"
+        th:
+          type: string
+          example: "some title"
+      readOnly: true
+    MultiDateValue:
+      $ref: "./schemas/multiDateValue.yaml"
+    MultiYearValue:
+      $ref: "./schemas/multiYearValue.yaml"
+    RequestAccess:
+      type: object
+      properties:
+        vacancy_id:
+          $ref: "./schemas/vacancyId.yaml"
+        locale:
+          $ref: "./schemas/locale.yaml"
+  parameters:
+    ID:
+      name: id
+      in: path
+      description: resume identification
+      required: true
+      schema:
+        $ref: "#/components/schemas/ResumeID"
+    IDs:
+      name: ids
+      in: path
+      description: resume identifications
+      required: true
+      schema:
+        type: string
+        minLength: 36
+        maxLength: 1849
+        example: 2ccbc1c1-2323-49bc-8b98-8614a32dd223,29b47c2c-9b74-4622-82a1-ab0deb5b3e73
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+
+security:
+  - cookieAuth: [ ]

@@ -1,0 +1,176 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: 'MeroThai', Helvetica, Arial, Sans-Serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #171717;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+input,
+textarea,
+button {
+  font-family: 'MeroThai', Helvetica, Arial, Sans-Serif;
+  color: #171717;
+  padding: 0;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.2;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  font-family: 'MeroThai', Helvetica, Arial, Sans-Serif;
+  color: #171717;
+  text-decoration-skip-ink: auto;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+}
+
+button,
+input[type='submit'] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: none;
+  background: none;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active,
+button:hover {
+  outline: none;
+  background-color: none;
+  background: none;
+  border: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
+}
+
+body.has-modal {
+  overflow: hidden;
+}
+
+.hideVisible--laptop {
+  display: block;
+}
+
+.visible--mobile {
+  display: none;
+}
+
+.visible--tablet {
+  display: none;
+}
+
+.visible--laptop {
+  display: none;
+}
+
+@media (min-width: 0) {
+  .visible--mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible--tablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  .visible--laptop {
+    display: block;
+  }
+
+  .hideVisible--laptop {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .visible--desktop {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}

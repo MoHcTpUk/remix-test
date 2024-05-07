@@ -1,0 +1,12 @@
+type: object
+required:
+  - en
+  - th
+properties:
+  en:
+    type: string
+    example: "some title"
+  th:
+    type: string
+    example: "some title"
+readOnly: true

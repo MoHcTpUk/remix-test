@@ -1,0 +1,5 @@
+x-go-name: SpecializationID
+type: string
+format: uuid
+nullable: true
+example: "7052791d-f5b6-4d80-8119-02658bbfbb9e"

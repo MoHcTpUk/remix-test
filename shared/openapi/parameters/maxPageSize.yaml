@@ -1,0 +1,10 @@
+name: max_page_size
+in: query
+description: number of items per page
+required: false
+schema:
+  type: integer
+  format: int32
+  minimum: 1
+  maximum: 100
+  default: 30

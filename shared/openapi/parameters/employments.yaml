@@ -1,0 +1,7 @@
+name: employments
+in: query
+required: false
+schema:
+  items:
+    $ref: "../schemas/employmentTypeId.yaml"
+  type: array

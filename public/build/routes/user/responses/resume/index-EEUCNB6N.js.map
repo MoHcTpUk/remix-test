@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../app/routes/user/responses/resume/index.tsx"],
+  "sourcesContent": ["import type { LoaderFunction } from '@remix-run/cloudflare';\nimport { json, redirect } from '@remix-run/cloudflare';\n\nexport const loader: LoaderFunction = async ({ request }) => json({});\n\nexport default function ResponsesResumeIndex() {\n  // eslint-disable-next-line react/jsx-no-useless-fragment\n  return <></>;\n}\n"],
+  "mappings": ";;;;;;;;;;;AACA,wBAA+B;AAMtB;AAFM,SAAf,uBAA+C;AAE7C,SAAO;;;;SAAE;AACX;",
+  "names": []
+}

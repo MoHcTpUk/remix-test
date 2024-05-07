@@ -1,0 +1,5 @@
+name: salary_from
+in: query
+required: false
+schema:
+  $ref: "../schemas/salaryFrom.yaml"

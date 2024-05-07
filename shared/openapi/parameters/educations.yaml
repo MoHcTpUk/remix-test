@@ -1,0 +1,5 @@
+name: educations
+in: query
+required: false
+schema:
+  $ref: "../schemas/educationLevelIds.yaml"

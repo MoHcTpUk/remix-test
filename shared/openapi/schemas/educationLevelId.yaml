@@ -1,0 +1,5 @@
+x-go-name: LevelID
+type: string
+format: uuid
+nullable: true
+example: "7caa6408-ddad-4296-9be6-2960a0cce928"

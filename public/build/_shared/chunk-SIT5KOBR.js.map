@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/types/enums/responseState.ts"],
+  "sourcesContent": ["/* eslint-disable @typescript-eslint/no-redeclare */\nimport type { ValueOf } from 'shared/utils';\n\nexport const ResponseState = {\n  NEW: 'NEW',\n  VIEWED: 'VIEWED',\n  APPROVED: 'APPROVED',\n  CONTACT_SENT: 'CONTACT_SENT',\n  APPROVED_AND_VIEWED: 'APPROVED_AND_VIEWED',\n} as const;\n\nexport type ResponseState = ValueOf<typeof ResponseState>;\n"],
+  "mappings": ";AAGO,IAAM,gBAAgB;AAAA,EAC3B,KAAK;AAAA,EACL,QAAQ;AAAA,EACR,UAAU;AAAA,EACV,cAAc;AAAA,EACd,qBAAqB;AACvB;",
+  "names": []
+}

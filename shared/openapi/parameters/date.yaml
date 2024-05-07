@@ -1,0 +1,12 @@
+name: date
+in: query
+required: false
+schema:
+  type: integer
+  format: int32
+  enum:
+    - 1
+    - 2
+    - 3
+    - 4
+  description: 1 [last 24 hours], 2 [last 5 days], 3 [last 14 days], 4 [last month]

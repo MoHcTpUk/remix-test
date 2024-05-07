@@ -1,0 +1,235 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Responses API
+  description: Responses API
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com  
+paths:
+  /api/v2/entities-responses:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Responses
+      summary: Get responses grouped by entity
+      description: Request to get responses grouped by entity
+      operationId: getEntitiesResponses
+      parameters:
+        - $ref: "./parameters/maxPageSize.yaml"
+        - $ref: "./parameters/pages.yaml"
+        - $ref: "./parameters/pageToken.yaml"
+        - $ref: "#/components/parameters/entityTypeParam"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ResponsesGroupedByEntity"
+                  next_page_token:
+                    type: string
+                required:
+                  - data
+  /api/v2/entities-responses/{id}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Responses
+      summary: Get responses for the entity
+      description: Request to get responses for the entity
+      operationId: getEntityResponses
+      parameters:
+        - $ref: "#/components/parameters/entityIDParam"
+        - $ref: "./parameters/maxPageSize.yaml"
+        - $ref: "./parameters/pageToken.yaml"
+        - $ref: "#/components/parameters/responseTypeParam"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Response"
+                  next_page_token:
+                    type: string
+                required:
+                  - data
+  /api/v2/responses/{id}:
+    get:
+      x-stability-level: "alpha"
+      tags:
+        - Responses
+      summary: Get response
+      description: Request to get response
+      operationId: getResponse
+      parameters:
+        - $ref: "#/components/parameters/responseIdParam"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+    patch:
+      x-stability-level: "alpha"
+      tags:
+        - Responses
+      summary: Update response
+      description: Request to update response
+      operationId: patchResponse
+      parameters:
+        - $ref: "#/components/parameters/responseIdParam"
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Response"
+components:
+  schemas:
+    TargetId:
+      x-go-name: TargetID
+      type: string
+      format: uuid
+      readOnly: true
+      example: "9fe0763d-d934-4a2a-a120-6c412e7114f7"
+    EntityId:
+      x-go-name: EntityID
+      type: string
+      format: uuid
+      readOnly: true
+      example: "9fe0763d-d934-4a2a-a120-6c412e7114f7"
+    EntityType:
+      type: string
+      x-extensible-enum:
+        - RESUME
+        - VACANCY
+      readOnly: true
+    ResponseId:
+      x-go-name: ID
+      type: string
+      readOnly: true
+      example: "2SyUnquRUNuEx6z0jD0azXc2OXb"
+    ResponseType:
+      type: string
+      enum:
+        - REQUEST
+        - INVITATION
+    Response:
+      type: object
+      required:
+        - id
+        - state
+      properties:
+        id:
+          $ref: "#/components/schemas/ResponseId"
+        state:
+          type: string
+          x-extensible-enum:
+            - NEW
+            - VIEWED
+            - APPROVED
+            - CONTACT_SENT
+            - APPROVED_AND_VIEWED
+        target_id:
+          $ref: "#/components/schemas/TargetId"
+        target_type:
+          $ref: "#/components/schemas/EntityType"
+        shared_id:
+          x-go-name: SharedID
+          type: string
+          format: uuid
+          readOnly: true
+          example: "2ccbc1c1-2323-49bc-8b98-8614a32dd223"
+        shared_type:
+          $ref: "#/components/schemas/EntityType"
+    ResponsesGroupedByEntity:
+      type: object
+      required:
+        - entity_id
+        - entity_type
+        - responses
+        - statistics
+      properties:
+        entity_id:
+          $ref: "#/components/schemas/EntityId"
+        entity_type:
+          $ref: "#/components/schemas/EntityType"
+        responses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Response"
+        statistics:
+          $ref: "#/components/schemas/Statistics"
+    Statistics:
+      type: object
+      properties:
+        requests_total:
+          type: integer
+          format: int32
+        requests_viewed:
+          type: integer
+          format: int32
+        requests_approved:
+          type: integer
+          format: int32
+        requests_approved_and_viewed:
+          type: integer
+          format: int32
+        invitations_total:
+          type: integer
+          format: int32
+        new_invitations:
+          type: integer
+          format: int32
+  parameters:
+    entityIDParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/EntityId"
+    entityTypeParam:
+      name: entity_type
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/EntityType"
+    responseIdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/ResponseId"
+    responseTypeParam:
+      name: response_type
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/ResponseType"
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+
+security:
+  - cookieAuth: [ ]

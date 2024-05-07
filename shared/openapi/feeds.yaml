@@ -1,0 +1,155 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Feeds API
+  description: Feeds API
+servers:
+  - url: http://localhost:8000
+  - url: https://api.test.upjob.com  
+paths:
+  /api/v2/feeds:
+    get:
+      summary: Returns all feeds
+      description: Returns all feeds
+      operationId: getFeeds
+      responses:
+        '200':
+          description: feeds response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFeedsResponse'
+  /api/v2/faq:
+    get:
+      x-stability-level: "alpha"
+      summary: Returns a faq
+      operationId: getFaq
+      responses:
+        "200":
+          description: A JSON array of faq
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Faq"
+                required:
+                  - data
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    GetFeedsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Data'
+        error:
+          type: object
+    Data:
+      type: object
+      required:
+        - popular_companies
+        - news
+        - articles
+      properties:
+        popular_companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PopularCompany'
+        news:
+          type: array
+          items:
+            $ref: '#/components/schemas/News'
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Article'
+    PopularCompany:
+      type: object
+      required:
+        - icon_uri
+        - id
+        - name
+        - vacancies_count
+      properties:
+        icon_uri:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        vacancies_count:
+          type: integer
+    News:
+      type: object
+      required:
+        - image_uri
+        - id
+        - title_en
+        - title_th
+        - published_at
+      properties:
+        image_uri:
+          type: string
+        id:
+          type: string
+        title_en:
+          type: string
+        title_th:
+          type: string
+        published_at:
+          type: string
+          format: date
+    Article:
+      type: object
+      required:
+        - image_uri
+        - id
+        - title_en
+        - title_th
+        - published_at
+      properties:
+        image_uri:
+          type: string
+        id:
+          type: string
+        title_en:
+          type: string
+        title_th:
+          type: string
+        published_at:
+          type: string
+          format: date
+    Faq:
+      type: object
+      required:
+        - en
+        - th
+      properties:
+        en:
+          $ref: '#/components/schemas/FaqContent'
+        th:
+          $ref: '#/components/schemas/FaqContent'
+    FaqContent:
+      type: object
+      required:
+        - title
+        - text
+      properties:
+        title:
+          type: string
+        text:
+          type: object
+          required:
+            - steps
+          properties:
+            subtitle:
+              type: string
+            steps:
+              type: array
+              items:
+                type: string

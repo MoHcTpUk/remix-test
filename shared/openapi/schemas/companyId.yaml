@@ -1,0 +1,4 @@
+x-go-name: CompanyID
+type: string
+format: uuid
+example: "45f98e23-582a-4180-801f-0b5c6b66f655"

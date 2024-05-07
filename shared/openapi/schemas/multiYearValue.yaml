@@ -1,0 +1,8 @@
+type: object
+properties:
+  en:
+    type: string
+    example: "1990"
+  th:
+    type: string
+    example: "2533"

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/components/ui/Card/BoxFields/styles.ts", "../../../app/components/ui/Card/BoxFields/index.tsx"],
+  "sourcesContent": ["import styled from 'styled-components';\n\nexport const Wrapper = styled.div<{ variant?: string }>`\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  gap: 24px;\n`;\n", "import type { ReactNode } from 'react';\n\nimport { Wrapper } from './styles';\n\ntype Props = {\n  children: ReactNode;\n};\n\nexport function BoxFields({ children }: Props) {\n  return <Wrapper>{children}</Wrapper>;\n}\n"],
+  "mappings": ";;;;;;;;;;;AAEO,IAAM,UAAU,sCAAO;AAAA;AAAA;AAAA;AAAA;AAAA;;;ACOrB;AADF,SAASA,UAAU;EAAEC;AAAgB,GAAG;AAC7C,SAAO,mDAAC,WAASA,YAAV;;;;SAAmB;AAC5B;",
+  "names": ["BoxFields", "children"]
+}

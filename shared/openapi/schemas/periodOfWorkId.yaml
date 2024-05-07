@@ -1,0 +1,5 @@
+type: string
+format: uuid
+x-go-name: PeriodOfWorkID
+nullable: true
+example: "06e4d7c0-3902-4a4b-80bc-1d93fb705447"

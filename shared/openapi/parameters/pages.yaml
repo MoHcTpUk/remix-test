@@ -1,0 +1,8 @@
+name: pages
+in: query
+description: page numbers (starting from 1) for which wants to receive tokens
+required: false
+schema:
+  type: array
+  items:
+    type: integer

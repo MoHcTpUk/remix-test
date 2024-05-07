@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/components/ui/Divider/styles.ts", "../../../app/components/ui/Divider/index.tsx"],
+  "sourcesContent": ["import styled from 'styled-components';\n\nexport const Wrapper = styled.div`\n  display: flex;\n  height: 1px;\n  width: 100%;\n  background-color: ${({ theme }) => theme.backgroundColor};\n`;\n", "import { Wrapper } from './styles';\n\nexport function Divider() {\n  return <Wrapper />;\n}\n"],
+  "mappings": ";;;;;;;;;;;AAEO,IAAM,UAAU,sCAAO;AAAA;AAAA;AAAA;AAAA,sBAIR,CAAC,EAAE,MAAM,MAAM,MAAM;AAAA;;;ACHlC;AADF,SAASA,UAAU;AACxB,SAAO,mDAAC,aAAD;;;;SAAQ;AACjB;",
+  "names": ["Divider"]
+}

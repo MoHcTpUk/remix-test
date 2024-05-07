@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/components/ui/Card/BoxDataChips/styles.ts", "../../../app/components/ui/Card/BoxDataChips/index.tsx"],
+  "sourcesContent": ["import styled from 'styled-components';\n\nexport const BoxData = styled.div`\n  height: 32px;\n  border-radius: 80px;\n  padding: 6px 12px 4px;\n  display: flex;\n  align-items: center;\n  border: 1px solid ${({ theme }) => theme.user.borderCustomFieldData};\n  @media (min-width: 768px) {\n    padding: 9px 12px 6px;\n  }\n`;\n", "import type { ReactNode } from 'react';\n\nimport { BoxData } from './styles';\n\ntype BoxDataChipsProps = {\n  children: ReactNode;\n};\n\nexport function BoxDataChips({ children }: BoxDataChipsProps) {\n  return <BoxData>{children}</BoxData>;\n}\n"],
+  "mappings": ";;;;;;;;;;;AAEO,IAAM,UAAU,sCAAO;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,sBAMR,CAAC,EAAE,MAAM,MAAM,MAAM,KAAK;AAAA;AAAA;AAAA;AAAA;;;ACCvC;AADF,SAASA,aAAa;EAAEC;AAA4B,GAAG;AAC5D,SAAO,mDAAC,WAASA,YAAV;;;;SAAmB;AAC5B;",
+  "names": ["BoxDataChips", "children"]
+}

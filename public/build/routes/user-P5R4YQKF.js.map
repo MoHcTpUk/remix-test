@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/routes/user.tsx"],
+  "sourcesContent": ["import type { LoaderArgs } from '@remix-run/cloudflare';\nimport { json, redirect } from '@remix-run/cloudflare';\n\nimport { RouteLayout } from '~/components/ui/RouteLayout';\nimport { getUserContextStorage } from '~/storages/userContext.server';\n\nexport const loader = async ({ context, request, params }: LoaderArgs) => {\n  const userContextStorage = await getUserContextStorage(request);\n  const userContext = userContextStorage.getUserContext();\n\n  userContext.user = {\n    ...userContext.user,\n    pathFromLogin: request.url,\n  };\n\n  if (!context.userContext.user?.isAuthenticated) {\n    return redirect('/?login=true', {\n      status: 302,\n    });\n  }\n\n  return json({});\n};\n\nexport default function Index() {\n  return <RouteLayout variant='user' />;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACA,wBAA+B;AAG/B,yBAAsC;AAqB7B;AADM,SAAf,QAAgC;AAC9B,SAAO,mDAAC,eAAY,SAAQ,UAArB;;;;SAA2B;AACpC;",
+  "names": []
+}

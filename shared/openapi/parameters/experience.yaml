@@ -1,0 +1,5 @@
+name: experience
+in: query
+required: false
+schema:
+  $ref: "../schemas/periodOfWorkIds.yaml"

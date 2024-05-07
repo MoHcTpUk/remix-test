@@ -1,0 +1,5 @@
+type: number
+format: float
+minimum: 2
+maximum: 7
+example: 75000

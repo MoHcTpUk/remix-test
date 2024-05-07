@@ -1,0 +1,4 @@
+type: array
+items:
+  $ref: "employmentTypeId.yaml"
+x-go-name: EmploymentTypeIDs
