@@ -1,43 +1,61 @@
-/**
- * By default, Remix will handle generating the HTTP Response for you.
- * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
- * For more information, see https://remix.run/file-conventions/entry.server
- */
+import type { EntryContext } from '@remix-run/cloudflare';
+import { RemixServer } from '@remix-run/react';
+import { createInstance } from 'i18next';
+import Backend from 'i18next-fs-backend';
+import { resolve } from 'path';
+import { renderToString } from 'react-dom/server';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { ServerStyleSheet } from 'styled-components';
 
-import type { AppLoadContext, EntryContext } from "@remix-run/cloudflare";
-import { RemixServer } from "@remix-run/react";
-import { isbot } from "isbot";
-import { renderToReadableStream } from "react-dom/server";
+import { LanguageEnum } from '~/types/enums/languageEnum';
+
+import i18n from './i18n/i18n';
+import resources from './i18n/i18next.resources';
+import i18next from './i18n/i18next.server';
+import { getUserContextStorage } from './storages/userContext.server';
 
 export default async function handleRequest(
   request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
-  remixContext: EntryContext,
-  // This is ignored so we can keep it in the template for visibility.  Feel
-  // free to delete this parameter in your app if you're not using it!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  loadContext: AppLoadContext
+  statusCode: number,
+  headers: Headers,
+  context: EntryContext,
 ) {
-  const body = await renderToReadableStream(
-    <RemixServer context={remixContext} url={request.url} />,
-    {
-      signal: request.signal,
-      onError(error: unknown) {
-        // Log streaming rendering errors from inside the shell
-        console.error(error);
-        responseStatusCode = 500;
+  const instance = createInstance();
+  const userContextSession = await getUserContextStorage(request);
+
+  const lng = userContextSession.getUserContext()?.language ?? LanguageEnum.EN;
+  const ns = i18next.getRouteNamespaces(context);
+
+  await instance
+    .use(initReactI18next)
+    .use(Backend)
+    .init({
+      resources,
+      ...i18n,
+      lng,
+      ns,
+      backend: {
+        loadPath: resolve('./public/locales/{{lng}}/{{ns}}.json'),
       },
-    }
+    });
+
+  const sheet = new ServerStyleSheet();
+
+  let markup = renderToString(
+    sheet.collectStyles(
+      <I18nextProvider i18n={instance}>
+        <RemixServer context={context} url={request.url} />
+      </I18nextProvider>,
+    ),
   );
 
-  if (isbot(request.headers.get("user-agent") || "")) {
-    await body.allReady;
-  }
+  const styles = sheet.getStyleTags();
+  markup = markup.replace('__STYLES__', styles);
 
-  responseHeaders.set("Content-Type", "text/html");
-  return new Response(body, {
-    headers: responseHeaders,
-    status: responseStatusCode,
+  headers.set('Content-Type', 'text/html');
+
+  return new Response(`<!DOCTYPE html>${markup}`, {
+    status: statusCode,
+    headers,
   });
 }
