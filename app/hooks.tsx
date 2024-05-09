@@ -9,14 +9,8 @@ import type { Vacancy } from 'shared/v2/vacancies';
 import { validate as uuidValidate } from 'uuid';
 
 import { UserContext } from './providers/userContextProvider';
-import {
-  apiCall,
-  checkCompleteness,
-  extractTitles,
-  getIdFromDictionaries,
-  getValueFromDictionaries,
-} from './utils/helpers';
 import { getUserTheme } from './utils/themeUtils';
+import { apiCall, checkCompleteness, extractTitles, getIdFromDictionaries, getValueFromDictionaries } from './utils/helpers.client';
 
 function useUserContext() {
   const context = useContext(UserContext);
