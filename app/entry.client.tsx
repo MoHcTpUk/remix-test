@@ -8,7 +8,47 @@ import { getInitialNamespaces } from "remix-i18next/client";
 import i18n from "./i18n/i18n";
 import i18next from "i18next";
 
+function clearBrowserExtensionInjectionsBeforeHydration() {
+	document
+		.querySelectorAll(
+			[
+				'html > *:not(body, head)',
+				'script[src*="extension://"]',
+				'link[href*="extension://"]',
+			].join(', '),
+		)
+		.forEach((s) => {
+			s.parentNode?.removeChild(s);
+		});
+
+	const $targets = {
+		html: {
+			$elm: document.querySelector('html')!,
+			allowedAttributes: ['lang', 'dir', 'class'],
+		},
+		head: {
+			$elm: document.querySelector('head')!,
+			allowedAttributes: [''],
+		},
+		body: {
+			$elm: document.querySelector('body')!,
+			allowedAttributes: ['class'],
+		},
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	Object.entries($targets).forEach(([targetName, target]) => {
+		target.$elm.getAttributeNames().forEach((attr) => {
+			if (!target.allowedAttributes.includes(attr)) {
+				target.$elm.removeAttribute(attr);
+			}
+		});
+	});
+}
+
 async function hydrate() {
+	clearBrowserExtensionInjectionsBeforeHydration();
+	
 	// eslint-disable-next-line import/no-named-as-default-member
 	await i18next
 		.use(initReactI18next) // Tell i18next to use the react-i18next plugin

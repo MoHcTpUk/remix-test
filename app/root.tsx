@@ -12,7 +12,7 @@ import { ThemeProvider } from 'styled-components';
 import { Toaster } from 'react-hot-toast';
 import NProgress from 'nprogress';
 import { useEffect } from "react";
-import { json, LinksFunction, LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { json, LinksFunction, LoaderArgs } from "@remix-run/cloudflare";
 import nProgressStyles from 'nprogress/nprogress.css';
 import fonts from 'public/fonts/MeroThai/fonts.css';
 import stylesConstants from 'public/styles/constants.css';
@@ -65,7 +65,7 @@ export const links: LinksFunction = () => [
 //   viewport: 'width=device-width,initial-scale=1',
 // });
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const userContextSession = await getUserContextStorage(request);
   const messageContextStorage = await getMessageContext(request);
   const toastMessage = messageContextStorage.get();
