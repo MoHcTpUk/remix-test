@@ -11,7 +11,7 @@ import type { Resume } from 'shared/v2/resumes';
 import type { Vacancy } from 'shared/v2/vacancies';
 import * as url from 'url';
 import type { LanguageEnum } from '~/types/enums/languageEnum';
-import { API_BASE_URL } from './constants';
+import { API_BASE_URL, DEFAULT_COMPANY_LOGO, DEFAULT_USER_AVATAR } from './constants';
 import { IUserContext } from '~/types/interfaces/iUserContext';
 import ReferenceService from '~/services/reference/referenceService';
 
@@ -498,4 +498,32 @@ interface Context {
 
 interface ISession {
   session: string | null;
+}
+
+export function getImageUrl(arg: string | undefined | null, type?: 'company' | 'user'): string {
+  if (
+    !arg ||
+    arg === '' ||
+    arg === undefined ||
+    arg === null ||
+    arg === 'path_to_photo' ||
+    arg === 'https://api.test.upjob.com/m/path_to_photo' ||
+    arg === '/images/user/squareAvatarDefault.png' ||
+    arg === '/images/user/avatarDefault.png' ||
+    arg === DEFAULT_USER_AVATAR ||
+    arg === DEFAULT_COMPANY_LOGO ||
+    (arg.startsWith('https://api.test.upjob.com') && !arg.split('/m/')[1])
+  ) {
+    return type === 'company' ? DEFAULT_COMPANY_LOGO : DEFAULT_USER_AVATAR;
+  }
+
+  if (arg.startsWith('https://api.test.upjob.com')) {
+    return arg;
+  }
+
+  if (arg.startsWith('https://upjob.com')) {
+    return type === 'company' ? DEFAULT_COMPANY_LOGO : DEFAULT_USER_AVATAR;
+  }
+
+  return `https://api.test.upjob.com/m/${arg}`;
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Box } from '~/components/common/Box';
 import { Icon } from '~/components/common/Icon';
@@ -9,7 +9,7 @@ import ButtonCreate from '~/components/entities/ButtonCreate';
 import { useApp } from '~/hooks';
 import { IconEnum } from '~/types/enums/iconEnum';
 import { DEFAULT_USER_AVATAR } from '~/utils/constants';
-import { getImageUrl } from '~/utils/helpers';
+import { getImageUrl } from '~/utils/helpers.client';
 
 import {
   ButtonsControl,

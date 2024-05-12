@@ -11,7 +11,7 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import { CommonLayout } from '~/components/layouts/CommonLayout';
 import { useApp } from '~/hooks';
 import type { ISignUpResponse } from '~/types/interfaces/iForms';
-import { extractTitlesNewWay } from '~/utils/helpers';
+import { extractTitlesNewWay } from '~/utils/helpers.client';
 
 import { PoliciesText } from '../Login/styles';
 import { BoxCheckbox, BoxForm, Wrapper } from './styles';

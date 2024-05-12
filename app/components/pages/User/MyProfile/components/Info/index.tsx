@@ -27,7 +27,7 @@ import {
   getValueFromDictionaries,
   getValueFromDictionariesNewWay,
   getValueLang,
-} from '~/utils/helpers';
+} from '~/utils/helpers.client';
 
 import { BoxPicture, BoxUserData, BoxUserEditData, Image } from './styles';
 

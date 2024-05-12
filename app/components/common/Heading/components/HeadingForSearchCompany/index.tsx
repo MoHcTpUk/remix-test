@@ -7,7 +7,7 @@ import { BoxDataChips } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl, getValueLang } from '~/utils/helpers';
+import { getImageUrl, getValueLang } from '~/utils/helpers.client';
 
 import {
   AvatarBox,

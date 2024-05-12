@@ -7,11 +7,10 @@ import { DataField } from '~/components/entities/DataFIeld';
 import { BoxDataFieldsInner } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { calculateAge, getValueLang } from '~/utils/helpers';
+import { calculateAge, getValueLang } from '~/utils/helpers.client';
 
 export function ResumeFullCardAboutEmployee({
   resume,
-  dictionaries,
 }: {
   resume?: Resume;
   dictionaries?: IDictionaries;

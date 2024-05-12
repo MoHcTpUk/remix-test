@@ -8,7 +8,7 @@ import { DataBox } from '~/components/ui/DataBox';
 import { useApp, useScreenWidth } from '~/hooks';
 import { PageVariantEnum } from '~/types/enums/pageVariantEnum';
 import { ResponseCardVariantEnum } from '~/types/enums/responseCardVariantEnum';
-import { getImageUrl, getSalary, getValueLang } from '~/utils/helpers';
+import { getImageUrl, getSalary, getValueLang } from '~/utils/helpers.client';
 
 export function ResumePartCardHeading({
   resume,

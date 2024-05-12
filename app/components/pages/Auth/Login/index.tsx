@@ -10,9 +10,9 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import { useApp } from '~/hooks';
 import { IconEnum } from '~/types/enums/iconEnum';
 import type { ISignInResponse } from '~/types/interfaces/iForms';
-import { removeLoginSearch } from '~/utils/helpers';
 
 import { BoxContainer, BoxForm, BoxHelp, BoxSocial, HelpButton, PoliciesText } from './styles';
+import { removeLoginSearch } from '~/utils/helpers.client';
 
 export default function Login({
   visibility,

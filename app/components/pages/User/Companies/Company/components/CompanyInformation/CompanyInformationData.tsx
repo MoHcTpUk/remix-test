@@ -10,7 +10,7 @@ import { CardContainer } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import { CompanyCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 import { BoxWebsite } from './styles';
 

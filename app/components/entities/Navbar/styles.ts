@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 export const WrapperHeader = styled.div<{ sticky: boolean; type: string }>`
   width: 100%;

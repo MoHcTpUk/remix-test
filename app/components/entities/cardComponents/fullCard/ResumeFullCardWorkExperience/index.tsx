@@ -7,7 +7,7 @@ import { DataField } from '~/components/entities/DataFIeld';
 import { BoxDataFieldsInner } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 export function ResumeFullCardWorkExperience({
   resume,

@@ -10,7 +10,7 @@ import { useApp } from '~/hooks';
 import type { ResumeCardEnum } from '~/types/enums/stateCardEnum';
 import { VacancyCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { findCompanyById, getValueFromDictionaries } from '~/utils/helpers';
+import { findCompanyById, getValueFromDictionaries } from '~/utils/helpers.client';
 
 export default function VacancyContactsData({
   editCard,

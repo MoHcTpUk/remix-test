@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { FONT_SIZES_DESC, LINE_HEIGHTS_DESC } from '~/components/common/Text';
 

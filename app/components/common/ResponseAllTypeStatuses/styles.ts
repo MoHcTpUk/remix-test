@@ -1,5 +1,5 @@
 import { ResponseType } from 'shared/v2/responses';
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 
 import { ResponseState } from '~/types/enums/responseState';
 

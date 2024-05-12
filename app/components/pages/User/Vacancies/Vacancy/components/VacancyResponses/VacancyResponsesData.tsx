@@ -12,7 +12,7 @@ import { CardContainer } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import { VacancyCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueFromDictionaries } from '~/utils/helpers';
+import { getValueFromDictionaries } from '~/utils/helpers.client';
 
 import { BoxLabel, SwitcherBox } from '../../../styles';
 import { FieldsWrapper } from '../../styles';

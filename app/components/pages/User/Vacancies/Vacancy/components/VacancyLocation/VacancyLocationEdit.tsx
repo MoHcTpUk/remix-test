@@ -13,7 +13,7 @@ import { VacancyCardEnum } from '~/types/enums/stateCardEnum';
 import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { IUpdateVacancy } from '~/types/interfaces/iForms';
-import { extractTitles, extractTitlesNewWay } from '~/utils/helpers';
+import { extractTitles, extractTitlesNewWay } from '~/utils/helpers.client';
 
 export default function VacancyLocationEdit({
   editCard,

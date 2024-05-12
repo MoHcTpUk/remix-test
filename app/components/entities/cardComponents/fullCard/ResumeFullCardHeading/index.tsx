@@ -10,10 +10,10 @@ import { useApp, useScreenWidth } from '~/hooks';
 import { EntityVariantEnum } from '~/types/enums/entityVariantEnum';
 import { SizeCardVariantEnum } from '~/types/enums/sizeCardVariantEnum';
 import { DEFAULT_USER_AVATAR } from '~/utils/constants';
-import { getImageUrl, getSalary } from '~/utils/helpers';
+import { getSalary, getImageUrl } from '~/utils/helpers.client';
 
 export function ResumeFullCardHeading({ resume }: { resume?: Resume }): JSX.Element {
-  const { theme, t, userContext } = useApp();
+  const { theme, userContext } = useApp();
   const widthScreen = useScreenWidth();
 
   return (

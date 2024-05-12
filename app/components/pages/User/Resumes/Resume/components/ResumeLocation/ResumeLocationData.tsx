@@ -10,7 +10,7 @@ import { CardContainer } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import { ResumeCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 export default function ResumeLocationData({
   editCard,

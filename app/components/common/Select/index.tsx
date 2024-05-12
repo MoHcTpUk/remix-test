@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useApp } from '~/hooks';
 import { IconEnum } from '~/types/enums/iconEnum';
-import { compareArrays } from '~/utils/helpers';
+import { compareArrays } from '~/utils/helpers.client';
 
 import { Box } from '../Box';
 import { Icon } from '../Icon';

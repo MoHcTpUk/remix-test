@@ -11,7 +11,7 @@ import type { ISlide } from '~/components/entities/Slider';
 import { useApp, useScreenWidth } from '~/hooks';
 import type { LanguageEnum } from '~/types/enums/languageEnum';
 import { VariantCardEnum } from '~/types/enums/variantCardEnum';
-import { getImageUrl } from '~/utils/helpers';
+import { getImageUrl } from '~/utils/helpers.client';
 
 import { BoxCard } from '../../../common/Card';
 import { CardContent, Image, Wrapper } from './styles';

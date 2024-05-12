@@ -14,7 +14,7 @@ import type { PageVariantEnum } from '~/types/enums/pageVariantEnum';
 import { SizeCardVariantEnum } from '~/types/enums/sizeCardVariantEnum';
 import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { updateSearchString } from '~/utils/helpers';
+import { updateSearchString } from '~/utils/helpers.client';
 
 import { BoxControlContainer } from '../../BoxControl';
 

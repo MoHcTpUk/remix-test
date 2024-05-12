@@ -19,7 +19,7 @@ import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { IUpdateCompany } from '~/types/interfaces/iForms';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { extractTitles, extractTitlesNewWay, getImageUrl } from '~/utils/helpers';
+import { extractTitles, extractTitlesNewWay, getImageUrl } from '~/utils/helpers.client';
 
 import { BoxPicture, Image } from './styles';
 

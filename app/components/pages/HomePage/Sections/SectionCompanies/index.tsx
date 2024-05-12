@@ -9,7 +9,7 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import type { ISlide } from '~/components/entities/Slider';
 import { Slider } from '~/components/entities/Slider';
 import { useApp } from '~/hooks';
-import { getImageUrl } from '~/utils/helpers';
+import { getImageUrl } from '~/utils/helpers.client';
 
 import { ButtonWrapper, SliderContainer, TitleContainer, WrapperSection } from './styles';
 

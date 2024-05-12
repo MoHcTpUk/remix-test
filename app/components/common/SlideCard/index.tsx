@@ -4,7 +4,7 @@ import type { CSSProperties } from 'styled-components';
 
 import { useApp, useScreenWidth } from '~/hooks';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl } from '~/utils/helpers';
+import { getImageUrl } from '~/utils/helpers.client';
 
 import { Text } from '../Text';
 import { TextVariantEnum } from '../Text/enums';

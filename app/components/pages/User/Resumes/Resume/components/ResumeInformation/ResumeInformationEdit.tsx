@@ -22,7 +22,7 @@ import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { IUpdateResume } from '~/types/interfaces/iForms';
 import { DEFAULT_USER_AVATAR } from '~/utils/constants';
-import { extractTitles, extractTitlesNewWay, getImageUrl, getValueLang } from '~/utils/helpers';
+import { extractTitles, extractTitlesNewWay, getImageUrl, getValueLang } from '~/utils/helpers.client';
 
 import { BoxPicture, Image } from './styles';
 

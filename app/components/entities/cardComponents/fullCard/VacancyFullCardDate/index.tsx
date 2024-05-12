@@ -5,7 +5,7 @@ import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 import { useApp, useScreenWidth } from '~/hooks';
 import type { PageVariantEnum } from '~/types/enums/pageVariantEnum';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 export function VacancyFullCardDate({
   vacancy,

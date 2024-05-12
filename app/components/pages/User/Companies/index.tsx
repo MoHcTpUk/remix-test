@@ -22,7 +22,7 @@ import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { ListCompaniesResponse } from '~/types/interfaces/iForms';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl, getValueLang } from '~/utils/helpers';
+import { getImageUrl, getValueLang } from '~/utils/helpers.client';
 
 import { BoxCard } from '../../../common/Card';
 import { BoxButtons, BoxControl, BoxHeading, DataBox, Field, HeadingInformation } from './styles';

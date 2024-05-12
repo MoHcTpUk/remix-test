@@ -10,7 +10,7 @@ import { useApp, useScreenWidth } from '~/hooks';
 import { EntityVariantEnum } from '~/types/enums/entityVariantEnum';
 import { SizeCardVariantEnum } from '~/types/enums/sizeCardVariantEnum';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl, getSalary } from '~/utils/helpers';
+import { getImageUrl, getSalary } from '~/utils/helpers.client';
 
 export function VacancyFullCardHeading({ vacancy }: { vacancy?: Vacancy | null }): JSX.Element {
   const { theme, userContext } = useApp();

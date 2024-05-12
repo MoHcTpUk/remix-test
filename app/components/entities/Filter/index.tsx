@@ -12,7 +12,7 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import { useApp, useRouteChecks, useScreenWidth } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { IFilter } from '~/types/interfaces/iFilters';
-import { compareArrays, extractTitles, extractTitlesNewWay } from '~/utils/helpers';
+import { compareArrays, extractTitles, extractTitlesNewWay } from '~/utils/helpers.client';
 
 import { BoxContainer, Section } from './styles';
 

@@ -9,7 +9,7 @@ import { ModalBox } from '~/components/ui/ModalBox';
 import { useApp, useScreenWidth } from '~/hooks';
 import { VariantModalEnum } from '~/types/enums/variantModalEnum';
 import { DEFAULT_USER_AVATAR } from '~/utils/constants';
-import { getImageUrl } from '~/utils/helpers';
+import { getImageUrl } from '~/utils/helpers.client';
 
 import { Box } from '../Box';
 import SvgClose from '../Icons/Close';

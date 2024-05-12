@@ -103,35 +103,6 @@ type CollectDataArgument = {
 const checkDataKey = (key: string) =>
   key === 'from' || key === 'to' || key === 'start_year' || key === 'end_year';
 
-export function getImageUrl(arg: string | undefined | null, type?: 'company' | 'user'): string {
-  if (
-    !arg ||
-    arg === '' ||
-    arg === undefined ||
-    arg === null ||
-    arg === 'path_to_photo' ||
-    arg === 'https://api.test.upjob.com/m/path_to_photo' ||
-    arg === '/images/user/squareAvatarDefault.png' ||
-    arg === '/images/user/avatarDefault.png' ||
-    arg === DEFAULT_USER_AVATAR ||
-    arg === DEFAULT_COMPANY_LOGO ||
-    (arg.startsWith('https://api.test.upjob.com') && !arg.split('/m/')[1])
-  ) {
-    return type === 'company' ? DEFAULT_COMPANY_LOGO : DEFAULT_USER_AVATAR;
-  }
-
-  if (arg.startsWith('https://api.test.upjob.com')) {
-    return arg;
-  }
-
-  if (arg.startsWith('https://upjob.com')) {
-    return type === 'company' ? DEFAULT_COMPANY_LOGO : DEFAULT_USER_AVATAR;
-  }
-
-  return `https://api.test.upjob.com/m/${arg}`;
-}
-
-
 export const setSessionStorage = async (request: Request, sessionCookie: string | null) => {
   const sessionStorage = await getSessionStorage(request);
   const session = sessionStorage.getSession();

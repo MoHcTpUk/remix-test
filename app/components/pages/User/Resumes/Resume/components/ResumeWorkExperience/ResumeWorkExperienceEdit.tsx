@@ -20,7 +20,7 @@ import { ResumeCardEnum } from '~/types/enums/stateCardEnum';
 import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { FieldError, IUpdateResume } from '~/types/interfaces/iForms';
-import { extractTitles, getValueLang } from '~/utils/helpers';
+import { extractTitles, getValueLang } from '~/utils/helpers.client';
 
 interface ExtendedWorkExperience extends Omit<WorkExperience, 'from' | 'to'> {
   from?: string | MultiLingualValue | MultiDateValue | undefined;

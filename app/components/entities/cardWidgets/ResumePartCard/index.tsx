@@ -18,7 +18,7 @@ import { PageVariantEnum } from '~/types/enums/pageVariantEnum';
 import type { ResponseState } from '~/types/enums/responseState';
 import { SizeCardVariantEnum } from '~/types/enums/sizeCardVariantEnum';
 import { VariantCardEnum } from '~/types/enums/variantCardEnum';
-import { updateSearchString } from '~/utils/helpers';
+import { updateSearchString } from '~/utils/helpers.client';
 
 export const ResumePartCardWidget = memo(
   ({

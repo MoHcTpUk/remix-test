@@ -8,7 +8,7 @@ import { Field } from '~/components/ui/Field';
 import { useApp } from '~/hooks';
 import { EntityVariantEnum } from '~/types/enums/entityVariantEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueFromDictionaries } from '~/utils/helpers';
+import { getValueFromDictionaries } from '~/utils/helpers.client';
 
 export function CompanyPartCardInfo({
   company,

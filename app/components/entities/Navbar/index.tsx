@@ -28,7 +28,7 @@ import {
   TranslateBox,
   WrapperHeader,
 } from './styles';
-import { getImageUrl } from '~/utils/helpers.server';
+import { getImageUrl } from '~/utils/helpers.client';
 
 export const Navbar = memo((): JSX.Element => {
   const [visibilityLogin, setVisibilityLogin] = useState(false);

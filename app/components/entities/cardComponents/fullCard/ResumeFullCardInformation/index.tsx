@@ -8,7 +8,7 @@ import { DataField } from '~/components/entities/DataFIeld';
 import { BoxDataChips, BoxDataFieldsInner } from '~/components/ui/Card';
 import { useApp, useScreenWidth } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueFromDictionaries, getValueLang } from '~/utils/helpers';
+import { getValueFromDictionaries, getValueLang } from '~/utils/helpers.client';
 
 export function ResumeFullCardInformation({
   resume,

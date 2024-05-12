@@ -5,7 +5,7 @@ import type { Resume } from 'shared/v2/resumes';
 import type { Vacancy } from 'shared/v2/vacancies';
 
 import { WrapperContainer } from '~/components/ui/Containers';
-import { calculateStatistics, useMatchesData } from '~/utils/helpers';
+import { calculateStatistics, useMatchesData } from '~/utils/helpers.client';
 
 import MainFilter from './components/MainFilter';
 

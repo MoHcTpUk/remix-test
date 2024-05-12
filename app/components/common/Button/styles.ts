@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 
 import { ButtonPriorityEnum, ButtonSizeEnum } from './enums';
 import type { ButtonProps } from './index';

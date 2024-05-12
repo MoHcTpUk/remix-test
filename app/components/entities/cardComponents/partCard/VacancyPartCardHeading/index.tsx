@@ -9,7 +9,7 @@ import { useApp, useScreenWidth } from '~/hooks';
 import { PageVariantEnum } from '~/types/enums/pageVariantEnum';
 import { ResponseCardVariantEnum } from '~/types/enums/responseCardVariantEnum';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl, getSalary } from '~/utils/helpers';
+import { getImageUrl, getSalary } from '~/utils/helpers.client';
 
 export function VacancyPartCardHeading({
   vacancy,

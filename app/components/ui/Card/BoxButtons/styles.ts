@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 export const Wrapper = styled.div<{ variant?: 'resume' | 'company' | 'vacancy' | 'response' }>`
   display: flex;

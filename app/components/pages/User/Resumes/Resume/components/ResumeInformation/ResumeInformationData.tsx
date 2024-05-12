@@ -9,7 +9,7 @@ import { CardContainer } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import { ResumeCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { extractTitles, getValueFromDictionaries, getValueLang } from '~/utils/helpers';
+import { extractTitles, getValueFromDictionaries, getValueLang } from '~/utils/helpers.client';
 
 export default function ResumeInformationData({
   editCard,

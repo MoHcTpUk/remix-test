@@ -4,7 +4,7 @@ import type { EntityMessage } from 'shared/client/data-contracts';
 import type { Company } from 'shared/v2/companies';
 import type { Resume } from 'shared/v2/resumes';
 import type { Vacancy } from 'shared/v2/vacancies';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Box } from '~/components/common/Box';
 import BoxInformation from '~/components/common/BoxInformation';

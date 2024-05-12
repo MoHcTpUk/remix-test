@@ -6,7 +6,7 @@ import { DataBox } from '~/components/ui/DataBox';
 import { Field } from '~/components/ui/Field';
 import { useApp } from '~/hooks';
 import type { PageVariantEnum } from '~/types/enums/pageVariantEnum';
-import { calculateAge, calculateTotalDurationWorkExperience, getValueLang } from '~/utils/helpers';
+import { calculateAge, calculateTotalDurationWorkExperience, getValueLang } from '~/utils/helpers.client';
 
 export function ResumePartCardInfo({
   resume,

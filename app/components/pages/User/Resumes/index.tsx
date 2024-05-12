@@ -26,7 +26,7 @@ import {
   getImageUrl,
   getSalary,
   getValueLang,
-} from '~/utils/helpers';
+} from '~/utils/helpers.client';
 
 import { BoxCard } from '../../../common/Card';
 import { BoxButtons, BoxControl, BoxHeading, DataBox, Field, HeadingInformation } from './styles';

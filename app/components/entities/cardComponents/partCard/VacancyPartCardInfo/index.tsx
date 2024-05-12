@@ -8,7 +8,7 @@ import { Field } from '~/components/ui/Field';
 import { useApp } from '~/hooks';
 import { EntityVariantEnum } from '~/types/enums/entityVariantEnum';
 import type { PageVariantEnum } from '~/types/enums/pageVariantEnum';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 export function VacancyPartCardInfo({
   vacancy,

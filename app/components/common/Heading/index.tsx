@@ -7,7 +7,7 @@ import type { Vacancy } from 'shared/v2/vacancies';
 import ModalSelectCreateForm from '~/components/entities/ModalSelectCreateForm';
 import { useRouteChecks, useScreenWidth } from '~/hooks';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { useMatchesData } from '~/utils/helpers';
+import { useMatchesData } from '~/utils/helpers.client';
 
 import {
   HeadingForArticles,

@@ -13,7 +13,7 @@ import {
   YEAR_RANGE_END_OFFSET,
   YEAR_RANGE_START_OFFSET,
 } from '~/utils/constants';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 import {
   BoxErrors,

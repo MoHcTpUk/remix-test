@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 import { memo } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Box } from '~/components/common/Box';
 import { Icon } from '~/components/common/Icon';

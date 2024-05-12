@@ -11,7 +11,7 @@ import { BoxDataChips, CardContainer } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
 import { ResumeCardEnum } from '~/types/enums/stateCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
-import { getValueFromDictionaries, getValueLang } from '~/utils/helpers';
+import { getValueFromDictionaries, getValueLang } from '~/utils/helpers.client';
 
 export default function ResumeJobPositionData({
   editCard,

@@ -6,7 +6,7 @@ import { TextVariantEnum } from '~/components/common/Text/enums';
 import { DataField } from '~/components/entities/DataFIeld';
 import { BoxDataChips, BoxDataFieldsInner } from '~/components/ui/Card';
 import { useApp } from '~/hooks';
-import { getValueLang } from '~/utils/helpers';
+import { getValueLang } from '~/utils/helpers.client';
 
 export function VacancyFullCardInfo({ vacancy }: { vacancy?: Vacancy | null }): JSX.Element {
   const { userContext, t } = useApp();

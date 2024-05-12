@@ -1,4 +1,4 @@
-import styled, { CSSProperties } from 'styled-components';
+import { styled } from 'styled-components';
 
 import type { EntityVariantEnum } from '~/types/enums/entityVariantEnum';
 import type { PageVariantEnum } from '~/types/enums/pageVariantEnum';

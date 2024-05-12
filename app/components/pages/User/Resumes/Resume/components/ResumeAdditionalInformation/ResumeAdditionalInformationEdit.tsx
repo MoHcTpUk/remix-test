@@ -20,7 +20,7 @@ import { VariantCardEnum } from '~/types/enums/variantCardEnum';
 import type { IDictionaries } from '~/types/interfaces/iDictionaries';
 import type { FieldErrors } from '~/types/interfaces/IError';
 import type { IUpdateResume } from '~/types/interfaces/iForms';
-import { extractTitles } from '~/utils/helpers';
+import { extractTitles } from '~/utils/helpers.client';
 
 interface LanguagesFieldProps {
   language: Language;

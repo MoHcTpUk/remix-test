@@ -4,14 +4,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useNavigation,
-  LiveReload,
   useLoaderData,
 } from "@remix-run/react";
-import { ThemeProvider } from 'styled-components';
-import { Toaster } from 'react-hot-toast';
-import NProgress from 'nprogress';
-import { useEffect } from "react";
 import { json, LinksFunction, LoaderArgs } from "@remix-run/cloudflare";
 import nProgressStyles from 'nprogress/nprogress.css';
 import fonts from 'public/fonts/MeroThai/fonts.css';
@@ -19,7 +13,6 @@ import stylesConstants from 'public/styles/constants.css';
 import stylesGlobal from 'public/styles/globals.css';
 import stylesNPprogress from 'public/styles/npprogress.css';
 import { IUserContext } from "./types/interfaces/iUserContext";
-import { useApp } from "./hooks";
 import { getUserContextStorage } from "./storages/userContext.server";
 import { getMessageContext } from "./storages/message.server";
 import { UserContextProvider } from "./providers/userContextProvider";
@@ -32,6 +25,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
         {children}
@@ -84,19 +78,19 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 function App() {
-  const { userContext, theme, i18n } = useApp();
+  // const { userContext, theme, i18n } = useApp();
 
   // useChangeLanguage(userContext?.language ?? LanguageEnum.EN);
 
-  const transition = useNavigation();
+  // const transition = useNavigation();
 
-  useEffect(() => {
-    // when the state is idle then we can to complete the progress bar
-    if (transition.state === 'idle') NProgress.done();
-    // and when it's something else it means it's either submitting a form or
-    // waiting for the loaders of the next location so we start it
-    else NProgress.start();
-  }, [transition.state]);
+  // useEffect(() => {
+  //   // when the state is idle then we can to complete the progress bar
+  //   if (transition.state === 'idle') NProgress.done();
+  //   // and when it's something else it means it's either submitting a form or
+  //   // waiting for the loaders of the next location so we start it
+  //   else NProgress.start();
+  // }, [transition.state]);
 
   // const { toastMessage }: { toastMessage: ToastMessage } = useLoaderData<typeof loader>();
 
@@ -145,34 +139,35 @@ function App() {
   //   }
   // }, [toastMessage]);
 
-  return (
-    <html lang={userContext?.language} dir={i18n.dir()}>
-      <head>
-        <Meta />
-        <Links />
-        {typeof document === 'undefined' ? '__STYLES__' : null}
-      </head>
-      <body>
-        <ThemeProvider theme={theme}>
-          <Outlet />
-          <Toaster
-            toastOptions={{
-              duration: 5000,
-              style: {
-                padding: '0',
-                width: 'fit-content',
-                maxWidth: '100%',
-              },
-            }}
-          />
-        </ThemeProvider>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload port={8002} />
-        <div id='modal-container' />
-      </body>
-    </html>
-  );
+  // return (
+  //   <html lang={userContext?.language} dir={i18n.dir()}>
+  //     <head>
+  //       <Meta />
+  //       <Links />
+  //       {typeof document === 'undefined' ? '__STYLES__' : null}
+  //     </head>
+  //     <body>
+  //       <ThemeProvider theme={theme}>
+  //         <Outlet />
+  //         <Toaster
+  //           toastOptions={{
+  //             duration: 5000,
+  //             style: {
+  //               padding: '0',
+  //               width: 'fit-content',
+  //               maxWidth: '100%',
+  //             },
+  //           }}
+  //         />
+  //       </ThemeProvider>
+  //       <ScrollRestoration />
+  //       <Scripts />
+  //       <LiveReload port={8002} />
+  //       <div id='modal-container' />
+  //     </body>
+  //   </html>
+  // );
+  return <Outlet />;
 }
 
 export default function AppWithProviders() {
