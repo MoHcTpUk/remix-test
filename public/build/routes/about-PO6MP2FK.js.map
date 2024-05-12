@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/routes/about.tsx"],
-  "sourcesContent": ["import { RouteLayout } from '~/components/ui/RouteLayout';\n\nexport default function Index() {\n  return <RouteLayout variant='fixedWidth' noHeading />;\n}\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAGS;AADM,SAAf,QAAgC;AAC9B,SAAO,mDAAC,eAAY,SAAQ,cAAa,WAAS,QAA3C;;;;SAA2C;AACpD;",
-  "names": []
-}

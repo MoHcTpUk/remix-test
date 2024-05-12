@@ -9,11 +9,11 @@ export const loader = async ({ context }: LoaderArgs) => {
 
   const [feeds, location] = await Promise.all([
     feedsClient.getFeeds(),
-    context.references.locationMap,
+    context?.references?.locationMap ?? [],
   ]);
 
   const dictionaries = {
-    location: location.ToArray(),
+    location: [...location.values()],
   };
 
   return json({ feeds, dictionaries });

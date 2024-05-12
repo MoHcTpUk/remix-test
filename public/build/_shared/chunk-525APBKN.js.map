@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/components/pages/User/Resumes/Resume/components/ResumeSettings/styles.ts"],
-  "sourcesContent": ["import { styled } from 'styled-components';\n\nexport const BoxSetting = styled.div`\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n`;\nexport const Wrapper = styled.div`\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n  width: 100%;\n`;\n"],
-  "mappings": ";;;;;AAEO,IAAM,aAAa,sCAAO;AAAA;AAAA;AAAA;AAAA;AAK1B,IAAM,UAAU,sCAAO;AAAA;AAAA;AAAA;AAAA;AAAA;",
-  "names": []
-}

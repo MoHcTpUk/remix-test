@@ -16,8 +16,12 @@ import { IUserContext } from "./types/interfaces/iUserContext";
 import { getUserContextStorage } from "./storages/userContext.server";
 import { getMessageContext } from "./storages/message.server";
 import { UserContextProvider } from "./providers/userContextProvider";
+import { useApp } from "./hooks";
+import { ThemeProvider } from "styled-components";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { theme } = useApp();
+
   return (
     <html lang="en">
       <head>
@@ -28,6 +32,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
+        <ThemeProvider theme={theme}>
+          <Outlet />
+        </ThemeProvider>
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -98,44 +105,44 @@ function App() {
   //   if (!toastMessage) {
   //     return;
   //   }
-    // const { message, title, type } = toastMessage;
+  // const { message, title, type } = toastMessage;
 
-    // switch (type) {
-    //   case 'success':
-        // toast.custom(
-        //   title === 'Failed!' ||
-        //     message === 'มีข้อผิดพลาดบางอย่างเกิดขึ้นหรืออีเมลของคุณไม่ได้รับการยืนยัน' ? (
-        //     <BoxInformation
-        //       onClose={() => toast.dismiss()}
-        //       variant={BoxInformationEnum.error}
-        //       title={title}
-        //       information={message}
-        //       type='popup'
-        //     />
-        //   ) : (
-        //     <BoxInformation
-        //       onClose={() => toast.dismiss()}
-        //       variant={BoxInformationEnum.success}
-        //       title={title}
-        //       information={message}
-        //       type='popup'
-        //     />
-        //   ),
-        // );
-      //   break;
-      // case 'error':
-        // toast.custom(
-        //   <BoxInformation
-        //     onClose={() => toast.dismiss()}
-        //     variant={BoxInformationEnum.error}
-        //     title={title}
-        //     information={message}
-        //     type='popup'
-        //   />,
-        // );
-      //   break;
-      // default:
-      //   throw new Error(`${type as MessageEnum} is not handled`);
+  // switch (type) {
+  //   case 'success':
+  // toast.custom(
+  //   title === 'Failed!' ||
+  //     message === 'มีข้อผิดพลาดบางอย่างเกิดขึ้นหรืออีเมลของคุณไม่ได้รับการยืนยัน' ? (
+  //     <BoxInformation
+  //       onClose={() => toast.dismiss()}
+  //       variant={BoxInformationEnum.error}
+  //       title={title}
+  //       information={message}
+  //       type='popup'
+  //     />
+  //   ) : (
+  //     <BoxInformation
+  //       onClose={() => toast.dismiss()}
+  //       variant={BoxInformationEnum.success}
+  //       title={title}
+  //       information={message}
+  //       type='popup'
+  //     />
+  //   ),
+  // );
+  //   break;
+  // case 'error':
+  // toast.custom(
+  //   <BoxInformation
+  //     onClose={() => toast.dismiss()}
+  //     variant={BoxInformationEnum.error}
+  //     title={title}
+  //     information={message}
+  //     type='popup'
+  //   />,
+  // );
+  //   break;
+  // default:
+  //   throw new Error(`${type as MessageEnum} is not handled`);
   //   }
   // }, [toastMessage]);
 

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/types/enums/stateCardEnum.ts"],
-  "sourcesContent": ["/* eslint-disable @typescript-eslint/no-redeclare */\nimport type { ValueOf } from 'shared/utils';\n\nexport const StateCard = {\n  info: 'info',\n  edit: 'edit',\n  crate: 'create',\n} as const;\n\nexport type StateCard = ValueOf<typeof StateCard>;\n\nexport const ResumeCardEnum = {\n  information: 'information',\n  location: 'location',\n  jobPosition: 'jobPosition',\n  education: 'education',\n  workExperience: 'workExperience',\n  additionalInformation: 'additionalInformation',\n  settings: 'settings',\n  all: 'all',\n};\n\nexport type ResumeCardEnum = ValueOf<typeof ResumeCardEnum>;\n\nexport const VacancyCardEnum = {\n  vacancy: 'vacancy',\n  location: 'location',\n  employer: 'employer',\n  requirements: 'requirements',\n  responses: 'responses',\n  additional: 'additional',\n  all: 'all',\n};\n\nexport type VacancyCardEnum = ValueOf<typeof VacancyCardEnum>;\n\nexport const CompanyCardEnum = {\n  information: 'information',\n  all: 'all',\n};\n\nexport type CompanyCardEnum = ValueOf<typeof CompanyCardEnum>;\n"],
-  "mappings": ";AAWO,IAAM,iBAAiB;AAAA,EAC5B,aAAa;AAAA,EACb,UAAU;AAAA,EACV,aAAa;AAAA,EACb,WAAW;AAAA,EACX,gBAAgB;AAAA,EAChB,uBAAuB;AAAA,EACvB,UAAU;AAAA,EACV,KAAK;AACP;AAIO,IAAM,kBAAkB;AAAA,EAC7B,SAAS;AAAA,EACT,UAAU;AAAA,EACV,UAAU;AAAA,EACV,cAAc;AAAA,EACd,WAAW;AAAA,EACX,YAAY;AAAA,EACZ,KAAK;AACP;AAIO,IAAM,kBAAkB;AAAA,EAC7B,aAAa;AAAA,EACb,KAAK;AACP;",
-  "names": []
-}

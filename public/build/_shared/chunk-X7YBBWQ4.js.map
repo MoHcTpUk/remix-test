@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/components/ui/Field/styles.ts", "../../../app/components/ui/Field/index.tsx"],
-  "sourcesContent": ["import { styled } from 'styled-components';\n\nimport type { EntityVariantEnum } from '~/types/enums/entityVariantEnum';\n\nexport const Wrapper = styled.div<{ variant?: EntityVariantEnum }>`\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n\n  .shortDescription {\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n    -webkit-line-clamp: 2;\n  }\n`;\n", "import type { ReactNode } from 'react';\n\nimport type { EntityVariantEnum } from '~/types/enums/entityVariantEnum';\n\nimport { Wrapper } from './styles';\n\ntype Props = {\n  variant?: EntityVariantEnum;\n  children: ReactNode;\n  className?: string;\n};\n\nexport function Field({ children, variant, className }: Props) {\n  return <Wrapper variant={variant}>{children}</Wrapper>;\n}\n"],
-  "mappings": ";;;;;;;;;;;AAIO,IAAM,UAAU,sCAAO;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;;ACSrB;AADF,SAASA,MAAM;EAAEC;EAAUC;EAASC;AAAiB,GAAG;AAC7D,SAAO,mDAAC,WAAQ,SAAmBF,YAA5B;;;;SAAqC;AAC9C;",
-  "names": ["Field", "children", "variant", "className"]
-}
