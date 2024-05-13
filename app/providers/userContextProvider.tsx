@@ -51,7 +51,7 @@ function UserContextProvider({
         isEmailConfirm: user?.isEmailConfirm,
         progressInfo: user?.progressInfo,
         phone: user?.phone,
-        birthday: user?.birthday,
+        // birthday: user?.birthday,
         gender: user?.gender,
       },
       forms,

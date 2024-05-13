@@ -12,7 +12,7 @@ import { IconEnum } from '~/types/enums/iconEnum';
 import type { ISignInResponse } from '~/types/interfaces/iForms';
 
 import { BoxContainer, BoxForm, BoxHelp, BoxSocial, HelpButton, PoliciesText } from './styles';
-import { removeLoginSearch } from '~/utils/helpers.client';
+// import { removeLoginSearch } from '~/utils/helpers.client';
 
 export default function Login({
   visibility,
@@ -78,7 +78,7 @@ export default function Login({
             <input
               type='hidden'
               name='path'
-              value={removeLoginSearch(`${location.pathname}${location.search}`) || ''}
+              // value={removeLoginSearch(`${location.pathname}${location.search}`) || ''}
             />
           </Form>
           <Form method='POST' action='/auth/login-facebook'>
@@ -89,7 +89,7 @@ export default function Login({
             <input
               type='hidden'
               name='path'
-              value={removeLoginSearch(`${location.pathname}${location.search}`) || ''}
+              // value={removeLoginSearch(`${location.pathname}${location.search}`) || ''}
             />
           </Form>
         </BoxSocial>

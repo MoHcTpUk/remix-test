@@ -1,7 +1,7 @@
 import { createCookieSessionStorage } from '@remix-run/cloudflare';
 
-import type { IUserContext } from '~/types/interfaces/iUserContext';
-import { isUserContext } from '~/types/interfaces/iUserContext';
+import type { IUserContext } from '../types/interfaces/iUserContext';
+import { isUserContext } from '../types/interfaces/iUserContext';
 
 import { defaultUserContext } from '../../public/defaultUserContext';
 

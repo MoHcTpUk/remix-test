@@ -9,23 +9,47 @@ import type { Vacancy } from 'shared/v2/vacancies';
 import { validate as uuidValidate } from 'uuid';
 
 import { UserContext } from './providers/userContextProvider';
-import { getUserTheme } from './utils/themeUtils';
 import { apiCall, checkCompleteness, extractTitles, getIdFromDictionaries, getValueFromDictionaries } from './utils/helpers.client';
+import { ThemeEnum } from './types/enums/themeEnum';
+import { lightTheme } from './themes/lightTheme';
+import { IUser, IUserContext } from './types/interfaces/iUserContext';
+import { LanguageEnum } from './types/enums/languageEnum';
 
 function useUserContext() {
   const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUserContext must be used within a UserContextProvider');
-  }
+  // if (context === undefined) {
+  //   throw new Error('useUserContext must be used within a UserContextProvider');
+  // }
   return context;
 }
 
 function useApp() {
-  const [userContext, setUserContext] = useUserContext();
-  const theme = getUserTheme(userContext);
+  // const [userContext, setUserContext] = useUserContext();
+  // const theme = getUserTheme(userContext);
   const { i18n, t } = useTranslation();
 
-  return { userContext, setUserContext, theme, t, i18n };
+  // return { userContext, setUserContext, theme, t, i18n };
+  const theme = lightTheme;
+  const userContext = {  
+    theme: ThemeEnum.Light,
+    language: LanguageEnum.EN,
+    user: {  
+      id: 'string',
+      firstName: 'string',
+      lastName: 'string',
+      email: 'string',
+      isAuthenticated: false,
+      isEmailConfirm: false,
+      avatar: 'string',
+      progressInfo: 'string',
+      pathFromLogin: 'string',
+      phone: 'string',
+      // birthday?: MultiDateValue | null;
+      gender: 'string',
+    } as IUser,
+    search: 'vacancy',
+    forms: undefined } as IUserContext
+  return { userContext, theme , t, i18n}
 }
 
 const useRouteChecks = () => {

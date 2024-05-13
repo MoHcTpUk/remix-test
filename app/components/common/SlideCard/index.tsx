@@ -4,7 +4,7 @@ import type { CSSProperties } from 'styled-components';
 
 import { useApp, useScreenWidth } from '~/hooks';
 import { DEFAULT_COMPANY_LOGO } from '~/utils/constants';
-import { getImageUrl } from '~/utils/helpers.client';
+// import { getImageUrl } from '~/utils/helpers.client';
 
 import { Text } from '../Text';
 import { TextVariantEnum } from '../Text/enums';
@@ -46,7 +46,7 @@ function SlideCard({ className, style, variant, title, date, vacancies, image, i
         style={{ width: '100%' }}
       >
         <Image variant={variant}>
-          <img src={image ? getImageUrl(image, 'company') : DEFAULT_COMPANY_LOGO} alt={title} />
+          {/* <img src={image ? getImageUrl(image, 'company') : DEFAULT_COMPANY_LOGO} alt={title} /> */}
         </Image>
         <CardContent variant={variant}>
           {variant === 'articles' && (

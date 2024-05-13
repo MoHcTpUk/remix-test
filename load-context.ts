@@ -1,8 +1,9 @@
 import { type AppLoadContext } from "@remix-run/cloudflare";
 import { type PlatformProxy } from "wrangler";
-import ReferenceService from "~/services/reference/referenceService";
-import { ISession } from "~/storages/session.server";
-import { IUserContext } from "~/types/interfaces/iUserContext";
+import ReferenceService from "./app/services/reference/referenceService";
+import { ISession } from "./app/storages/session.server";
+import { getUserContextStorage } from "./app/storages/userContext.server";
+import { IUserContext } from "./app/types/interfaces/iUserContext";
 
 // When using `wrangler.toml` to configure bindings,
 // `wrangler types` will generate types for those bindings
@@ -26,12 +27,15 @@ type GetLoadContext = (args: {
   request: Request;
   context: { 
     cloudflare: Cloudflare}; // load context _before_ augmentation
-}) => AppLoadContext;
+}) => Promise<AppLoadContext>;
 
 // Shared implementation compatible with Vite, Wrangler, and Cloudflare Pages
-export const getLoadContext: GetLoadContext = ({
-  context,
+export const getLoadContext: GetLoadContext = async ({
+  context, request
 }) => {
+    // const userContext = await getUserContextStorage(request);
+  // const session = await getSessionStorage(request);
+
   return {
     ...context,
     cloudflare: context.cloudflare,

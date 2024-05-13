@@ -1,7 +1,5 @@
-import type { MultiDateValue } from 'shared/v2/users';
-
-import type { LanguageEnum } from '~/types/enums/languageEnum';
-import type { ThemeEnum } from '~/types/enums/themeEnum';
+import type { LanguageEnum } from 'app/types/enums/languageEnum';
+import type { ThemeEnum } from 'app/types/enums/themeEnum';
 
 export interface IUser {
   id?: string;
@@ -14,7 +12,7 @@ export interface IUser {
   progressInfo?: string;
   pathFromLogin?: string;
   phone?: string;
-  birthday?: MultiDateValue | null;
+  // birthday?: MultiDateValue | null;
   gender?: string;
 }
 

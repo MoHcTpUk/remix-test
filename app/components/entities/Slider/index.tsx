@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
 import { memo, useRef } from 'react';
 import type { DefaultTheme } from 'styled-components';
-import SwiperCore, { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Button from '~/components/common/Button';
@@ -11,6 +11,7 @@ import { Text } from '~/components/common/Text';
 import { TextVariantEnum } from '~/components/common/Text/enums';
 
 import { ChipsContainer, IconContainerArrow, SwiperContainer, SwiperControl } from './styles';
+import { Pagination } from '~/components/common/Pagination';
 
 export interface ISlide {
   id: string;
@@ -32,7 +33,7 @@ export interface ISliderProps {
 export const Slider = memo(
   ({ theme, slides, slideElements = 1, variant }: ISliderProps): JSX.Element => {
     const swiperRef = useRef<typeof Swiper>(null);
-    SwiperCore.use([Pagination]);
+    // SwiperCore.use([Pagination]);
 
     const chunkedArray = [];
     if (slides) {
