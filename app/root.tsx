@@ -5,8 +5,9 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigation,
 } from "@remix-run/react";
-import { json, LinksFunction, LoaderArgs } from "@remix-run/cloudflare";
+import { json, LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/cloudflare";
 import nProgressStyles from 'nprogress/nprogress.css';
 import fonts from 'public/fonts/MeroThai/fonts.css';
 import stylesConstants from 'public/styles/constants.css';
@@ -18,9 +19,16 @@ import { getMessageContext } from "./storages/message.server";
 import { UserContextProvider } from "./providers/userContextProvider";
 import { useApp } from "./hooks";
 import { ThemeProvider } from "styled-components";
+import { LanguageEnum } from "./types/enums/languageEnum";
+import { useEffect } from "react";
+import BoxInformation from "./components/common/BoxInformation";
+import { BoxInformationEnum } from "./types/enums/boxInformationEnum";
+import { MessageEnum } from "./types/enums/messageEnum";
+import { toast, Toaster } from 'react-hot-toast';
+import NProgress from 'nprogress';
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { userContext, theme, t, i18n } = useApp();
+  const { userContext, theme, i18n } = useApp();
 
   return (
     <html lang={userContext.language} dir={i18n.dir()}>
@@ -35,10 +43,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <UserContextProvider specifiedUserContext={userContext}>
           <ThemeProvider theme={theme}>
             {children}
+            <Toaster
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  padding: '0',
+                  width: 'fit-content',
+                  maxWidth: '100%',
+                },
+              }}
+            />
           </ThemeProvider>
         </UserContextProvider>
         <ScrollRestoration />
         <Scripts />
+        <div id='modal-container' />
       </body>
     </html>
   );
@@ -61,11 +80,16 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesConstants },
 ];
 
-// export const meta: MetaFunction = () => ({
-//   charset: 'utf-8',
-//   title: 'Search job app',
-//   viewport: 'width=device-width,initial-scale=1',
-// });
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Search job app" },
+    {
+      viewport: "width=device-width,initial-scale=1",
+      charset: "utf-8",
+    },
+  ];
+};
+
 
 export const loader = async ({ request }: LoaderArgs) => {
   const userContextSession = await getUserContextStorage(request);
@@ -86,66 +110,63 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 function App() {
-  // const { userContext, theme, i18n } = useApp();
+  const { userContext, i18n } = useApp();
 
-  // useChangeLanguage(userContext?.language ?? LanguageEnum.EN);
+  i18n.changeLanguage(userContext?.language ?? LanguageEnum.EN)
+  const transition = useNavigation();
 
-  // const transition = useNavigation();
+  useEffect(() => {
+    if (transition.state === 'idle') NProgress.done();
+    else NProgress.start();
+  }, [transition.state]);
 
-  // useEffect(() => {
-  //   // when the state is idle then we can to complete the progress bar
-  //   if (transition.state === 'idle') NProgress.done();
-  //   // and when it's something else it means it's either submitting a form or
-  //   // waiting for the loaders of the next location so we start it
-  //   else NProgress.start();
-  // }, [transition.state]);
+  const { toastMessage } = useLoaderData<typeof loader>();
 
-  // const { toastMessage }: { toastMessage: ToastMessage } = useLoaderData<typeof loader>();
+  useEffect(() => {
+    if (!toastMessage) {
+      return;
+    }
 
-  // useEffect(() => {
-  //   if (!toastMessage) {
-  //     return;
-  //   }
-  // const { message, title, type } = toastMessage;
+    const { message, title, type } = toastMessage;
 
-  // switch (type) {
-  //   case 'success':
-  // toast.custom(
-  //   title === 'Failed!' ||
-  //     message === 'มีข้อผิดพลาดบางอย่างเกิดขึ้นหรืออีเมลของคุณไม่ได้รับการยืนยัน' ? (
-  //     <BoxInformation
-  //       onClose={() => toast.dismiss()}
-  //       variant={BoxInformationEnum.error}
-  //       title={title}
-  //       information={message}
-  //       type='popup'
-  //     />
-  //   ) : (
-  //     <BoxInformation
-  //       onClose={() => toast.dismiss()}
-  //       variant={BoxInformationEnum.success}
-  //       title={title}
-  //       information={message}
-  //       type='popup'
-  //     />
-  //   ),
-  // );
-  //   break;
-  // case 'error':
-  // toast.custom(
-  //   <BoxInformation
-  //     onClose={() => toast.dismiss()}
-  //     variant={BoxInformationEnum.error}
-  //     title={title}
-  //     information={message}
-  //     type='popup'
-  //   />,
-  // );
-  //   break;
-  // default:
-  //   throw new Error(`${type as MessageEnum} is not handled`);
-  //   }
-  // }, [toastMessage]);
+    switch (type) {
+      case 'success':
+        toast.custom(
+          title === 'Failed!' ||
+            message === 'มีข้อผิดพลาดบางอย่างเกิดขึ้นหรืออีเมลของคุณไม่ได้รับการยืนยัน' ? (
+            <BoxInformation
+              onClose={() => toast.dismiss()}
+              variant={BoxInformationEnum.error}
+              title={title}
+              information={message}
+              type='popup'
+            />
+          ) : (
+            <BoxInformation
+              onClose={() => toast.dismiss()}
+              variant={BoxInformationEnum.success}
+              title={title}
+              information={message}
+              type='popup'
+            />
+          ),
+        );
+        break;
+      case 'error':
+        toast.custom(
+          <BoxInformation
+            onClose={() => toast.dismiss()}
+            variant={BoxInformationEnum.error}
+            title={title}
+            information={message}
+            type='popup'
+          />,
+        );
+        break;
+      default:
+        throw new Error(`${type as MessageEnum} is not handled`);
+    }
+  }, [toastMessage]);
 
   // return (
   //   <html lang={userContext?.language} dir={i18n.dir()}>
