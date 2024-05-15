@@ -20,10 +20,10 @@ import { useApp } from "./hooks";
 import { ThemeProvider } from "styled-components";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { theme } = useApp();
+  const { userContext, theme, t, i18n } = useApp();
 
   return (
-    <html lang="en">
+    <html lang={userContext.language} dir={i18n.dir()}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,9 +32,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
-        <ThemeProvider theme={theme}>
-          {children}
-        </ThemeProvider>
+        <UserContextProvider specifiedUserContext={userContext}>
+          <ThemeProvider theme={theme}>
+            {children}
+          </ThemeProvider>
+        </UserContextProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -173,6 +175,7 @@ function App() {
   //     </body>
   //   </html>
   // );
+
   return <Outlet />;
 }
 

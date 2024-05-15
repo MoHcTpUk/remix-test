@@ -1,5 +1,5 @@
 import { useFetcher } from '@remix-run/react';
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import type { ReactNode } from 'react';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { isServer } from 'shared/utils';
 
@@ -8,9 +8,9 @@ import { isUserContext } from '~/types/interfaces/iUserContext';
 
 import { defaultUserContext } from '../../public/defaultUserContext';
 
-type UserContextType = [IUserContext, Dispatch<SetStateAction<IUserContext>>];
+// type UserContextType = [IUserContext, Dispatch<SetStateAction<IUserContext>>];
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const UserContext = createContext<IUserContext>(defaultUserContext());
 
 function UserContextProvider({
   children,
@@ -91,7 +91,7 @@ function UserContextProvider({
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <UserContext.Provider value={[userContext, setUserContext]}>{children}</UserContext.Provider>
+    <UserContext.Provider value={userContext}>{children}</UserContext.Provider>
   );
 }
 

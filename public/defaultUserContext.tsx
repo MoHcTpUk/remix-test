@@ -2,7 +2,7 @@ import { LanguageEnum } from '~/types/enums/languageEnum';
 import { ThemeEnum } from '~/types/enums/themeEnum';
 import type { IUserContext } from '~/types/interfaces/iUserContext';
 
-export function defaultUserContext() {
+export function defaultUserContext(): IUserContext {
   return {
     theme: ThemeEnum.Light,
     language: LanguageEnum.EN,
@@ -18,7 +18,7 @@ export function defaultUserContext() {
       isEmailConfirm: false,
       pathFromLogin: '/',
       phone: '',
-      birthday: '',
+      // birthday: '',
       gender: '',
     },
     forms: {
@@ -26,5 +26,5 @@ export function defaultUserContext() {
       vacancy: '',
       company: '',
     },
-  } as IUserContext;
+  } ;
 }
