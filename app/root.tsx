@@ -8,11 +8,11 @@ import {
   useNavigation,
 } from "@remix-run/react";
 import { json, LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/cloudflare";
-import nProgressStyles from 'nprogress/nprogress.css';
-import fonts from 'public/fonts/MeroThai/fonts.css';
-import stylesConstants from 'public/styles/constants.css';
-import stylesGlobal from 'public/styles/globals.css';
-import stylesNPprogress from 'public/styles/npprogress.css';
+import nProgressStyles from 'nprogress/nprogress.css?url';
+import fonts from 'public/fonts/MeroThai/fonts.css?url';
+import stylesConstants from 'public/styles/constants.css?url';
+import stylesGlobal from 'public/styles/globals.css?url';
+import stylesNPprogress from 'public/styles/npprogress.css?url';
 import { IUserContext } from "./types/interfaces/iUserContext";
 import { getUserContextStorage } from "./storages/userContext.server";
 import { getMessageContext } from "./storages/message.server";

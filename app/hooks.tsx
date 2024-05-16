@@ -10,11 +10,10 @@ import { validate as uuidValidate } from 'uuid';
 
 import { UserContext } from './providers/userContextProvider';
 import { apiCall, checkCompleteness, extractTitles, getIdFromDictionaries, getValueFromDictionaries } from './utils/helpers.client';
-import { lightTheme } from './themes/lightTheme';
+import { getUserTheme } from './utils/themeUtils';
 
 function useUserContext() {
   const context = useContext(UserContext);
-  console.warn('CONTEXT',context)
   if (context === undefined) {
     throw new Error('useUserContext must be used within a UserContextProvider');
   }
@@ -23,31 +22,9 @@ function useUserContext() {
 
 function useApp() {
   const userContext = useUserContext();
-  // const theme = getUserTheme(userContext);
+  const theme = getUserTheme(userContext);
   const { i18n, t } = useTranslation();
-  const theme = lightTheme;
   return { userContext, theme, t, i18n };
-
-  // const userContext = {  
-  //   theme: ThemeEnum.Light,
-  //   language: LanguageEnum.EN,
-  //   user: {  
-  //     id: 'string',
-  //     firstName: 'string',
-  //     lastName: 'string',
-  //     email: 'string',
-  //     isAuthenticated: false,
-  //     isEmailConfirm: false,
-  //     avatar: 'string',
-  //     progressInfo: 'string',
-  //     pathFromLogin: 'string',
-  //     phone: 'string',
-  //     // birthday?: MultiDateValue | null;
-  //     gender: 'string',
-  //   } as IUser,
-  //   search: 'vacancy',
-  //   forms: undefined } as IUserContext
-  // return { userContext, theme , t, i18n}
 }
 
 const useRouteChecks = () => {
